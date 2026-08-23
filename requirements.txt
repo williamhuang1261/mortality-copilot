@@ -1,0 +1,8 @@
+# Core pipeline — data plumbing, SQL and the CLI.
+# Deliberately excludes the RAG stack (see requirements-rag.txt) so the
+# statistical pipeline and CI stay installable in seconds, without torch.
+duckdb==1.1.3
+pypdf==5.1.0
+typer==0.15.1
+rich==13.9.4
+pytest==8.3.4

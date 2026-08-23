@@ -1,0 +1,10 @@
+# Retrieval layer only. Pulls in torch (~250 MB+), so it is a separate
+# target: `make setup-rag`. Everything up to and including model fitting
+# runs without these.
+sentence-transformers==3.3.1
+faiss-cpu==1.9.0.post1
+certifi==2026.7.22
+# sentence-transformers 3.x routes model.fit through datasets
+datasets==3.2.0
+# transformers Trainer backend, required for CPU fine-tuning
+accelerate==1.14.0

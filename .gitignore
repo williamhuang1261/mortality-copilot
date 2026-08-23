@@ -1,0 +1,24 @@
+# Data — downloaded from CDC on demand, never committed
+data/*
+!data/.gitkeep
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# R
+.Rproj.user/
+.Rhistory
+.RData
+
+# Fine-tuned model weights (regenerate with `make finetune`)
+models/
+
+# Retrieval index (regenerate with `make index`)
+index/
+corpus/
+
+# OS
+.DS_Store

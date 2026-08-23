@@ -1,0 +1,3609 @@
+{
+  "generated": "2026-08-23",
+  "model": "logistic GLM, out-of-fold predictions",
+  "horizon_months": 36,
+  "attribution": "Per-variable contributions to the log-odds, relative to the cohort mean. Factor dummies are summed back into their source variable, and each driver is reported with the value this participant actually has. Exact additive decomposition of the linear predictor, not an approximation.",
+  "n_cases": 50,
+  "cases": [
+    {
+      "case_id": "case_001",
+      "predicted_risk_36mo": 0.04628,
+      "risk_decile": 9,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 58
+      },
+      "features": {
+        "age": 67,
+        "sex": "male",
+        "bmi": 28.8,
+        "sbp": 133.33333333,
+        "dbp": 81.33333333,
+        "smoker": "never",
+        "diabetes": "yes",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 57,
+        "hba1c": 8.6,
+        "income_ratio": 2.04,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "67",
+          "statement": "Age = 67",
+          "contribution_log_odds": 1.33843,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "diabetes",
+          "label": "Diabetes",
+          "value": "yes",
+          "statement": "Diabetes = yes",
+          "contribution_log_odds": 0.40899,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "male",
+          "statement": "Sex = male",
+          "contribution_log_odds": 0.36629,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "education",
+          "label": "Education",
+          "value": "college grad",
+          "statement": "Education = college grad",
+          "contribution_log_odds": -0.3304,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "smoker",
+          "label": "Smoking status",
+          "value": "never",
+          "statement": "Smoking status = never",
+          "contribution_log_odds": -0.18295,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_002",
+      "predicted_risk_36mo": 0.00332,
+      "risk_decile": 4,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 39
+      },
+      "features": {
+        "age": 37,
+        "sex": "female",
+        "bmi": 35.3,
+        "sbp": 123.33333333,
+        "dbp": 76,
+        "smoker": "current",
+        "diabetes": "no",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 39,
+        "hba1c": 5.2,
+        "income_ratio": 1.86,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "37",
+          "statement": "Age = 37",
+          "contribution_log_odds": -0.95188,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "smoker",
+          "label": "Smoking status",
+          "value": "current",
+          "statement": "Smoking status = current",
+          "contribution_log_odds": 0.39559,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "female",
+          "statement": "Sex = female",
+          "contribution_log_odds": -0.33539,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "race_eth",
+          "label": "Race/ethnicity",
+          "value": "nh white",
+          "statement": "Race/ethnicity = nh white",
+          "contribution_log_odds": 0.2712,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "income_ratio",
+          "label": "Income-to-poverty ratio",
+          "value": "1.86",
+          "statement": "Income-to-poverty ratio = 1.86",
+          "contribution_log_odds": 0.15692,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_003",
+      "predicted_risk_36mo": 0.00782,
+      "risk_decile": 6,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 56
+      },
+      "features": {
+        "age": 52,
+        "sex": "male",
+        "bmi": 27.2,
+        "sbp": 183.33333333,
+        "dbp": 112,
+        "smoker": "never",
+        "diabetes": "yes",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 43,
+        "hba1c": 8.4,
+        "income_ratio": 2,
+        "income_ratio_imputed": true
+      },
+      "top_drivers": [
+        {
+          "variable": "race_eth",
+          "label": "Race/ethnicity",
+          "value": "nh asian",
+          "statement": "Race/ethnicity = nh asian",
+          "contribution_log_odds": -0.97471,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "dbp",
+          "label": "Diastolic blood pressure",
+          "value": "112.0",
+          "statement": "Diastolic blood pressure = 112.0",
+          "contribution_log_odds": -0.42247,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "diabetes",
+          "label": "Diabetes",
+          "value": "yes",
+          "statement": "Diabetes = yes",
+          "contribution_log_odds": 0.40899,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "male",
+          "statement": "Sex = male",
+          "contribution_log_odds": 0.36629,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "education",
+          "label": "Education",
+          "value": "some hs",
+          "statement": "Education = some hs",
+          "contribution_log_odds": 0.33035,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_004",
+      "predicted_risk_36mo": 0.00173,
+      "risk_decile": 3,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 50
+      },
+      "features": {
+        "age": 46,
+        "sex": "male",
+        "bmi": 26.9,
+        "sbp": 155.33333333,
+        "dbp": 92,
+        "smoker": "never",
+        "diabetes": "no",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 37,
+        "hba1c": 5.7,
+        "income_ratio": 3.16,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "race_eth",
+          "label": "Race/ethnicity",
+          "value": "nh asian",
+          "statement": "Race/ethnicity = nh asian",
+          "contribution_log_odds": -0.97471,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "male",
+          "statement": "Sex = male",
+          "contribution_log_odds": 0.36629,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "46",
+          "statement": "Age = 46",
+          "contribution_log_odds": -0.26479,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "dbp",
+          "label": "Diastolic blood pressure",
+          "value": "92.0",
+          "statement": "Diastolic blood pressure = 92.0",
+          "contribution_log_odds": -0.22098,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "income_ratio",
+          "label": "Income-to-poverty ratio",
+          "value": "3.16",
+          "statement": "Income-to-poverty ratio = 3.16",
+          "contribution_log_odds": -0.21406,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_005",
+      "predicted_risk_36mo": 0.00377,
+      "risk_decile": 4,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 51
+      },
+      "features": {
+        "age": 20,
+        "sex": "male",
+        "bmi": 25.6,
+        "sbp": 100,
+        "dbp": 52,
+        "smoker": "never",
+        "diabetes": "no",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 67,
+        "hba1c": 5.6,
+        "income_ratio": 0,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "20",
+          "statement": "Age = 20",
+          "contribution_log_odds": -2.24973,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "income_ratio",
+          "label": "Income-to-poverty ratio",
+          "value": "0.00",
+          "statement": "Income-to-poverty ratio = 0.00",
+          "contribution_log_odds": 0.68771,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "male",
+          "statement": "Sex = male",
+          "contribution_log_odds": 0.36629,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "smoker",
+          "label": "Smoking status",
+          "value": "never",
+          "statement": "Smoking status = never",
+          "contribution_log_odds": -0.18295,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "dbp",
+          "label": "Diastolic blood pressure",
+          "value": "52.0",
+          "statement": "Diastolic blood pressure = 52.0",
+          "contribution_log_odds": 0.18199,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_006",
+      "predicted_risk_36mo": 0.03188,
+      "risk_decile": 8,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 51
+      },
+      "features": {
+        "age": 62,
+        "sex": "female",
+        "bmi": 33.7,
+        "sbp": 103.33333333,
+        "dbp": 64,
+        "smoker": "former",
+        "diabetes": "no",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 58,
+        "hba1c": 9.4,
+        "income_ratio": 0.6,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "62",
+          "statement": "Age = 62",
+          "contribution_log_odds": 0.95671,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "income_ratio",
+          "label": "Income-to-poverty ratio",
+          "value": "0.60",
+          "statement": "Income-to-poverty ratio = 0.60",
+          "contribution_log_odds": 0.51648,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "female",
+          "statement": "Sex = female",
+          "contribution_log_odds": -0.33539,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "education",
+          "label": "Education",
+          "value": "some hs",
+          "statement": "Education = some hs",
+          "contribution_log_odds": 0.33035,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "race_eth",
+          "label": "Race/ethnicity",
+          "value": "nh black",
+          "statement": "Race/ethnicity = nh black",
+          "contribution_log_odds": 0.16686,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_007",
+      "predicted_risk_36mo": 0.00263,
+      "risk_decile": 4,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 55
+      },
+      "features": {
+        "age": 27,
+        "sex": "female",
+        "bmi": 25.4,
+        "sbp": 98.66666667,
+        "dbp": 60,
+        "smoker": "never",
+        "diabetes": "yes",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 64,
+        "hba1c": 4.9,
+        "income_ratio": 1.76,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "27",
+          "statement": "Age = 27",
+          "contribution_log_odds": -1.71532,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "diabetes",
+          "label": "Diabetes",
+          "value": "yes",
+          "statement": "Diabetes = yes",
+          "contribution_log_odds": 0.40899,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "female",
+          "statement": "Sex = female",
+          "contribution_log_odds": -0.33539,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "race_eth",
+          "label": "Race/ethnicity",
+          "value": "nh white",
+          "statement": "Race/ethnicity = nh white",
+          "contribution_log_odds": 0.2712,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "income_ratio",
+          "label": "Income-to-poverty ratio",
+          "value": "1.76",
+          "statement": "Income-to-poverty ratio = 1.76",
+          "contribution_log_odds": 0.18546,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_008",
+      "predicted_risk_36mo": 0.00497,
+      "risk_decile": 5,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 38
+      },
+      "features": {
+        "age": 68,
+        "sex": "female",
+        "bmi": 23.3,
+        "sbp": 114,
+        "dbp": 57.33333333,
+        "smoker": "never",
+        "diabetes": "no",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 41,
+        "hba1c": 5.7,
+        "income_ratio": 3.57,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "68",
+          "statement": "Age = 68",
+          "contribution_log_odds": 1.41477,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "race_eth",
+          "label": "Race/ethnicity",
+          "value": "nh asian",
+          "statement": "Race/ethnicity = nh asian",
+          "contribution_log_odds": -0.97471,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "female",
+          "statement": "Sex = female",
+          "contribution_log_odds": -0.33539,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "income_ratio",
+          "label": "Income-to-poverty ratio",
+          "value": "3.57",
+          "statement": "Income-to-poverty ratio = 3.57",
+          "contribution_log_odds": -0.33106,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "smoker",
+          "label": "Smoking status",
+          "value": "never",
+          "statement": "Smoking status = never",
+          "contribution_log_odds": -0.18295,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_009",
+      "predicted_risk_36mo": 0.00582,
+      "risk_decile": 5,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 37
+      },
+      "features": {
+        "age": 52,
+        "sex": "female",
+        "bmi": 28.3,
+        "sbp": 127.33333333,
+        "dbp": 60.66666667,
+        "smoker": "never",
+        "diabetes": "no",
+        "prior_chd": "no",
+        "prior_cancer": "yes",
+        "hdl": 100,
+        "hba1c": 5.5,
+        "income_ratio": 5,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "income_ratio",
+          "label": "Income-to-poverty ratio",
+          "value": "5.00",
+          "statement": "Income-to-poverty ratio = 5.00",
+          "contribution_log_odds": -0.73914,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "prior_cancer",
+          "label": "Prior cancer",
+          "value": "yes",
+          "statement": "Prior cancer = yes",
+          "contribution_log_odds": 0.55571,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "hdl",
+          "label": "HDL cholesterol",
+          "value": "100.0",
+          "statement": "HDL cholesterol = 100.0",
+          "contribution_log_odds": 0.40519,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "female",
+          "statement": "Sex = female",
+          "contribution_log_odds": -0.33539,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "education",
+          "label": "Education",
+          "value": "college grad",
+          "statement": "Education = college grad",
+          "contribution_log_odds": -0.3304,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_010",
+      "predicted_risk_36mo": 0.00523,
+      "risk_decile": 5,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 44
+      },
+      "features": {
+        "age": 36,
+        "sex": "female",
+        "bmi": 22.8,
+        "sbp": 101.33333333,
+        "dbp": 60,
+        "smoker": "current",
+        "diabetes": "no",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 41,
+        "hba1c": 5.2,
+        "income_ratio": 2.14,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "36",
+          "statement": "Age = 36",
+          "contribution_log_odds": -1.02823,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "smoker",
+          "label": "Smoking status",
+          "value": "current",
+          "statement": "Smoking status = current",
+          "contribution_log_odds": 0.39559,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "female",
+          "statement": "Sex = female",
+          "contribution_log_odds": -0.33539,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "education",
+          "label": "Education",
+          "value": "some hs",
+          "statement": "Education = some hs",
+          "contribution_log_odds": 0.33035,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "race_eth",
+          "label": "Race/ethnicity",
+          "value": "nh white",
+          "statement": "Race/ethnicity = nh white",
+          "contribution_log_odds": 0.2712,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_011",
+      "predicted_risk_36mo": 0.01667,
+      "risk_decile": 7,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 48
+      },
+      "features": {
+        "age": 36,
+        "sex": "male",
+        "bmi": 27.8,
+        "sbp": 129.33333333,
+        "dbp": 83.33333333,
+        "smoker": "current",
+        "diabetes": "yes",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 41,
+        "hba1c": 14.2,
+        "income_ratio": 0.31,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "36",
+          "statement": "Age = 36",
+          "contribution_log_odds": -1.02823,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "income_ratio",
+          "label": "Income-to-poverty ratio",
+          "value": "0.31",
+          "statement": "Income-to-poverty ratio = 0.31",
+          "contribution_log_odds": 0.59924,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "diabetes",
+          "label": "Diabetes",
+          "value": "yes",
+          "statement": "Diabetes = yes",
+          "contribution_log_odds": 0.40899,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "smoker",
+          "label": "Smoking status",
+          "value": "current",
+          "statement": "Smoking status = current",
+          "contribution_log_odds": 0.39559,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "male",
+          "statement": "Sex = male",
+          "contribution_log_odds": 0.36629,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_012",
+      "predicted_risk_36mo": 0.03743,
+      "risk_decile": 8,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 58
+      },
+      "features": {
+        "age": 60,
+        "sex": "male",
+        "bmi": 26.3,
+        "sbp": 111.33333333,
+        "dbp": 69.33333333,
+        "smoker": "current",
+        "diabetes": "no",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 36,
+        "hba1c": 5.3,
+        "income_ratio": 0.49,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "60",
+          "statement": "Age = 60",
+          "contribution_log_odds": 0.80402,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "income_ratio",
+          "label": "Income-to-poverty ratio",
+          "value": "0.49",
+          "statement": "Income-to-poverty ratio = 0.49",
+          "contribution_log_odds": 0.54787,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "smoker",
+          "label": "Smoking status",
+          "value": "current",
+          "statement": "Smoking status = current",
+          "contribution_log_odds": 0.39559,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "male",
+          "statement": "Sex = male",
+          "contribution_log_odds": 0.36629,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "education",
+          "label": "Education",
+          "value": "some hs",
+          "statement": "Education = some hs",
+          "contribution_log_odds": 0.33035,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_013",
+      "predicted_risk_36mo": 0.00214,
+      "risk_decile": 3,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 54
+      },
+      "features": {
+        "age": 61,
+        "sex": "female",
+        "bmi": 21.3,
+        "sbp": 124.66666667,
+        "dbp": 80,
+        "smoker": "never",
+        "diabetes": "no",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 60,
+        "hba1c": 5.3,
+        "income_ratio": 5,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "61",
+          "statement": "Age = 61",
+          "contribution_log_odds": 0.88036,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "income_ratio",
+          "label": "Income-to-poverty ratio",
+          "value": "5.00",
+          "statement": "Income-to-poverty ratio = 5.00",
+          "contribution_log_odds": -0.73914,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "female",
+          "statement": "Sex = female",
+          "contribution_log_odds": -0.33539,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "education",
+          "label": "Education",
+          "value": "college grad",
+          "statement": "Education = college grad",
+          "contribution_log_odds": -0.3304,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "race_eth",
+          "label": "Race/ethnicity",
+          "value": "other hispanic",
+          "statement": "Race/ethnicity = other hispanic",
+          "contribution_log_odds": -0.31019,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_014",
+      "predicted_risk_36mo": 0.0041,
+      "risk_decile": 5,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 38
+      },
+      "features": {
+        "age": 25,
+        "sex": "male",
+        "bmi": 30.3,
+        "sbp": 133.33333333,
+        "dbp": 42.66666667,
+        "smoker": "never",
+        "diabetes": "yes",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 39,
+        "hba1c": 6.7,
+        "income_ratio": 3.82,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "25",
+          "statement": "Age = 25",
+          "contribution_log_odds": -1.86801,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "diabetes",
+          "label": "Diabetes",
+          "value": "yes",
+          "statement": "Diabetes = yes",
+          "contribution_log_odds": 0.40899,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "income_ratio",
+          "label": "Income-to-poverty ratio",
+          "value": "3.82",
+          "statement": "Income-to-poverty ratio = 3.82",
+          "contribution_log_odds": -0.40241,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "male",
+          "statement": "Sex = male",
+          "contribution_log_odds": 0.36629,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "dbp",
+          "label": "Diastolic blood pressure",
+          "value": "42.7",
+          "statement": "Diastolic blood pressure = 42.7",
+          "contribution_log_odds": 0.27601,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_015",
+      "predicted_risk_36mo": 0.2061,
+      "risk_decile": 10,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 48
+      },
+      "features": {
+        "age": 80,
+        "sex": "male",
+        "bmi": 34,
+        "sbp": 136,
+        "dbp": 58,
+        "smoker": "current",
+        "diabetes": "no",
+        "prior_chd": "yes",
+        "prior_cancer": "yes",
+        "hdl": 34,
+        "hba1c": 5.6,
+        "income_ratio": 1.88,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "80",
+          "statement": "Age = 80",
+          "contribution_log_odds": 2.3309,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "prior_cancer",
+          "label": "Prior cancer",
+          "value": "yes",
+          "statement": "Prior cancer = yes",
+          "contribution_log_odds": 0.55571,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "smoker",
+          "label": "Smoking status",
+          "value": "current",
+          "statement": "Smoking status = current",
+          "contribution_log_odds": 0.39559,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "male",
+          "statement": "Sex = male",
+          "contribution_log_odds": 0.36629,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "race_eth",
+          "label": "Race/ethnicity",
+          "value": "other hispanic",
+          "statement": "Race/ethnicity = other hispanic",
+          "contribution_log_odds": -0.31019,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_016",
+      "predicted_risk_36mo": 0.07733,
+      "risk_decile": 9,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 55
+      },
+      "features": {
+        "age": 80,
+        "sex": "male",
+        "bmi": 25.6,
+        "sbp": 178.66666667,
+        "dbp": 90.66666667,
+        "smoker": "never",
+        "diabetes": "no",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 45,
+        "hba1c": 5.4,
+        "income_ratio": 1.32,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "80",
+          "statement": "Age = 80",
+          "contribution_log_odds": 2.3309,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "male",
+          "statement": "Sex = male",
+          "contribution_log_odds": 0.36629,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "education",
+          "label": "Education",
+          "value": "college grad",
+          "statement": "Education = college grad",
+          "contribution_log_odds": -0.3304,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "income_ratio",
+          "label": "Income-to-poverty ratio",
+          "value": "1.32",
+          "statement": "Income-to-poverty ratio = 1.32",
+          "contribution_log_odds": 0.31102,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "race_eth",
+          "label": "Race/ethnicity",
+          "value": "nh white",
+          "statement": "Race/ethnicity = nh white",
+          "contribution_log_odds": 0.2712,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_017",
+      "predicted_risk_36mo": 0.01196,
+      "risk_decile": 6,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 37
+      },
+      "features": {
+        "age": 59,
+        "sex": "male",
+        "bmi": 28.3,
+        "sbp": 134.66666667,
+        "dbp": 65.33333333,
+        "smoker": "former",
+        "diabetes": "no",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 60,
+        "hba1c": 5.4,
+        "income_ratio": 5,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "income_ratio",
+          "label": "Income-to-poverty ratio",
+          "value": "5.00",
+          "statement": "Income-to-poverty ratio = 5.00",
+          "contribution_log_odds": -0.73914,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "59",
+          "statement": "Age = 59",
+          "contribution_log_odds": 0.72768,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "male",
+          "statement": "Sex = male",
+          "contribution_log_odds": 0.36629,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "education",
+          "label": "Education",
+          "value": "college grad",
+          "statement": "Education = college grad",
+          "contribution_log_odds": -0.3304,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "race_eth",
+          "label": "Race/ethnicity",
+          "value": "nh white",
+          "statement": "Race/ethnicity = nh white",
+          "contribution_log_odds": 0.2712,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_018",
+      "predicted_risk_36mo": 0.00145,
+      "risk_decile": 2,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 37
+      },
+      "features": {
+        "age": 36,
+        "sex": "female",
+        "bmi": 37.4,
+        "sbp": 123.33333333,
+        "dbp": 84,
+        "smoker": "never",
+        "diabetes": "no",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 34,
+        "hba1c": 5.5,
+        "income_ratio": 2.29,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "36",
+          "statement": "Age = 36",
+          "contribution_log_odds": -1.02823,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "race_eth",
+          "label": "Race/ethnicity",
+          "value": "other multi",
+          "statement": "Race/ethnicity = other multi",
+          "contribution_log_odds": 0.35665,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "female",
+          "statement": "Sex = female",
+          "contribution_log_odds": -0.33539,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "smoker",
+          "label": "Smoking status",
+          "value": "never",
+          "statement": "Smoking status = never",
+          "contribution_log_odds": -0.18295,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "hdl",
+          "label": "HDL cholesterol",
+          "value": "34.0",
+          "statement": "HDL cholesterol = 34.0",
+          "contribution_log_odds": -0.17908,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_019",
+      "predicted_risk_36mo": 0.00117,
+      "risk_decile": 2,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 57
+      },
+      "features": {
+        "age": 39,
+        "sex": "female",
+        "bmi": 57.2,
+        "sbp": 129.33333333,
+        "dbp": 80.66666667,
+        "smoker": "never",
+        "diabetes": "no",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 35,
+        "hba1c": 5.5,
+        "income_ratio": 1.03,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "39",
+          "statement": "Age = 39",
+          "contribution_log_odds": -0.7992,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "income_ratio",
+          "label": "Income-to-poverty ratio",
+          "value": "1.03",
+          "statement": "Income-to-poverty ratio = 1.03",
+          "contribution_log_odds": 0.39377,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "female",
+          "statement": "Sex = female",
+          "contribution_log_odds": -0.33539,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "race_eth",
+          "label": "Race/ethnicity",
+          "value": "other hispanic",
+          "statement": "Race/ethnicity = other hispanic",
+          "contribution_log_odds": -0.31019,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "smoker",
+          "label": "Smoking status",
+          "value": "never",
+          "statement": "Smoking status = never",
+          "contribution_log_odds": -0.18295,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_020",
+      "predicted_risk_36mo": 0.02663,
+      "risk_decile": 8,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 45
+      },
+      "features": {
+        "age": 66,
+        "sex": "male",
+        "bmi": 33.3,
+        "sbp": 131.33333333,
+        "dbp": 71.33333333,
+        "smoker": "never",
+        "diabetes": "no",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 41,
+        "hba1c": 6.4,
+        "income_ratio": 2.5,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "66",
+          "statement": "Age = 66",
+          "contribution_log_odds": 1.26208,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "male",
+          "statement": "Sex = male",
+          "contribution_log_odds": 0.36629,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "education",
+          "label": "Education",
+          "value": "college grad",
+          "statement": "Education = college grad",
+          "contribution_log_odds": -0.3304,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "smoker",
+          "label": "Smoking status",
+          "value": "never",
+          "statement": "Smoking status = never",
+          "contribution_log_odds": -0.18295,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "hdl",
+          "label": "HDL cholesterol",
+          "value": "41.0",
+          "statement": "HDL cholesterol = 41.0",
+          "contribution_log_odds": -0.11711,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_021",
+      "predicted_risk_36mo": 0.00988,
+      "risk_decile": 6,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 38
+      },
+      "features": {
+        "age": 52,
+        "sex": "male",
+        "bmi": 25.8,
+        "sbp": 128.66666667,
+        "dbp": 70.66666667,
+        "smoker": "never",
+        "diabetes": "no",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 44,
+        "hba1c": 4.8,
+        "income_ratio": 2,
+        "income_ratio_imputed": true
+      },
+      "top_drivers": [
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "male",
+          "statement": "Sex = male",
+          "contribution_log_odds": 0.36629,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "income_missing",
+          "label": "Income reporting",
+          "value": "not reported",
+          "statement": "Income reporting = not reported",
+          "contribution_log_odds": -0.27712,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "52",
+          "statement": "Age = 52",
+          "contribution_log_odds": 0.19327,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "smoker",
+          "label": "Smoking status",
+          "value": "never",
+          "statement": "Smoking status = never",
+          "contribution_log_odds": -0.18295,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "race_eth",
+          "label": "Race/ethnicity",
+          "value": "nh black",
+          "statement": "Race/ethnicity = nh black",
+          "contribution_log_odds": 0.16686,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_022",
+      "predicted_risk_36mo": 0.00737,
+      "risk_decile": 6,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 53
+      },
+      "features": {
+        "age": 58,
+        "sex": "female",
+        "bmi": 31.4,
+        "sbp": 156,
+        "dbp": 82.66666667,
+        "smoker": "never",
+        "diabetes": "no",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 42,
+        "hba1c": 5.8,
+        "income_ratio": 2.45,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "58",
+          "statement": "Age = 58",
+          "contribution_log_odds": 0.65133,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "female",
+          "statement": "Sex = female",
+          "contribution_log_odds": -0.33539,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "smoker",
+          "label": "Smoking status",
+          "value": "never",
+          "statement": "Smoking status = never",
+          "contribution_log_odds": -0.18295,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "race_eth",
+          "label": "Race/ethnicity",
+          "value": "nh black",
+          "statement": "Race/ethnicity = nh black",
+          "contribution_log_odds": 0.16686,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "dbp",
+          "label": "Diastolic blood pressure",
+          "value": "82.7",
+          "statement": "Diastolic blood pressure = 82.7",
+          "contribution_log_odds": -0.12696,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_023",
+      "predicted_risk_36mo": 0.02034,
+      "risk_decile": 7,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 41
+      },
+      "features": {
+        "age": 69,
+        "sex": "female",
+        "bmi": 26.1,
+        "sbp": 150,
+        "dbp": 83.33333333,
+        "smoker": "never",
+        "diabetes": "no",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 44,
+        "hba1c": 5.9,
+        "income_ratio": 0.82,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "69",
+          "statement": "Age = 69",
+          "contribution_log_odds": 1.49111,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "income_ratio",
+          "label": "Income-to-poverty ratio",
+          "value": "0.82",
+          "statement": "Income-to-poverty ratio = 0.82",
+          "contribution_log_odds": 0.4537,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "female",
+          "statement": "Sex = female",
+          "contribution_log_odds": -0.33539,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "smoker",
+          "label": "Smoking status",
+          "value": "never",
+          "statement": "Smoking status = never",
+          "contribution_log_odds": -0.18295,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "dbp",
+          "label": "Diastolic blood pressure",
+          "value": "83.3",
+          "statement": "Diastolic blood pressure = 83.3",
+          "contribution_log_odds": -0.13367,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_024",
+      "predicted_risk_36mo": 0.205,
+      "risk_decile": 10,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 39
+      },
+      "features": {
+        "age": 70,
+        "sex": "male",
+        "bmi": 32,
+        "sbp": 142.66666667,
+        "dbp": 70.66666667,
+        "smoker": "former",
+        "diabetes": "no",
+        "prior_chd": "no",
+        "prior_cancer": "yes",
+        "hdl": 41,
+        "hba1c": 5.7,
+        "income_ratio": 0.31,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "70",
+          "statement": "Age = 70",
+          "contribution_log_odds": 1.56746,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "income_ratio",
+          "label": "Income-to-poverty ratio",
+          "value": "0.31",
+          "statement": "Income-to-poverty ratio = 0.31",
+          "contribution_log_odds": 0.59924,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "prior_cancer",
+          "label": "Prior cancer",
+          "value": "yes",
+          "statement": "Prior cancer = yes",
+          "contribution_log_odds": 0.55571,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "male",
+          "statement": "Sex = male",
+          "contribution_log_odds": 0.36629,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "education",
+          "label": "Education",
+          "value": "lt 9th",
+          "statement": "Education = lt 9th",
+          "contribution_log_odds": 0.22738,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_025",
+      "predicted_risk_36mo": 0.00227,
+      "risk_decile": 3,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 52
+      },
+      "features": {
+        "age": 41,
+        "sex": "female",
+        "bmi": 32,
+        "sbp": 109.33333333,
+        "dbp": 76,
+        "smoker": "never",
+        "diabetes": "no",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 47,
+        "hba1c": 5.6,
+        "income_ratio": 2.47,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "41",
+          "statement": "Age = 41",
+          "contribution_log_odds": -0.64651,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "female",
+          "statement": "Sex = female",
+          "contribution_log_odds": -0.33539,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "smoker",
+          "label": "Smoking status",
+          "value": "never",
+          "statement": "Smoking status = never",
+          "contribution_log_odds": -0.18295,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "race_eth",
+          "label": "Race/ethnicity",
+          "value": "nh black",
+          "statement": "Race/ethnicity = nh black",
+          "contribution_log_odds": 0.16686,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "diabetes",
+          "label": "Diabetes",
+          "value": "no",
+          "statement": "Diabetes = no",
+          "contribution_log_odds": -0.07294,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_026",
+      "predicted_risk_36mo": 0.02955,
+      "risk_decile": 8,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 44
+      },
+      "features": {
+        "age": 67,
+        "sex": "female",
+        "bmi": 27.6,
+        "sbp": 143.33333333,
+        "dbp": 54.66666667,
+        "smoker": "never",
+        "diabetes": "no",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 60,
+        "hba1c": 5.3,
+        "income_ratio": 0.75,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "67",
+          "statement": "Age = 67",
+          "contribution_log_odds": 1.33843,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "income_ratio",
+          "label": "Income-to-poverty ratio",
+          "value": "0.75",
+          "statement": "Income-to-poverty ratio = 0.75",
+          "contribution_log_odds": 0.47368,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "female",
+          "statement": "Sex = female",
+          "contribution_log_odds": -0.33539,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "race_eth",
+          "label": "Race/ethnicity",
+          "value": "other hispanic",
+          "statement": "Race/ethnicity = other hispanic",
+          "contribution_log_odds": -0.31019,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "education",
+          "label": "Education",
+          "value": "lt 9th",
+          "statement": "Education = lt 9th",
+          "contribution_log_odds": 0.22738,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_027",
+      "predicted_risk_36mo": 0.00135,
+      "risk_decile": 2,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 51
+      },
+      "features": {
+        "age": 44,
+        "sex": "female",
+        "bmi": 50.8,
+        "sbp": 100.66666667,
+        "dbp": 66.66666667,
+        "smoker": "former",
+        "diabetes": "no",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 45,
+        "hba1c": 6,
+        "income_ratio": 5,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "income_ratio",
+          "label": "Income-to-poverty ratio",
+          "value": "5.00",
+          "statement": "Income-to-poverty ratio = 5.00",
+          "contribution_log_odds": -0.73914,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "44",
+          "statement": "Age = 44",
+          "contribution_log_odds": -0.41748,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "female",
+          "statement": "Sex = female",
+          "contribution_log_odds": -0.33539,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "education",
+          "label": "Education",
+          "value": "college grad",
+          "statement": "Education = college grad",
+          "contribution_log_odds": -0.3304,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "race_eth",
+          "label": "Race/ethnicity",
+          "value": "nh black",
+          "statement": "Race/ethnicity = nh black",
+          "contribution_log_odds": 0.16686,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_028",
+      "predicted_risk_36mo": 0.00055,
+      "risk_decile": 1,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 56
+      },
+      "features": {
+        "age": 25,
+        "sex": "female",
+        "bmi": 32.4,
+        "sbp": 113.33333333,
+        "dbp": 53.33333333,
+        "smoker": "never",
+        "diabetes": "no",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 50,
+        "hba1c": 5,
+        "income_ratio": 5,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "25",
+          "statement": "Age = 25",
+          "contribution_log_odds": -1.86801,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "income_ratio",
+          "label": "Income-to-poverty ratio",
+          "value": "5.00",
+          "statement": "Income-to-poverty ratio = 5.00",
+          "contribution_log_odds": -0.73914,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "female",
+          "statement": "Sex = female",
+          "contribution_log_odds": -0.33539,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "race_eth",
+          "label": "Race/ethnicity",
+          "value": "nh white",
+          "statement": "Race/ethnicity = nh white",
+          "contribution_log_odds": 0.2712,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "smoker",
+          "label": "Smoking status",
+          "value": "never",
+          "statement": "Smoking status = never",
+          "contribution_log_odds": -0.18295,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_029",
+      "predicted_risk_36mo": 0.04861,
+      "risk_decile": 9,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 53
+      },
+      "features": {
+        "age": 57,
+        "sex": "male",
+        "bmi": 24.1,
+        "sbp": 117.33333333,
+        "dbp": 70.66666667,
+        "smoker": "current",
+        "diabetes": "no",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 87,
+        "hba1c": 5.5,
+        "income_ratio": 2.69,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "57",
+          "statement": "Age = 57",
+          "contribution_log_odds": 0.57499,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "smoker",
+          "label": "Smoking status",
+          "value": "current",
+          "statement": "Smoking status = current",
+          "contribution_log_odds": 0.39559,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "male",
+          "statement": "Sex = male",
+          "contribution_log_odds": 0.36629,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "hdl",
+          "label": "HDL cholesterol",
+          "value": "87.0",
+          "statement": "HDL cholesterol = 87.0",
+          "contribution_log_odds": 0.2901,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "race_eth",
+          "label": "Race/ethnicity",
+          "value": "nh black",
+          "statement": "Race/ethnicity = nh black",
+          "contribution_log_odds": 0.16686,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_030",
+      "predicted_risk_36mo": 0.02268,
+      "risk_decile": 8,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 57
+      },
+      "features": {
+        "age": 67,
+        "sex": "female",
+        "bmi": 31,
+        "sbp": 133.33333333,
+        "dbp": 72,
+        "smoker": "never",
+        "diabetes": "no",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 56,
+        "hba1c": 6.3,
+        "income_ratio": 1.29,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "67",
+          "statement": "Age = 67",
+          "contribution_log_odds": 1.33843,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "female",
+          "statement": "Sex = female",
+          "contribution_log_odds": -0.33539,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "income_ratio",
+          "label": "Income-to-poverty ratio",
+          "value": "1.29",
+          "statement": "Income-to-poverty ratio = 1.29",
+          "contribution_log_odds": 0.31958,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "race_eth",
+          "label": "Race/ethnicity",
+          "value": "other hispanic",
+          "statement": "Race/ethnicity = other hispanic",
+          "contribution_log_odds": -0.31019,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "education",
+          "label": "Education",
+          "value": "lt 9th",
+          "statement": "Education = lt 9th",
+          "contribution_log_odds": 0.22738,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_031",
+      "predicted_risk_36mo": 0.00348,
+      "risk_decile": 4,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 55
+      },
+      "features": {
+        "age": 46,
+        "sex": "female",
+        "bmi": 23.8,
+        "sbp": 108.66666667,
+        "dbp": 66,
+        "smoker": "current",
+        "diabetes": "no",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 93,
+        "hba1c": 5.2,
+        "income_ratio": 2.02,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "race_eth",
+          "label": "Race/ethnicity",
+          "value": "nh asian",
+          "statement": "Race/ethnicity = nh asian",
+          "contribution_log_odds": -0.97471,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "smoker",
+          "label": "Smoking status",
+          "value": "current",
+          "statement": "Smoking status = current",
+          "contribution_log_odds": 0.39559,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "hdl",
+          "label": "HDL cholesterol",
+          "value": "93.0",
+          "statement": "HDL cholesterol = 93.0",
+          "contribution_log_odds": 0.34322,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "female",
+          "statement": "Sex = female",
+          "contribution_log_odds": -0.33539,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "education",
+          "label": "Education",
+          "value": "college grad",
+          "statement": "Education = college grad",
+          "contribution_log_odds": -0.3304,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_032",
+      "predicted_risk_36mo": 0.0531,
+      "risk_decile": 9,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 48
+      },
+      "features": {
+        "age": 74,
+        "sex": "male",
+        "bmi": 26.7,
+        "sbp": 136,
+        "dbp": 67.33333333,
+        "smoker": "never",
+        "diabetes": "no",
+        "prior_chd": "yes",
+        "prior_cancer": "yes",
+        "hdl": 40,
+        "hba1c": 5.9,
+        "income_ratio": 4.25,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "74",
+          "statement": "Age = 74",
+          "contribution_log_odds": 1.87283,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "prior_cancer",
+          "label": "Prior cancer",
+          "value": "yes",
+          "statement": "Prior cancer = yes",
+          "contribution_log_odds": 0.55571,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "income_ratio",
+          "label": "Income-to-poverty ratio",
+          "value": "4.25",
+          "statement": "Income-to-poverty ratio = 4.25",
+          "contribution_log_odds": -0.52511,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "male",
+          "statement": "Sex = male",
+          "contribution_log_odds": 0.36629,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "education",
+          "label": "Education",
+          "value": "college grad",
+          "statement": "Education = college grad",
+          "contribution_log_odds": -0.3304,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_033",
+      "predicted_risk_36mo": 0.00012,
+      "risk_decile": 1,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 47
+      },
+      "features": {
+        "age": 26,
+        "sex": "female",
+        "bmi": 35,
+        "sbp": 109.33333333,
+        "dbp": 56.66666667,
+        "smoker": "former",
+        "diabetes": "no",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 63,
+        "hba1c": 5.3,
+        "income_ratio": 2,
+        "income_ratio_imputed": true
+      },
+      "top_drivers": [
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "26",
+          "statement": "Age = 26",
+          "contribution_log_odds": -1.79167,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "race_eth",
+          "label": "Race/ethnicity",
+          "value": "nh asian",
+          "statement": "Race/ethnicity = nh asian",
+          "contribution_log_odds": -0.97471,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "female",
+          "statement": "Sex = female",
+          "contribution_log_odds": -0.33539,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "education",
+          "label": "Education",
+          "value": "college grad",
+          "statement": "Education = college grad",
+          "contribution_log_odds": -0.3304,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "income_missing",
+          "label": "Income reporting",
+          "value": "not reported",
+          "statement": "Income reporting = not reported",
+          "contribution_log_odds": -0.27712,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_034",
+      "predicted_risk_36mo": 0.00014,
+      "risk_decile": 1,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 53
+      },
+      "features": {
+        "age": 42,
+        "sex": "female",
+        "bmi": 29.4,
+        "sbp": 116.66666667,
+        "dbp": 78.66666667,
+        "smoker": "never",
+        "diabetes": "no",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 36,
+        "hba1c": 5.4,
+        "income_ratio": 3.29,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "race_eth",
+          "label": "Race/ethnicity",
+          "value": "nh asian",
+          "statement": "Race/ethnicity = nh asian",
+          "contribution_log_odds": -0.97471,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "42",
+          "statement": "Age = 42",
+          "contribution_log_odds": -0.57017,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "female",
+          "statement": "Sex = female",
+          "contribution_log_odds": -0.33539,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "education",
+          "label": "Education",
+          "value": "college grad",
+          "statement": "Education = college grad",
+          "contribution_log_odds": -0.3304,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "income_ratio",
+          "label": "Income-to-poverty ratio",
+          "value": "3.29",
+          "statement": "Income-to-poverty ratio = 3.29",
+          "contribution_log_odds": -0.25116,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_035",
+      "predicted_risk_36mo": 0.00209,
+      "risk_decile": 3,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 43
+      },
+      "features": {
+        "age": 31,
+        "sex": "male",
+        "bmi": 34.1,
+        "sbp": 131.33333333,
+        "dbp": 75.33333333,
+        "smoker": "current",
+        "diabetes": "no",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 34,
+        "hba1c": 5.5,
+        "income_ratio": 3.79,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "31",
+          "statement": "Age = 31",
+          "contribution_log_odds": -1.40995,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "smoker",
+          "label": "Smoking status",
+          "value": "current",
+          "statement": "Smoking status = current",
+          "contribution_log_odds": 0.39559,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "income_ratio",
+          "label": "Income-to-poverty ratio",
+          "value": "3.79",
+          "statement": "Income-to-poverty ratio = 3.79",
+          "contribution_log_odds": -0.39384,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "male",
+          "statement": "Sex = male",
+          "contribution_log_odds": 0.36629,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "hdl",
+          "label": "HDL cholesterol",
+          "value": "34.0",
+          "statement": "HDL cholesterol = 34.0",
+          "contribution_log_odds": -0.17908,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_036",
+      "predicted_risk_36mo": 0.01728,
+      "risk_decile": 7,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 55
+      },
+      "features": {
+        "age": 65,
+        "sex": "female",
+        "bmi": 48.6,
+        "sbp": 142,
+        "dbp": 51.33333333,
+        "smoker": "never",
+        "diabetes": "no",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 74,
+        "hba1c": 5.6,
+        "income_ratio": 2,
+        "income_ratio_imputed": true
+      },
+      "top_drivers": [
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "65",
+          "statement": "Age = 65",
+          "contribution_log_odds": 1.18574,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "female",
+          "statement": "Sex = female",
+          "contribution_log_odds": -0.33539,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "income_missing",
+          "label": "Income reporting",
+          "value": "not reported",
+          "statement": "Income reporting = not reported",
+          "contribution_log_odds": -0.27712,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "race_eth",
+          "label": "Race/ethnicity",
+          "value": "nh white",
+          "statement": "Race/ethnicity = nh white",
+          "contribution_log_odds": 0.2712,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "dbp",
+          "label": "Diastolic blood pressure",
+          "value": "51.3",
+          "statement": "Diastolic blood pressure = 51.3",
+          "contribution_log_odds": 0.1887,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_037",
+      "predicted_risk_36mo": 0.01372,
+      "risk_decile": 7,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 56
+      },
+      "features": {
+        "age": 53,
+        "sex": "female",
+        "bmi": 28.5,
+        "sbp": 110,
+        "dbp": 71.33333333,
+        "smoker": "never",
+        "diabetes": "no",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 84,
+        "hba1c": 6,
+        "income_ratio": 0.82,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "income_ratio",
+          "label": "Income-to-poverty ratio",
+          "value": "0.82",
+          "statement": "Income-to-poverty ratio = 0.82",
+          "contribution_log_odds": 0.4537,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "female",
+          "statement": "Sex = female",
+          "contribution_log_odds": -0.33539,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "race_eth",
+          "label": "Race/ethnicity",
+          "value": "nh white",
+          "statement": "Race/ethnicity = nh white",
+          "contribution_log_odds": 0.2712,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "53",
+          "statement": "Age = 53",
+          "contribution_log_odds": 0.26962,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "hdl",
+          "label": "HDL cholesterol",
+          "value": "84.0",
+          "statement": "HDL cholesterol = 84.0",
+          "contribution_log_odds": 0.26355,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_038",
+      "predicted_risk_36mo": 0.0033,
+      "risk_decile": 4,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 47
+      },
+      "features": {
+        "age": 46,
+        "sex": "female",
+        "bmi": 29.6,
+        "sbp": 135.33333333,
+        "dbp": 78.66666667,
+        "smoker": "never",
+        "diabetes": "no",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 34,
+        "hba1c": 9.5,
+        "income_ratio": 0.59,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "income_ratio",
+          "label": "Income-to-poverty ratio",
+          "value": "0.59",
+          "statement": "Income-to-poverty ratio = 0.59",
+          "contribution_log_odds": 0.51934,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "female",
+          "statement": "Sex = female",
+          "contribution_log_odds": -0.33539,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "education",
+          "label": "Education",
+          "value": "college grad",
+          "statement": "Education = college grad",
+          "contribution_log_odds": -0.3304,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "46",
+          "statement": "Age = 46",
+          "contribution_log_odds": -0.26479,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "smoker",
+          "label": "Smoking status",
+          "value": "never",
+          "statement": "Smoking status = never",
+          "contribution_log_odds": -0.18295,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_039",
+      "predicted_risk_36mo": 0.00068,
+      "risk_decile": 1,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 42
+      },
+      "features": {
+        "age": 30,
+        "sex": "male",
+        "bmi": 27,
+        "sbp": 125.33333333,
+        "dbp": 76.66666667,
+        "smoker": "never",
+        "diabetes": "no",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 35,
+        "hba1c": 5.9,
+        "income_ratio": 3.98,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "30",
+          "statement": "Age = 30",
+          "contribution_log_odds": -1.48629,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "income_ratio",
+          "label": "Income-to-poverty ratio",
+          "value": "3.98",
+          "statement": "Income-to-poverty ratio = 3.98",
+          "contribution_log_odds": -0.44806,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "male",
+          "statement": "Sex = male",
+          "contribution_log_odds": 0.36629,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "education",
+          "label": "Education",
+          "value": "college grad",
+          "statement": "Education = college grad",
+          "contribution_log_odds": -0.3304,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "smoker",
+          "label": "Smoking status",
+          "value": "never",
+          "statement": "Smoking status = never",
+          "contribution_log_odds": -0.18295,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_040",
+      "predicted_risk_36mo": 0.00184,
+      "risk_decile": 3,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 39
+      },
+      "features": {
+        "age": 38,
+        "sex": "female",
+        "bmi": 31.4,
+        "sbp": 116.66666667,
+        "dbp": 76,
+        "smoker": "never",
+        "diabetes": "no",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 36,
+        "hba1c": 5.4,
+        "income_ratio": 2.29,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "38",
+          "statement": "Age = 38",
+          "contribution_log_odds": -0.87554,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "race_eth",
+          "label": "Race/ethnicity",
+          "value": "other multi",
+          "statement": "Race/ethnicity = other multi",
+          "contribution_log_odds": 0.35665,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "female",
+          "statement": "Sex = female",
+          "contribution_log_odds": -0.33539,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "smoker",
+          "label": "Smoking status",
+          "value": "never",
+          "statement": "Smoking status = never",
+          "contribution_log_odds": -0.18295,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "hdl",
+          "label": "HDL cholesterol",
+          "value": "36.0",
+          "statement": "HDL cholesterol = 36.0",
+          "contribution_log_odds": -0.16137,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_041",
+      "predicted_risk_36mo": 0.00112,
+      "risk_decile": 2,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 47
+      },
+      "features": {
+        "age": 30,
+        "sex": "male",
+        "bmi": 23.1,
+        "sbp": 120,
+        "dbp": 72,
+        "smoker": "never",
+        "diabetes": "no",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 56,
+        "hba1c": 5.2,
+        "income_ratio": 5,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "30",
+          "statement": "Age = 30",
+          "contribution_log_odds": -1.48629,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "income_ratio",
+          "label": "Income-to-poverty ratio",
+          "value": "5.00",
+          "statement": "Income-to-poverty ratio = 5.00",
+          "contribution_log_odds": -0.73914,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "male",
+          "statement": "Sex = male",
+          "contribution_log_odds": 0.36629,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "race_eth",
+          "label": "Race/ethnicity",
+          "value": "other hispanic",
+          "statement": "Race/ethnicity = other hispanic",
+          "contribution_log_odds": -0.31019,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "smoker",
+          "label": "Smoking status",
+          "value": "never",
+          "statement": "Smoking status = never",
+          "contribution_log_odds": -0.18295,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_042",
+      "predicted_risk_36mo": 0.0141,
+      "risk_decile": 7,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 53
+      },
+      "features": {
+        "age": 68,
+        "sex": "female",
+        "bmi": 26.5,
+        "sbp": 125.33333333,
+        "dbp": 64.66666667,
+        "smoker": "never",
+        "diabetes": "no",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 69,
+        "hba1c": 5.6,
+        "income_ratio": 3.82,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "68",
+          "statement": "Age = 68",
+          "contribution_log_odds": 1.41477,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "income_ratio",
+          "label": "Income-to-poverty ratio",
+          "value": "3.82",
+          "statement": "Income-to-poverty ratio = 3.82",
+          "contribution_log_odds": -0.40241,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "female",
+          "statement": "Sex = female",
+          "contribution_log_odds": -0.33539,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "education",
+          "label": "Education",
+          "value": "college grad",
+          "statement": "Education = college grad",
+          "contribution_log_odds": -0.3304,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "race_eth",
+          "label": "Race/ethnicity",
+          "value": "nh white",
+          "statement": "Race/ethnicity = nh white",
+          "contribution_log_odds": 0.2712,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_043",
+      "predicted_risk_36mo": 0.08661,
+      "risk_decile": 9,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 49
+      },
+      "features": {
+        "age": 80,
+        "sex": "female",
+        "bmi": 20.6,
+        "sbp": 149.33333333,
+        "dbp": 50,
+        "smoker": "never",
+        "diabetes": "no",
+        "prior_chd": "yes",
+        "prior_cancer": "yes",
+        "hdl": 53,
+        "hba1c": 6.1,
+        "income_ratio": 3.01,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "80",
+          "statement": "Age = 80",
+          "contribution_log_odds": 2.3309,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "prior_cancer",
+          "label": "Prior cancer",
+          "value": "yes",
+          "statement": "Prior cancer = yes",
+          "contribution_log_odds": 0.55571,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "female",
+          "statement": "Sex = female",
+          "contribution_log_odds": -0.33539,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "education",
+          "label": "Education",
+          "value": "college grad",
+          "statement": "Education = college grad",
+          "contribution_log_odds": -0.3304,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "race_eth",
+          "label": "Race/ethnicity",
+          "value": "nh white",
+          "statement": "Race/ethnicity = nh white",
+          "contribution_log_odds": 0.2712,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_044",
+      "predicted_risk_36mo": 0.25046,
+      "risk_decile": 10,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": true,
+        "followup_months": 12
+      },
+      "features": {
+        "age": 74,
+        "sex": "male",
+        "bmi": 23.9,
+        "sbp": 170,
+        "dbp": 54,
+        "smoker": "current",
+        "diabetes": "no",
+        "prior_chd": "yes",
+        "prior_cancer": "no",
+        "hdl": 62,
+        "hba1c": 6.3,
+        "income_ratio": 0.53,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "74",
+          "statement": "Age = 74",
+          "contribution_log_odds": 1.87283,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "income_ratio",
+          "label": "Income-to-poverty ratio",
+          "value": "0.53",
+          "statement": "Income-to-poverty ratio = 0.53",
+          "contribution_log_odds": 0.53646,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "smoker",
+          "label": "Smoking status",
+          "value": "current",
+          "statement": "Smoking status = current",
+          "contribution_log_odds": 0.39559,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "male",
+          "statement": "Sex = male",
+          "contribution_log_odds": 0.36629,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "education",
+          "label": "Education",
+          "value": "lt 9th",
+          "statement": "Education = lt 9th",
+          "contribution_log_odds": 0.22738,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_045",
+      "predicted_risk_36mo": 0.00091,
+      "risk_decile": 2,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 43
+      },
+      "features": {
+        "age": 51,
+        "sex": "female",
+        "bmi": 20.9,
+        "sbp": 113.33333333,
+        "dbp": 59.33333333,
+        "smoker": "never",
+        "diabetes": "no",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 59,
+        "hba1c": 4.5,
+        "income_ratio": 5,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "income_ratio",
+          "label": "Income-to-poverty ratio",
+          "value": "5.00",
+          "statement": "Income-to-poverty ratio = 5.00",
+          "contribution_log_odds": -0.73914,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "female",
+          "statement": "Sex = female",
+          "contribution_log_odds": -0.33539,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "education",
+          "label": "Education",
+          "value": "college grad",
+          "statement": "Education = college grad",
+          "contribution_log_odds": -0.3304,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "race_eth",
+          "label": "Race/ethnicity",
+          "value": "other hispanic",
+          "statement": "Race/ethnicity = other hispanic",
+          "contribution_log_odds": -0.31019,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "smoker",
+          "label": "Smoking status",
+          "value": "never",
+          "statement": "Smoking status = never",
+          "contribution_log_odds": -0.18295,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_046",
+      "predicted_risk_36mo": 0.00027,
+      "risk_decile": 1,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 50
+      },
+      "features": {
+        "age": 28,
+        "sex": "male",
+        "bmi": 28.3,
+        "sbp": 132,
+        "dbp": 88,
+        "smoker": "never",
+        "diabetes": "no",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 50,
+        "hba1c": 5.1,
+        "income_ratio": 5,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "28",
+          "statement": "Age = 28",
+          "contribution_log_odds": -1.63898,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "race_eth",
+          "label": "Race/ethnicity",
+          "value": "nh asian",
+          "statement": "Race/ethnicity = nh asian",
+          "contribution_log_odds": -0.97471,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "income_ratio",
+          "label": "Income-to-poverty ratio",
+          "value": "5.00",
+          "statement": "Income-to-poverty ratio = 5.00",
+          "contribution_log_odds": -0.73914,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "male",
+          "statement": "Sex = male",
+          "contribution_log_odds": 0.36629,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "education",
+          "label": "Education",
+          "value": "college grad",
+          "statement": "Education = college grad",
+          "contribution_log_odds": -0.3304,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_047",
+      "predicted_risk_36mo": 0.10025,
+      "risk_decile": 10,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 55
+      },
+      "features": {
+        "age": 80,
+        "sex": "male",
+        "bmi": 25,
+        "sbp": 122,
+        "dbp": 64,
+        "smoker": "former",
+        "diabetes": "no",
+        "prior_chd": "no",
+        "prior_cancer": "yes",
+        "hdl": 47,
+        "hba1c": 5.9,
+        "income_ratio": 5,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "80",
+          "statement": "Age = 80",
+          "contribution_log_odds": 2.3309,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "income_ratio",
+          "label": "Income-to-poverty ratio",
+          "value": "5.00",
+          "statement": "Income-to-poverty ratio = 5.00",
+          "contribution_log_odds": -0.73914,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "prior_cancer",
+          "label": "Prior cancer",
+          "value": "yes",
+          "statement": "Prior cancer = yes",
+          "contribution_log_odds": 0.55571,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "male",
+          "statement": "Sex = male",
+          "contribution_log_odds": 0.36629,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "education",
+          "label": "Education",
+          "value": "college grad",
+          "statement": "Education = college grad",
+          "contribution_log_odds": -0.3304,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_048",
+      "predicted_risk_36mo": 0.00487,
+      "risk_decile": 5,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 56
+      },
+      "features": {
+        "age": 46,
+        "sex": "female",
+        "bmi": 29.8,
+        "sbp": 113.33333333,
+        "dbp": 54.66666667,
+        "smoker": "never",
+        "diabetes": "no",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 47,
+        "hba1c": 5.6,
+        "income_ratio": 1.49,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "female",
+          "statement": "Sex = female",
+          "contribution_log_odds": -0.33539,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "46",
+          "statement": "Age = 46",
+          "contribution_log_odds": -0.26479,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "income_ratio",
+          "label": "Income-to-poverty ratio",
+          "value": "1.49",
+          "statement": "Income-to-poverty ratio = 1.49",
+          "contribution_log_odds": 0.2625,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "smoker",
+          "label": "Smoking status",
+          "value": "never",
+          "statement": "Smoking status = never",
+          "contribution_log_odds": -0.18295,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "race_eth",
+          "label": "Race/ethnicity",
+          "value": "nh black",
+          "statement": "Race/ethnicity = nh black",
+          "contribution_log_odds": 0.16686,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_049",
+      "predicted_risk_36mo": 0.007,
+      "risk_decile": 6,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 47
+      },
+      "features": {
+        "age": 53,
+        "sex": "female",
+        "bmi": 25.4,
+        "sbp": 125.33333333,
+        "dbp": 72,
+        "smoker": "never",
+        "diabetes": "no",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 124,
+        "hba1c": 4.9,
+        "income_ratio": 5,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "income_ratio",
+          "label": "Income-to-poverty ratio",
+          "value": "5.00",
+          "statement": "Income-to-poverty ratio = 5.00",
+          "contribution_log_odds": -0.73914,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "hdl",
+          "label": "HDL cholesterol",
+          "value": "124.0",
+          "statement": "HDL cholesterol = 124.0",
+          "contribution_log_odds": 0.61764,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "female",
+          "statement": "Sex = female",
+          "contribution_log_odds": -0.33539,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "education",
+          "label": "Education",
+          "value": "college grad",
+          "statement": "Education = college grad",
+          "contribution_log_odds": -0.3304,
+          "direction": "decreases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "race_eth",
+          "label": "Race/ethnicity",
+          "value": "nh white",
+          "statement": "Race/ethnicity = nh white",
+          "contribution_log_odds": 0.2712,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    },
+    {
+      "case_id": "case_050",
+      "predicted_risk_36mo": 0.1249,
+      "risk_decile": 10,
+      "prediction_is_out_of_fold": true,
+      "observed": {
+        "died_within_36_months": false,
+        "followup_months": 45
+      },
+      "features": {
+        "age": 63,
+        "sex": "male",
+        "bmi": 18.8,
+        "sbp": 144.66666667,
+        "dbp": 69.33333333,
+        "smoker": "current",
+        "diabetes": "no",
+        "prior_chd": "no",
+        "prior_cancer": "no",
+        "hdl": 110,
+        "hba1c": 5.2,
+        "income_ratio": 1.25,
+        "income_ratio_imputed": false
+      },
+      "top_drivers": [
+        {
+          "variable": "age",
+          "label": "Age",
+          "value": "63",
+          "statement": "Age = 63",
+          "contribution_log_odds": 1.03305,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "hdl",
+          "label": "HDL cholesterol",
+          "value": "110.0",
+          "statement": "HDL cholesterol = 110.0",
+          "contribution_log_odds": 0.49371,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "smoker",
+          "label": "Smoking status",
+          "value": "current",
+          "statement": "Smoking status = current",
+          "contribution_log_odds": 0.39559,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "sex",
+          "label": "Sex",
+          "value": "male",
+          "statement": "Sex = male",
+          "contribution_log_odds": 0.36629,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        },
+        {
+          "variable": "income_ratio",
+          "label": "Income-to-poverty ratio",
+          "value": "1.25",
+          "statement": "Income-to-poverty ratio = 1.25",
+          "contribution_log_odds": 0.33099,
+          "direction": "increases risk",
+          "relative_to": "cohort mean"
+        }
+      ]
+    }
+  ]
+}

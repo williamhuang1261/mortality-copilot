@@ -1,0 +1,574 @@
+{
+  "name": "mortality-copilot",
+  "generated": "2026-08-23",
+  "purpose": "Educational demonstration of survival and classification modelling on public health-survey data. NOT an underwriting system and not a mortality table. Must not be used for any real insurance, medical or financial decision.",
+  "outcome": {
+    "definition": "All-cause mortality within 36 months of NHANES examination",
+    "why_36_months": "Mortality follow-up ends in 2019. Survivors have a median of 47 months observed and only 99 of 5,426 reach 60 months, so a 5-year label would measure censoring rather than mortality: at 60 months only 349 of 5,701 people are classifiable and the apparent event rate is 71.6%."
+  },
+  "cohort": {
+    "source": "NHANES 2015-2016 linked to the NCHS Public-Use Linked Mortality File (2019)",
+    "inclusion": "Adults aged 20+, eligible for mortality follow-up, examined (not interview-only)",
+    "exclusions": "517 rows with an incomplete predictor or an unlabelled endpoint; 36 rows whose categorical predictors were 'unknown' -- three such categories contain zero deaths, which produces complete separation.",
+    "n": 4906,
+    "deaths_36_months": 151,
+    "deaths_any_followup": 204,
+    "event_rate_36_months": 0.03078
+  },
+  "predictors": {
+    "used": ["age", "income_ratio", "bmi", "sbp", "dbp", "hdl", "hba1c", "income_missing", "sex", "race_eth", "education", "smoker", "diabetes", "prior_chd", "prior_cancer"],
+    "dropped": {
+      "waist": "Correlates 0.910 with BMI; requiring it complete cost 161 rows and 23 deaths",
+      "survey_weights": "Not applied -- see limitations"
+    },
+    "imputation": "income_ratio is median-imputed with an explicit income_missing indicator (10.3% missing). All other predictors are complete-case."
+  },
+  "validation": {
+    "scheme": "5-fold cross-validation, stratified on the outcome, seed 20260823",
+    "metrics": [
+      {
+        "Model": "Logistic GLM",
+        "AUC": "0.853",
+        "AUC 95% CI (DeLong)": "[0.824, 0.881]",
+        "Brier": "0.02758",
+        "Calibration intercept": "-0.386",
+        "Calibration slope": "0.848"
+      },
+      {
+        "Model": "Cox PH",
+        "AUC": "0.856",
+        "AUC 95% CI (DeLong)": "[0.828, 0.884]",
+        "Brier": "0.02773",
+        "Calibration intercept": "-0.381",
+        "Calibration slope": "0.851"
+      },
+      {
+        "Model": "Random forest",
+        "AUC": "0.841",
+        "AUC 95% CI (DeLong)": "[0.806, 0.876]",
+        "Brier": "0.02741",
+        "Calibration intercept": "-0.532",
+        "Calibration slope": "0.827"
+      }
+    ],
+    "concordance_cox": {
+      "c_index": 0.873,
+      "se": 0.0112,
+      "note": "Computed over the full censored survival data, not the binary label"
+    },
+    "likelihood_ratio_tests": [
+      {
+        "Comparison": "demographics -> + clinical history",
+        "Chi-square": "22.34",
+        "df": 9,
+        "p": "0.0079"
+      },
+      {
+        "Comparison": "+ clinical -> + laboratory",
+        "Chi-square": "3.00",
+        "df": 2,
+        "p": "0.2227"
+      }
+    ],
+    "proportional_hazards": {
+      "test": "cox.zph",
+      "table": [
+        {
+          "Term": "age",
+          "Chi-square": "0.12",
+          "df": 1,
+          "p": "0.7259",
+          "_row": "age"
+        },
+        {
+          "Term": "income_ratio",
+          "Chi-square": "0.51",
+          "df": 1,
+          "p": "0.4764",
+          "_row": "income_ratio"
+        },
+        {
+          "Term": "bmi",
+          "Chi-square": "1.36",
+          "df": 1,
+          "p": "0.2434",
+          "_row": "bmi"
+        },
+        {
+          "Term": "sbp",
+          "Chi-square": "4.85",
+          "df": 1,
+          "p": "0.0277",
+          "_row": "sbp"
+        },
+        {
+          "Term": "dbp",
+          "Chi-square": "0.55",
+          "df": 1,
+          "p": "0.4574",
+          "_row": "dbp"
+        },
+        {
+          "Term": "hdl",
+          "Chi-square": "0.04",
+          "df": 1,
+          "p": "0.8442",
+          "_row": "hdl"
+        },
+        {
+          "Term": "hba1c",
+          "Chi-square": "0.08",
+          "df": 1,
+          "p": "0.7829",
+          "_row": "hba1c"
+        },
+        {
+          "Term": "income_missing",
+          "Chi-square": "1.76",
+          "df": 1,
+          "p": "0.1845",
+          "_row": "income_missing"
+        },
+        {
+          "Term": "sex",
+          "Chi-square": "2.81",
+          "df": 1,
+          "p": "0.0936",
+          "_row": "sex"
+        },
+        {
+          "Term": "race_eth",
+          "Chi-square": "2.54",
+          "df": 5,
+          "p": "0.7706",
+          "_row": "race_eth"
+        },
+        {
+          "Term": "education",
+          "Chi-square": "5.28",
+          "df": 4,
+          "p": "0.2599",
+          "_row": "education"
+        },
+        {
+          "Term": "smoker",
+          "Chi-square": "0.09",
+          "df": 2,
+          "p": "0.9540",
+          "_row": "smoker"
+        },
+        {
+          "Term": "diabetes",
+          "Chi-square": "0.45",
+          "df": 2,
+          "p": "0.7980",
+          "_row": "diabetes"
+        },
+        {
+          "Term": "prior_chd",
+          "Chi-square": "1.45",
+          "df": 1,
+          "p": "0.2281",
+          "_row": "prior_chd"
+        },
+        {
+          "Term": "prior_cancer",
+          "Chi-square": "0.26",
+          "df": 1,
+          "p": "0.6109",
+          "_row": "prior_cancer"
+        },
+        {
+          "Term": "GLOBAL",
+          "Chi-square": "23.14",
+          "df": 24,
+          "p": "0.5117",
+          "_row": "GLOBAL"
+        }
+      ],
+      "violations": "sbp",
+      "interpretation": "The hazard ratio for sbp varies over follow-up, so the reported figure is an average across the observation window rather than a constant effect."
+    }
+  },
+  "coefficients": {
+    "logistic_glm": [
+      {
+        "term": "(Intercept)",
+        "label": "Intercept",
+        "estimate_log_odds": -8.35214,
+        "odds_ratio": 0.0002,
+        "ci_95": [0, 0.0029],
+        "p_value": 1.283e-10
+      },
+      {
+        "term": "age",
+        "label": "Age",
+        "estimate_log_odds": 0.07634,
+        "odds_ratio": 1.0793,
+        "ci_95": [1.0603, 1.1002],
+        "p_value": 5.651e-16
+      },
+      {
+        "term": "income_ratio",
+        "label": "Income-to-poverty ratio",
+        "estimate_log_odds": -0.28537,
+        "odds_ratio": 0.7517,
+        "ci_95": [0.6389, 0.8778],
+        "p_value": 0.0004206
+      },
+      {
+        "term": "bmi",
+        "label": "BMI",
+        "estimate_log_odds": -0.00247,
+        "odds_ratio": 0.9975,
+        "ci_95": [0.966, 1.0286],
+        "p_value": 0.8776
+      },
+      {
+        "term": "sbp",
+        "label": "Systolic blood pressure",
+        "estimate_log_odds": 0.00379,
+        "odds_ratio": 1.0038,
+        "ci_95": [0.9943, 1.0132],
+        "p_value": 0.4303
+      },
+      {
+        "term": "dbp",
+        "label": "Diastolic blood pressure",
+        "estimate_log_odds": -0.01007,
+        "odds_ratio": 0.99,
+        "ci_95": [0.9744, 1.0059],
+        "p_value": 0.215
+      },
+      {
+        "term": "hdl",
+        "label": "HDL cholesterol",
+        "estimate_log_odds": 0.00885,
+        "odds_ratio": 1.0089,
+        "ci_95": [0.9987, 1.0186],
+        "p_value": 0.07867
+      },
+      {
+        "term": "hba1c",
+        "label": "HbA1c",
+        "estimate_log_odds": 0.00119,
+        "odds_ratio": 1.0012,
+        "ci_95": [0.8363, 1.1754],
+        "p_value": 0.9891
+      },
+      {
+        "term": "income_missing",
+        "label": "Income not reported",
+        "estimate_log_odds": -0.30669,
+        "odds_ratio": 0.7359,
+        "ci_95": [0.3991, 1.2684],
+        "p_value": 0.2954
+      },
+      {
+        "term": "sexmale",
+        "label": "Sex: male",
+        "estimate_log_odds": 0.70168,
+        "odds_ratio": 2.0171,
+        "ci_95": [1.3559, 3.0285],
+        "p_value": 0.0006079
+      },
+      {
+        "term": "race_ethmexican_american",
+        "label": "Race/ethnicity: mexican american",
+        "estimate_log_odds": -0.18456,
+        "odds_ratio": 0.8315,
+        "ci_95": [0.4647, 1.4538],
+        "p_value": 0.5249
+      },
+      {
+        "term": "race_ethnh_asian",
+        "label": "Race/ethnicity: nh asian",
+        "estimate_log_odds": -1.24592,
+        "odds_ratio": 0.2877,
+        "ci_95": [0.0831, 0.7576],
+        "p_value": 0.02356
+      },
+      {
+        "term": "race_ethnh_black",
+        "label": "Race/ethnicity: nh black",
+        "estimate_log_odds": -0.10434,
+        "odds_ratio": 0.9009,
+        "ci_95": [0.5432, 1.4675],
+        "p_value": 0.6798
+      },
+      {
+        "term": "race_ethother_hispanic",
+        "label": "Race/ethnicity: other hispanic",
+        "estimate_log_odds": -0.58139,
+        "odds_ratio": 0.5591,
+        "ci_95": [0.2729, 1.063],
+        "p_value": 0.09127
+      },
+      {
+        "term": "race_ethother_multi",
+        "label": "Race/ethnicity: other multi",
+        "estimate_log_odds": 0.08544,
+        "odds_ratio": 1.0892,
+        "ci_95": [0.3633, 2.6478],
+        "p_value": 0.8634
+      },
+      {
+        "term": "educationcollege_grad",
+        "label": "Education: college grad",
+        "estimate_log_odds": -0.42195,
+        "odds_ratio": 0.6558,
+        "ci_95": [0.3393, 1.2249],
+        "p_value": 0.1952
+      },
+      {
+        "term": "educationlt_9th",
+        "label": "Education: lt 9th",
+        "estimate_log_odds": 0.13582,
+        "odds_ratio": 1.1455,
+        "ci_95": [0.6443, 2.0288],
+        "p_value": 0.6416
+      },
+      {
+        "term": "educationsome_college",
+        "label": "Education: some college",
+        "estimate_log_odds": -0.09995,
+        "odds_ratio": 0.9049,
+        "ci_95": [0.5582, 1.4712],
+        "p_value": 0.6851
+      },
+      {
+        "term": "educationsome_hs",
+        "label": "Education: some hs",
+        "estimate_log_odds": 0.23879,
+        "odds_ratio": 1.2697,
+        "ci_95": [0.7199, 2.209],
+        "p_value": 0.4019
+      },
+      {
+        "term": "smokercurrent",
+        "label": "Smoking status: current",
+        "estimate_log_odds": 0.57854,
+        "odds_ratio": 1.7834,
+        "ci_95": [1.0676, 2.9529],
+        "p_value": 0.02542
+      },
+      {
+        "term": "smokerformer",
+        "label": "Smoking status: former",
+        "estimate_log_odds": 0.31443,
+        "odds_ratio": 1.3695,
+        "ci_95": [0.907, 2.0724],
+        "p_value": 0.135
+      },
+      {
+        "term": "diabetesborderline",
+        "label": "Diabetes: borderline",
+        "estimate_log_odds": 0.08124,
+        "odds_ratio": 1.0846,
+        "ci_95": [0.3621, 2.6196],
+        "p_value": 0.8697
+      },
+      {
+        "term": "diabetesyes",
+        "label": "Diabetes: yes",
+        "estimate_log_odds": 0.48193,
+        "odds_ratio": 1.6192,
+        "ci_95": [1.0018, 2.589],
+        "p_value": 0.04635
+      },
+      {
+        "term": "prior_chdyes",
+        "label": "Prior heart disease: yes",
+        "estimate_log_odds": 0.22506,
+        "odds_ratio": 1.2524,
+        "ci_95": [0.7347, 2.0545],
+        "p_value": 0.3891
+      },
+      {
+        "term": "prior_canceryes",
+        "label": "Prior cancer: yes",
+        "estimate_log_odds": 0.61376,
+        "odds_ratio": 1.8474,
+        "ci_95": [1.228, 2.7564],
+        "p_value": 0.00288
+      }
+    ],
+    "cox_proportional_hazards": [
+      {
+        "term": "age",
+        "label": "Age",
+        "hazard_ratio": 1.0831,
+        "ci_95": [1.0662, 1.1002],
+        "p_value": 2.249e-23
+      },
+      {
+        "term": "income_ratio",
+        "label": "Income-to-poverty ratio",
+        "hazard_ratio": 0.7876,
+        "ci_95": [0.6934, 0.8946],
+        "p_value": 0.0002388
+      },
+      {
+        "term": "bmi",
+        "label": "BMI",
+        "hazard_ratio": 1.0003,
+        "ci_95": [0.9753, 1.0259],
+        "p_value": 0.9845
+      },
+      {
+        "term": "sbp",
+        "label": "Systolic blood pressure",
+        "hazard_ratio": 1.0071,
+        "ci_95": [0.9997, 1.0145],
+        "p_value": 0.05884
+      },
+      {
+        "term": "dbp",
+        "label": "Diastolic blood pressure",
+        "hazard_ratio": 0.9968,
+        "ci_95": [0.9844, 1.0093],
+        "p_value": 0.615
+      },
+      {
+        "term": "hdl",
+        "label": "HDL cholesterol",
+        "hazard_ratio": 1.0057,
+        "ci_95": [0.9975, 1.014],
+        "p_value": 0.1712
+      },
+      {
+        "term": "hba1c",
+        "label": "HbA1c",
+        "hazard_ratio": 1.0008,
+        "ci_95": [0.8718, 1.1488],
+        "p_value": 0.9914
+      },
+      {
+        "term": "income_missing",
+        "label": "Income not reported",
+        "hazard_ratio": 0.83,
+        "ci_95": [0.531, 1.2973],
+        "p_value": 0.4134
+      },
+      {
+        "term": "sexmale",
+        "label": "Sex: male",
+        "hazard_ratio": 1.7568,
+        "ci_95": [1.2674, 2.4352],
+        "p_value": 0.0007188
+      },
+      {
+        "term": "race_ethmexican_american",
+        "label": "Race/ethnicity: mexican american",
+        "hazard_ratio": 0.7412,
+        "ci_95": [0.4652, 1.1809],
+        "p_value": 0.2076
+      },
+      {
+        "term": "race_ethnh_asian",
+        "label": "Race/ethnicity: nh asian",
+        "hazard_ratio": 0.4182,
+        "ci_95": [0.1963, 0.891],
+        "p_value": 0.02389
+      },
+      {
+        "term": "race_ethnh_black",
+        "label": "Race/ethnicity: nh black",
+        "hazard_ratio": 0.733,
+        "ci_95": [0.4859, 1.1058],
+        "p_value": 0.1387
+      },
+      {
+        "term": "race_ethother_hispanic",
+        "label": "Race/ethnicity: other hispanic",
+        "hazard_ratio": 0.5664,
+        "ci_95": [0.3281, 0.9777],
+        "p_value": 0.04126
+      },
+      {
+        "term": "race_ethother_multi",
+        "label": "Race/ethnicity: other multi",
+        "hazard_ratio": 1.1561,
+        "ci_95": [0.5548, 2.4087],
+        "p_value": 0.6986
+      },
+      {
+        "term": "educationcollege_grad",
+        "label": "Education: college grad",
+        "hazard_ratio": 0.5704,
+        "ci_95": [0.3382, 0.9622],
+        "p_value": 0.03533
+      },
+      {
+        "term": "educationlt_9th",
+        "label": "Education: lt 9th",
+        "hazard_ratio": 1.0392,
+        "ci_95": [0.6587, 1.6396],
+        "p_value": 0.8687
+      },
+      {
+        "term": "educationsome_college",
+        "label": "Education: some college",
+        "hazard_ratio": 0.9162,
+        "ci_95": [0.6299, 1.3326],
+        "p_value": 0.6471
+      },
+      {
+        "term": "educationsome_hs",
+        "label": "Education: some hs",
+        "hazard_ratio": 1.0324,
+        "ci_95": [0.6506, 1.6383],
+        "p_value": 0.8924
+      },
+      {
+        "term": "smokercurrent",
+        "label": "Smoking status: current",
+        "hazard_ratio": 1.8459,
+        "ci_95": [1.2286, 2.7732],
+        "p_value": 0.003164
+      },
+      {
+        "term": "smokerformer",
+        "label": "Smoking status: former",
+        "hazard_ratio": 1.2492,
+        "ci_95": [0.8927, 1.7481],
+        "p_value": 0.1943
+      },
+      {
+        "term": "diabetesborderline",
+        "label": "Diabetes: borderline",
+        "hazard_ratio": 1.1291,
+        "ci_95": [0.5236, 2.4349],
+        "p_value": 0.7568
+      },
+      {
+        "term": "diabetesyes",
+        "label": "Diabetes: yes",
+        "hazard_ratio": 1.5313,
+        "ci_95": [1.0422, 2.2501],
+        "p_value": 0.02999
+      },
+      {
+        "term": "prior_chdyes",
+        "label": "Prior heart disease: yes",
+        "hazard_ratio": 1.4374,
+        "ci_95": [0.9736, 2.1222],
+        "p_value": 0.06798
+      },
+      {
+        "term": "prior_canceryes",
+        "label": "Prior cancer: yes",
+        "hazard_ratio": 1.5308,
+        "ci_95": [1.1089, 2.1134],
+        "p_value": 0.009653
+      }
+    ]
+  },
+  "limitations": ["NHANES survey weights are not applied; estimates describe this sample of examined adults, not the U.S. population.", "NHANES is a general-population health survey, not an underwritten insurance book. There is no policy, premium, lapse or claims data anywhere in this project.", "Several predictors are self-reported (smoking, diabetes, prior disease), not clinically verified.", "Competing risks are ignored; the outcome is all-cause mortality.", "Follow-up is short (median 47 months), so this speaks to near-term mortality only.", "Predictions are somewhat over-dispersed: the calibration slope is below 1."],
+  "provenance": {
+    "nhanes": "https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2015/DataFiles/",
+    "linked_mortality": "https://ftp.cdc.gov/pub/HEALTH_STATISTICS/NCHS/datalinkage/linked_mortality/",
+    "licence": "U.S. public domain",
+    "verified": "2026-08-23"
+  }
+}
