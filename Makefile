@@ -7,7 +7,7 @@ PY      := $(VENV)/bin/python
 PIP     := $(VENV)/bin/pip
 RSCRIPT := Rscript
 
-.PHONY: help setup setup-rag data features eda models index demo finetune test all clean
+.PHONY: help setup setup-rag data features eda models sklearn-baseline index demo finetune test all clean
 
 help:
 	@echo "mortality-copilot"
@@ -18,6 +18,7 @@ help:
 	@echo "  make features   build the analytic cohort in SQL"
 	@echo "  make eda        exploratory analysis, hypothesis tests, figures"
 	@echo "  make models     fit logistic / Cox / random forest, export artifacts"
+	@echo "  make sklearn-baseline  scikit-learn cross-check of the R models"
 	@echo "  make index      embed the NCHS corpus into a FAISS index"
 	@echo "  make demo       run the copilot on one held-out case"
 	@echo "  make finetune   fine-tune the retriever, report recall@5"
@@ -58,6 +59,9 @@ eda:
 models:
 	$(RSCRIPT) R/04_models.R
 	$(RSCRIPT) R/05_export.R
+
+sklearn-baseline:
+	$(PY) pipeline/09_sklearn_baseline.py
 
 index: setup-rag
 	$(PY) pipeline/06_index.py

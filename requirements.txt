@@ -6,3 +6,8 @@ pypdf==5.1.0
 typer==0.15.1
 rich==13.9.4
 pytest==8.3.4
+# scikit-learn baseline cross-check (pipeline/09_sklearn_baseline.py) --
+# lightweight, no torch, so it stays in the core install.
+scikit-learn==1.9.0
+pandas==3.0.5
+numpy==2.4.6

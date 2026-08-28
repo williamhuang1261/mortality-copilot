@@ -1,0 +1,19 @@
+{
+  "cohort_size": 4906,
+  "deaths_36mo": 151,
+  "n_folds": 5,
+  "seed": 20260828,
+  "fold_note": "Independent stratified split drawn by scikit-learn's own RNG; not the same fold assignment as R/04_models.R, which uses R's sample() under a different seed and algorithm. This is a cross-check between comparable models, not an identical rerun.",
+  "results": [
+    {
+      "model": "Logistic Regression (scikit-learn)",
+      "auc": 0.855,
+      "brier": 0.02749
+    },
+    {
+      "model": "Random Forest (scikit-learn)",
+      "auc": 0.843,
+      "brier": 0.02751
+    }
+  ]
+}

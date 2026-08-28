@@ -209,6 +209,22 @@ over follow-up, not a constant effect. Reported rather than quietly dropped.
 
 ![Kaplan-Meier by smoking status](docs/figs/km_smoking.png)
 
+### scikit-learn cross-check
+
+The same cohort and predictor set, refit in Python (`make sklearn-baseline`)
+on an independently-drawn stratified 5-fold split, not R's own fold
+assignment, since the two RNGs cannot be made to match:
+
+| Model | AUC | Brier |
+| --- | ---: | ---: |
+| Logistic Regression (scikit-learn) | 0.855 | 0.02749 |
+| Random Forest (scikit-learn) | 0.843 | 0.02751 |
+
+Both land within 0.002 AUC of their R counterparts (GLM 0.853, RF 0.841)
+despite the independent folds, and the cohort size matches exactly (4,906
+rows, 151 deaths), confirming the exclusion rule was ported correctly. Full
+comparison and methodology: [`docs/sklearn_baseline.md`](docs/sklearn_baseline.md).
+
 ## Retrieval
 
 75 chunks from three NCHS PDFs plus the generated model card, embedded with
