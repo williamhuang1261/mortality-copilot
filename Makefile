@@ -7,7 +7,7 @@ PY      := $(VENV)/bin/python
 PIP     := $(VENV)/bin/pip
 RSCRIPT := Rscript
 
-.PHONY: help setup setup-rag data features eda models sklearn-baseline index demo finetune test all clean
+.PHONY: help setup setup-rag data features eda models sklearn-baseline index demo finetune equipment-data equipment-features equipment-models test all clean
 
 help:
 	@echo "mortality-copilot"
@@ -22,6 +22,9 @@ help:
 	@echo "  make index      embed the NCHS corpus into a FAISS index"
 	@echo "  make demo       run the copilot on one held-out case"
 	@echo "  make finetune   fine-tune the retriever, report recall@5"
+	@echo "  make equipment-data      download NASA C-MAPSS FD001 into DuckDB (second domain)"
+	@echo "  make equipment-features  build the equipment health-score analytic tables"
+	@echo "  make equipment-models   fit/validate equipment models, score the external holdout"
 	@echo "  make test       run the test suite"
 	@echo "  make all        data -> features -> eda -> models"
 	@echo "  make clean      remove generated data, index and artifacts"
@@ -72,6 +75,17 @@ demo:
 finetune: setup-rag
 	$(PY) pipeline/08_finetune.py
 
+equipment-data:
+	$(RSCRIPT) R/eq01_ingest.R
+	$(PY) pipeline/eq_load_duckdb.py
+
+equipment-features:
+	$(PY) pipeline/eq_features.py
+
+equipment-models:
+	$(RSCRIPT) R/eq03_models.R
+	$(RSCRIPT) R/eq04_export.R
+
 all: data features eda models
 
 # ---------------------------------------------------------------- quality
@@ -80,4 +94,4 @@ test:
 	$(PY) -m pytest tests/ -q
 
 clean:
-	rm -rf data/raw data/*.duckdb data/*.csv index/ corpus/ models/ artifacts/*.json docs/figs/*.png
+	rm -rf data/raw data/*.duckdb data/*.csv data/equipment index/ corpus/ models/ artifacts/*.json docs/figs/*.png

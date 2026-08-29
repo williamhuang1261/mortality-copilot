@@ -1,0 +1,5309 @@
+{
+  "generated": "2026-08-29",
+  "model": "logistic GLM, external holdout predictions",
+  "horizon_cycles": 30,
+  "attribution": "Per-predictor contributions to the log-odds, relative to the training cohort mean. Exact additive decomposition of the linear predictor, not an approximation -- verified above, not assumed.",
+  "n_cases": 100,
+  "cases": [
+    {
+      "engine_id": "test_engine_010",
+      "asset_health_score": 0.00109,
+      "risk_decile": 5,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 96,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 192
+      },
+      "top_drivers": [
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.062,
+          "contribution_log_odds": -0.95672,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.483,
+          "contribution_log_odds": -0.54729,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s7_std",
+          "label": "Sensor 7, trailing std dev",
+          "value": 0.5226,
+          "contribution_log_odds": 0.50969,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s2_std",
+          "label": "Sensor 2, trailing std dev",
+          "value": 0.3662,
+          "contribution_log_odds": 0.50693,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1405.936,
+          "contribution_log_odds": 0.30312,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_018",
+      "asset_health_score": 0.0052,
+      "risk_decile": 7,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 28,
+        "failed_within_30_cycles": true,
+        "last_observed_cycle": 133
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.637,
+          "contribution_log_odds": 1.79632,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.147,
+          "contribution_log_odds": 1.49371,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9054.458,
+          "contribution_log_odds": -1.39744,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.655,
+          "contribution_log_odds": -1.38205,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.129,
+          "contribution_log_odds": 1.23528,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_029",
+      "asset_health_score": 0.00012,
+      "risk_decile": 4,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 90,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 171
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.414,
+          "contribution_log_odds": -1.59735,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.052,
+          "contribution_log_odds": -1.08129,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9070.237,
+          "contribution_log_odds": 0.88832,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.069,
+          "contribution_log_odds": -0.72771,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.87,
+          "contribution_log_odds": 0.31635,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_034",
+      "asset_health_score": 0.99239,
+      "risk_decile": 10,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 7,
+        "failed_within_30_cycles": true,
+        "last_observed_cycle": 203
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 48.064,
+          "contribution_log_odds": 8.29451,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.241,
+          "contribution_log_odds": 4.89952,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.246,
+          "contribution_log_odds": 4.17713,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9045.917,
+          "contribution_log_odds": -2.63469,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.565,
+          "contribution_log_odds": -2.09301,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_047",
+      "asset_health_score": 0.01989,
+      "risk_decile": 7,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 135,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 73
+      },
+      "top_drivers": [
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9042.773,
+          "contribution_log_odds": -3.09014,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.15,
+          "contribution_log_odds": 1.92233,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.151,
+          "contribution_log_odds": 1.60213,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.617,
+          "contribution_log_odds": 1.49196,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s14_mean",
+          "label": "Sensor 14 (corr. core speed), trailing mean",
+          "value": 8122.044,
+          "contribution_log_odds": 0.58167,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_049",
+      "asset_health_score": 0.9347,
+      "risk_decile": 9,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 21,
+        "failed_within_30_cycles": true,
+        "last_observed_cycle": 303
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.933,
+          "contribution_log_odds": 6.30092,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.218,
+          "contribution_log_odds": 4.14704,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.211,
+          "contribution_log_odds": 3.22845,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1421.33,
+          "contribution_log_odds": -1.75917,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9052.46,
+          "contribution_log_odds": -1.68687,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_093",
+      "asset_health_score": 0.42154,
+      "risk_decile": 8,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 85,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 244
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.77,
+          "contribution_log_odds": 3.82035,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.153,
+          "contribution_log_odds": 2.02048,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9077.441,
+          "contribution_log_odds": 1.93189,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1417.827,
+          "contribution_log_odds": -1.28988,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.137,
+          "contribution_log_odds": 1.22266,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_021",
+      "asset_health_score": 0.0001,
+      "risk_decile": 3,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 57,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 148
+      },
+      "top_drivers": [
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9086.545,
+          "contribution_log_odds": 3.2507,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.025,
+          "contribution_log_odds": -2.16723,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.392,
+          "contribution_log_odds": -1.93215,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.033,
+          "contribution_log_odds": -1.59629,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.927,
+          "contribution_log_odds": 0.76662,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_025",
+      "asset_health_score": 0.00002,
+      "risk_decile": 2,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 145,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 48
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.331,
+          "contribution_log_odds": -2.86046,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9051.217,
+          "contribution_log_odds": -1.86693,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.955,
+          "contribution_log_odds": 0.98781,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.061,
+          "contribution_log_odds": -0.83734,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.069,
+          "contribution_log_odds": -0.72771,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_087",
+      "asset_health_score": 0.00002,
+      "risk_decile": 2,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 116,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 56
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.312,
+          "contribution_log_odds": -3.14961,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.038,
+          "contribution_log_odds": -1.46077,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.047,
+          "contribution_log_odds": -1.44747,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1397.933,
+          "contribution_log_odds": 1.37526,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.974,
+          "contribution_log_odds": 1.1379,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_095",
+      "asset_health_score": 0.00003,
+      "risk_decile": 3,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 128,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 89
+      },
+      "top_drivers": [
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9048.364,
+          "contribution_log_odds": -2.28022,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.442,
+          "contribution_log_odds": -1.17124,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.064,
+          "contribution_log_odds": -0.89129,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.061,
+          "contribution_log_odds": -0.83734,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.911,
+          "contribution_log_odds": 0.64023,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_099",
+      "asset_health_score": 0,
+      "risk_decile": 1,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 117,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 97
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.203,
+          "contribution_log_odds": -4.8084,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.007,
+          "contribution_log_odds": -2.75612,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388,
+          "contribution_log_odds": -2.49077,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.992,
+          "contribution_log_odds": 1.28009,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1399.507,
+          "contribution_log_odds": 1.16439,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_100",
+      "asset_health_score": 0.51893,
+      "risk_decile": 9,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 20,
+        "failed_within_30_cycles": true,
+        "last_observed_cycle": 198
+      },
+      "top_drivers": [
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9142.563,
+          "contribution_log_odds": 11.3655,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s14_mean",
+          "label": "Sensor 14 (corr. core speed), trailing mean",
+          "value": 8212.003,
+          "contribution_log_odds": -1.91973,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.607,
+          "contribution_log_odds": 1.33977,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1417.48,
+          "contribution_log_odds": -1.24339,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.694,
+          "contribution_log_odds": -1.07397,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_001",
+      "asset_health_score": 1e-05,
+      "risk_decile": 2,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 112,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 31
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.288,
+          "contribution_log_odds": -3.51485,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9049.068,
+          "contribution_log_odds": -2.17824,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1400.719,
+          "contribution_log_odds": 1.00202,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.933,
+          "contribution_log_odds": 0.81402,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.069,
+          "contribution_log_odds": -0.72771,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_078",
+      "asset_health_score": 0,
+      "risk_decile": 1,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 107,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 72
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.154,
+          "contribution_log_odds": -5.55409,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2387.982,
+          "contribution_log_odds": -3.57404,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2387.986,
+          "contribution_log_odds": -2.87024,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 39.077,
+          "contribution_log_odds": 1.95155,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1395.815,
+          "contribution_log_odds": 1.659,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_009",
+      "asset_health_score": 0.00173,
+      "risk_decile": 5,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 111,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 55
+      },
+      "top_drivers": [
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9051.982,
+          "contribution_log_odds": -1.75611,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.127,
+          "contribution_log_odds": 0.9516,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.118,
+          "contribution_log_odds": 0.8754,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s14_mean",
+          "label": "Sensor 14 (corr. core speed), trailing mean",
+          "value": 8131.691,
+          "contribution_log_odds": 0.31342,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s14_std",
+          "label": "Sensor 14, trailing std dev",
+          "value": 3.3779,
+          "contribution_log_odds": 0.20047,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_014",
+      "asset_health_score": 0.00294,
+      "risk_decile": 6,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 107,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 46
+      },
+      "top_drivers": [
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9035.698,
+          "contribution_log_odds": -4.11502,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.162,
+          "contribution_log_odds": 2.31492,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.161,
+          "contribution_log_odds": 1.87318,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.605,
+          "contribution_log_odds": 1.30934,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s14_mean",
+          "label": "Sensor 14 (corr. core speed), trailing mean",
+          "value": 8117.983,
+          "contribution_log_odds": 0.69459,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_017",
+      "asset_health_score": 0.00059,
+      "risk_decile": 4,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 50,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 165
+      },
+      "top_drivers": [
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9092.616,
+          "contribution_log_odds": 4.13015,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.033,
+          "contribution_log_odds": -1.9055,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.062,
+          "contribution_log_odds": -0.81024,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s14_mean",
+          "label": "Sensor 14 (corr. core speed), trailing mean",
+          "value": 8168.666,
+          "contribution_log_odds": -0.7147,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1412.551,
+          "contribution_log_odds": -0.58307,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_030",
+      "asset_health_score": 0.02462,
+      "risk_decile": 7,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 115,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 143
+      },
+      "top_drivers": [
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.151,
+          "contribution_log_odds": 1.95504,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9052.413,
+          "contribution_log_odds": -1.69368,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.62,
+          "contribution_log_odds": 1.53761,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.124,
+          "contribution_log_odds": 0.87029,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s2_std",
+          "label": "Sensor 2, trailing std dev",
+          "value": 0.3516,
+          "contribution_log_odds": 0.43253,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_044",
+      "asset_health_score": 0.00003,
+      "risk_decile": 3,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 109,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 54
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.42,
+          "contribution_log_odds": -1.50604,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9053.838,
+          "contribution_log_odds": -1.48725,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.078,
+          "contribution_log_odds": -0.43326,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s7_std",
+          "label": "Sensor 7, trailing std dev",
+          "value": 0.4713,
+          "contribution_log_odds": 0.34999,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s2_std",
+          "label": "Sensor 2, trailing std dev",
+          "value": 0.1992,
+          "contribution_log_odds": -0.34441,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_065",
+      "asset_health_score": 0,
+      "risk_decile": 1,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 128,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 71
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.206,
+          "contribution_log_odds": -4.76274,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.007,
+          "contribution_log_odds": -2.30103,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.025,
+          "contribution_log_odds": -2.16723,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 39.101,
+          "contribution_log_odds": 2.14114,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1398.917,
+          "contribution_log_odds": 1.24343,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_075",
+      "asset_health_score": 0.00004,
+      "risk_decile": 3,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 113,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 88
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.406,
+          "contribution_log_odds": -1.71909,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.056,
+          "contribution_log_odds": -1.15302,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9057.91,
+          "contribution_log_odds": -0.89738,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.066,
+          "contribution_log_odds": -0.70182,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.917,
+          "contribution_log_odds": 0.68763,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_079",
+      "asset_health_score": 0.0001,
+      "risk_decile": 3,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 63,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 101
+      },
+      "top_drivers": [
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9044.403,
+          "contribution_log_odds": -2.85401,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.483,
+          "contribution_log_odds": -0.54729,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s14_mean",
+          "label": "Sensor 14 (corr. core speed), trailing mean",
+          "value": 8127.044,
+          "contribution_log_odds": 0.44264,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.104,
+          "contribution_log_odds": 0.41737,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s17_mean",
+          "label": "Sensor 17 (bleed enthalpy), trailing mean",
+          "value": 392.6,
+          "contribution_log_odds": 0.28785,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_003",
+      "asset_health_score": 0.03485,
+      "risk_decile": 8,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 69,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 126
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.705,
+          "contribution_log_odds": 2.83116,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.161,
+          "contribution_log_odds": 2.28221,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9048.908,
+          "contribution_log_odds": -2.20142,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.162,
+          "contribution_log_odds": 1.90029,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1413.986,
+          "contribution_log_odds": -0.77531,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_006",
+      "asset_health_score": 0.00073,
+      "risk_decile": 4,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 93,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 105
+      },
+      "top_drivers": [
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9051.258,
+          "contribution_log_odds": -1.86099,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.124,
+          "contribution_log_odds": 1.0717,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.129,
+          "contribution_log_odds": 1.00581,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s2_std",
+          "label": "Sensor 2, trailing std dev",
+          "value": 0.3399,
+          "contribution_log_odds": 0.37295,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.498,
+          "contribution_log_odds": -0.31902,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_038",
+      "asset_health_score": 0.45125,
+      "risk_decile": 9,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 50,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 125
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.741,
+          "contribution_log_odds": 3.37902,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9076.888,
+          "contribution_log_odds": 1.85178,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.13,
+          "contribution_log_odds": 1.03292,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s17_mean",
+          "label": "Sensor 17 (bleed enthalpy), trailing mean",
+          "value": 394.6,
+          "contribution_log_odds": -0.88055,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s2_mean",
+          "label": "Sensor 2 (LPC outlet temp), trailing mean",
+          "value": 643.081,
+          "contribution_log_odds": 0.77989,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_041",
+      "asset_health_score": 0.02621,
+      "risk_decile": 7,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 18,
+        "failed_within_30_cycles": true,
+        "last_observed_cycle": 123
+      },
+      "top_drivers": [
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9037.637,
+          "contribution_log_odds": -3.83414,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.185,
+          "contribution_log_odds": 3.0674,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.71,
+          "contribution_log_odds": 2.90725,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.18,
+          "contribution_log_odds": 2.38818,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1414.536,
+          "contribution_log_odds": -0.849,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_058",
+      "asset_health_score": 0.25688,
+      "risk_decile": 8,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 37,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 176
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.748,
+          "contribution_log_odds": 3.48555,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.17,
+          "contribution_log_odds": 2.57666,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.156,
+          "contribution_log_odds": 1.73766,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9055.932,
+          "contribution_log_odds": -1.18391,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1416.018,
+          "contribution_log_odds": -1.04753,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_073",
+      "asset_health_score": 1e-05,
+      "risk_decile": 1,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 131,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 112
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.343,
+          "contribution_log_odds": -2.67784,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9056.946,
+          "contribution_log_odds": -1.03703,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.054,
+          "contribution_log_odds": -1.02708,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.061,
+          "contribution_log_odds": -0.98944,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1401.66,
+          "contribution_log_odds": 0.87596,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_076",
+      "asset_health_score": 0.98229,
+      "risk_decile": 10,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 10,
+        "failed_within_30_cycles": true,
+        "last_observed_cycle": 205
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.941,
+          "contribution_log_odds": 6.42267,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9106.692,
+          "contribution_log_odds": 6.16921,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.527,
+          "contribution_log_odds": -2.39319,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1423.917,
+          "contribution_log_odds": -2.10574,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.146,
+          "contribution_log_odds": 1.79146,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_082",
+      "asset_health_score": 0.98683,
+      "risk_decile": 10,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 9,
+        "failed_within_30_cycles": true,
+        "last_observed_cycle": 162
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 48.006,
+          "contribution_log_odds": 7.41185,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.227,
+          "contribution_log_odds": 4.44149,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.216,
+          "contribution_log_odds": 3.36397,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.602,
+          "contribution_log_odds": -1.80072,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9051.912,
+          "contribution_log_odds": -1.76625,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_005",
+      "asset_health_score": 0.00092,
+      "risk_decile": 5,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 91,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 98
+      },
+      "top_drivers": [
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9051.898,
+          "contribution_log_odds": -1.76828,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.123,
+          "contribution_log_odds": 1.03898,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.12,
+          "contribution_log_odds": 0.76187,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.774,
+          "contribution_log_odds": -0.442,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s2_std",
+          "label": "Sensor 2, trailing std dev",
+          "value": 0.1927,
+          "contribution_log_odds": -0.37751,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_089",
+      "asset_health_score": 0.00074,
+      "risk_decile": 5,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 136,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 177
+      },
+      "top_drivers": [
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9052.713,
+          "contribution_log_odds": -1.65022,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.121,
+          "contribution_log_odds": 0.97355,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.482,
+          "contribution_log_odds": -0.56251,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.109,
+          "contribution_log_odds": 0.46371,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s14_mean",
+          "label": "Sensor 14 (corr. core speed), trailing mean",
+          "value": 8131.958,
+          "contribution_log_odds": 0.306,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_094",
+      "asset_health_score": 0.01318,
+      "risk_decile": 7,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 55,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 133
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.677,
+          "contribution_log_odds": 2.40505,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.14,
+          "contribution_log_odds": 1.59516,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.149,
+          "contribution_log_odds": 1.54792,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9057.522,
+          "contribution_log_odds": -0.95359,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.72,
+          "contribution_log_odds": -0.86858,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_002",
+      "asset_health_score": 0.00019,
+      "risk_decile": 4,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 98,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 49
+      },
+      "top_drivers": [
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9047.351,
+          "contribution_log_odds": -2.42696,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.115,
+          "contribution_log_odds": 0.77725,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s2_std",
+          "label": "Sensor 2, trailing std dev",
+          "value": 0.1204,
+          "contribution_log_odds": -0.74574,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.11,
+          "contribution_log_odds": 0.49081,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s14_std",
+          "label": "Sensor 14, trailing std dev",
+          "value": 1.9495,
+          "contribution_log_odds": -0.48538,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_028",
+      "asset_health_score": 0.00868,
+      "risk_decile": 7,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 97,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 158
+      },
+      "top_drivers": [
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.11,
+          "contribution_log_odds": 0.61367,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.555,
+          "contribution_log_odds": 0.54842,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9060.543,
+          "contribution_log_odds": -0.51596,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_std",
+          "label": "Sensor 9, trailing std dev",
+          "value": 5.7549,
+          "contribution_log_odds": 0.47192,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s14_std",
+          "label": "Sensor 14, trailing std dev",
+          "value": 1.9883,
+          "contribution_log_odds": -0.46673,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_060",
+      "asset_health_score": 0.00152,
+      "risk_decile": 5,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 100,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 147
+      },
+      "top_drivers": [
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9054.239,
+          "contribution_log_odds": -1.42916,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.126,
+          "contribution_log_odds": 0.9245,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s14_std",
+          "label": "Sensor 14, trailing std dev",
+          "value": 4.1007,
+          "contribution_log_odds": 0.54753,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.107,
+          "contribution_log_odds": 0.51552,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.5,
+          "contribution_log_odds": -0.28858,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_063",
+      "asset_health_score": 0.07636,
+      "risk_decile": 8,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 72,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 155
+      },
+      "top_drivers": [
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9048.707,
+          "contribution_log_odds": -2.23053,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.159,
+          "contribution_log_odds": 2.21677,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.173,
+          "contribution_log_odds": 2.19845,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.642,
+          "contribution_log_odds": 1.87241,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.747,
+          "contribution_log_odds": -0.65529,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_071",
+      "asset_health_score": 0.00002,
+      "risk_decile": 2,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 118,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 68
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.306,
+          "contribution_log_odds": -3.24092,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.039,
+          "contribution_log_odds": -1.7092,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.04,
+          "contribution_log_odds": -1.40656,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1402.747,
+          "contribution_log_odds": 0.73034,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9068.992,
+          "contribution_log_odds": 0.70796,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_088",
+      "asset_health_score": 0.0032,
+      "risk_decile": 6,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 115,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 68
+      },
+      "top_drivers": [
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9040.235,
+          "contribution_log_odds": -3.45779,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.145,
+          "contribution_log_odds": 1.75874,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.14,
+          "contribution_log_odds": 1.30397,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.57,
+          "contribution_log_odds": 0.7767,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s14_mean",
+          "label": "Sensor 14 (corr. core speed), trailing mean",
+          "value": 8122.298,
+          "contribution_log_odds": 0.57461,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_012",
+      "asset_health_score": 1e-05,
+      "risk_decile": 1,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 124,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 217
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.399,
+          "contribution_log_odds": -1.82562,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.041,
+          "contribution_log_odds": -1.64377,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.042,
+          "contribution_log_odds": -1.35234,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9068.8,
+          "contribution_log_odds": 0.68015,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1404.372,
+          "contribution_log_odds": 0.51264,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_036",
+      "asset_health_score": 0.78867,
+      "risk_decile": 9,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 19,
+        "failed_within_30_cycles": true,
+        "last_observed_cycle": 126
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.873,
+          "contribution_log_odds": 5.38783,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.189,
+          "contribution_log_odds": 3.19827,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.182,
+          "contribution_log_odds": 2.44239,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1421.735,
+          "contribution_log_odds": -1.81342,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.622,
+          "contribution_log_odds": -1.64273,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_068",
+      "asset_health_score": 0.99462,
+      "risk_decile": 10,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 8,
+        "failed_within_30_cycles": true,
+        "last_observed_cycle": 187
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.953,
+          "contribution_log_odds": 6.60529,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.187,
+          "contribution_log_odds": 3.13284,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9084.131,
+          "contribution_log_odds": 2.90101,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.195,
+          "contribution_log_odds": 2.79476,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.575,
+          "contribution_log_odds": -2.01401,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_069",
+      "asset_health_score": 0.00021,
+      "risk_decile": 4,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 121,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 54
+      },
+      "top_drivers": [
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9047.179,
+          "contribution_log_odds": -2.45188,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.433,
+          "contribution_log_odds": -1.3082,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.117,
+          "contribution_log_odds": 0.84268,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1402.693,
+          "contribution_log_odds": 0.73757,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s2_mean",
+          "label": "Sensor 2 (LPC outlet temp), trailing mean",
+          "value": 642.363,
+          "contribution_log_odds": -0.50725,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_098",
+      "asset_health_score": 0.00206,
+      "risk_decile": 6,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 59,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 121
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.602,
+          "contribution_log_odds": 1.26368,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.116,
+          "contribution_log_odds": 0.65345,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.106,
+          "contribution_log_odds": 0.4828,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_std",
+          "label": "Sensor 9, trailing std dev",
+          "value": 1.9743,
+          "contribution_log_odds": -0.46473,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.779,
+          "contribution_log_odds": -0.40251,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_042",
+      "asset_health_score": 0.90728,
+      "risk_decile": 9,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 10,
+        "failed_within_30_cycles": true,
+        "last_observed_cycle": 156
+      },
+      "top_drivers": [
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.252,
+          "contribution_log_odds": 5.2594,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.858,
+          "contribution_log_odds": 5.15955,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9035.123,
+          "contribution_log_odds": -4.19832,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.236,
+          "contribution_log_odds": 3.90608,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.582,
+          "contribution_log_odds": -1.95872,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_039",
+      "asset_health_score": 0,
+      "risk_decile": 1,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 142,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 37
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.222,
+          "contribution_log_odds": -4.51925,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.023,
+          "contribution_log_odds": -2.23266,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.022,
+          "contribution_log_odds": -1.89445,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1397.902,
+          "contribution_log_odds": 1.37941,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s2_mean",
+          "label": "Sensor 2 (LPC outlet temp), trailing mean",
+          "value": 642.002,
+          "contribution_log_odds": -1.15441,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_020",
+      "asset_health_score": 0.96168,
+      "risk_decile": 9,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 16,
+        "failed_within_30_cycles": true,
+        "last_observed_cycle": 184
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.924,
+          "contribution_log_odds": 6.16396,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.201,
+          "contribution_log_odds": 3.59087,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.182,
+          "contribution_log_odds": 2.44239,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1420.685,
+          "contribution_log_odds": -1.67276,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.64,
+          "contribution_log_odds": -1.50054,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_070",
+      "asset_health_score": 0.00519,
+      "risk_decile": 6,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 94,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 152
+      },
+      "top_drivers": [
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9054.99,
+          "contribution_log_odds": -1.32037,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.119,
+          "contribution_log_odds": 0.90812,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.565,
+          "contribution_log_odds": 0.70061,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.112,
+          "contribution_log_odds": 0.54502,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s2_std",
+          "label": "Sensor 2, trailing std dev",
+          "value": 0.3463,
+          "contribution_log_odds": 0.40541,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_004",
+      "asset_health_score": 0.00393,
+      "risk_decile": 6,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 82,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 106
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.63,
+          "contribution_log_odds": 1.68979,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9055.564,
+          "contribution_log_odds": -1.23722,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.136,
+          "contribution_log_odds": 1.19555,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.113,
+          "contribution_log_odds": 0.71182,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s2_std",
+          "label": "Sensor 2, trailing std dev",
+          "value": 0.1798,
+          "contribution_log_odds": -0.4432,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_023",
+      "asset_health_score": 0,
+      "risk_decile": 1,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 113,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 130
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.279,
+          "contribution_log_odds": -3.65181,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9052.895,
+          "contribution_log_odds": -1.62386,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.044,
+          "contribution_log_odds": -1.54562,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.037,
+          "contribution_log_odds": -1.48787,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1399.443,
+          "contribution_log_odds": 1.17297,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_024",
+      "asset_health_score": 0.98607,
+      "risk_decile": 10,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 20,
+        "failed_within_30_cycles": true,
+        "last_observed_cycle": 186
+      },
+      "top_drivers": [
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9140.207,
+          "contribution_log_odds": 11.02421,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.658,
+          "contribution_log_odds": 2.1159,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s14_mean",
+          "label": "Sensor 14 (corr. core speed), trailing mean",
+          "value": 8207.756,
+          "contribution_log_odds": -1.80164,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s14_std",
+          "label": "Sensor 14, trailing std dev",
+          "value": 5.9451,
+          "contribution_log_odds": 1.43311,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.699,
+          "contribution_log_odds": -1.03447,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_033",
+      "asset_health_score": 0.00989,
+      "risk_decile": 7,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 106,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 50
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.612,
+          "contribution_log_odds": 1.41586,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9057.963,
+          "contribution_log_odds": -0.8897,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.124,
+          "contribution_log_odds": 0.87029,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s2_std",
+          "label": "Sensor 2, trailing std dev",
+          "value": 0.3747,
+          "contribution_log_odds": 0.54999,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s7_std",
+          "label": "Sensor 7, trailing std dev",
+          "value": 0.507,
+          "contribution_log_odds": 0.461,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_040",
+      "asset_health_score": 0.92231,
+      "risk_decile": 9,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 28,
+        "failed_within_30_cycles": true,
+        "last_observed_cycle": 133
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.86,
+          "contribution_log_odds": 5.18999,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.188,
+          "contribution_log_odds": 3.16555,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.182,
+          "contribution_log_odds": 2.44239,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.634,
+          "contribution_log_odds": -1.54794,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1418.204,
+          "contribution_log_odds": -1.34039,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_043",
+      "asset_health_score": 0.01266,
+      "risk_decile": 7,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 59,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 172
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.637,
+          "contribution_log_odds": 1.79632,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.134,
+          "contribution_log_odds": 1.39886,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9056.686,
+          "contribution_log_odds": -1.07469,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.125,
+          "contribution_log_odds": 0.89739,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s17_mean",
+          "label": "Sensor 17 (bleed enthalpy), trailing mean",
+          "value": 394,
+          "contribution_log_odds": -0.53003,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_045",
+      "asset_health_score": 0.00204,
+      "risk_decile": 6,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 114,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 152
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.59,
+          "contribution_log_odds": 1.08106,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.72,
+          "contribution_log_odds": -0.86858,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.117,
+          "contribution_log_odds": 0.84268,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1413.318,
+          "contribution_log_odds": -0.68582,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s2_mean",
+          "label": "Sensor 2 (LPC outlet temp), trailing mean",
+          "value": 642.92,
+          "contribution_log_odds": 0.49127,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_051",
+      "asset_health_score": 0.00129,
+      "risk_decile": 5,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 114,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 144
+      },
+      "top_drivers": [
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9052.147,
+          "contribution_log_odds": -1.73221,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_std",
+          "label": "Sensor 9, trailing std dev",
+          "value": 6.7761,
+          "contribution_log_odds": 0.72492,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.106,
+          "contribution_log_odds": 0.4828,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1405.488,
+          "contribution_log_odds": 0.36314,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s17_mean",
+          "label": "Sensor 17 (bleed enthalpy), trailing mean",
+          "value": 392.5,
+          "contribution_log_odds": 0.34627,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_056",
+      "asset_health_score": 0.97783,
+      "risk_decile": 10,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 15,
+        "failed_within_30_cycles": true,
+        "last_observed_cycle": 136
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.971,
+          "contribution_log_odds": 6.87921,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.241,
+          "contribution_log_odds": 4.89952,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.252,
+          "contribution_log_odds": 4.33976,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9044.593,
+          "contribution_log_odds": -2.82649,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.597,
+          "contribution_log_odds": -1.84022,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_072",
+      "asset_health_score": 0.00253,
+      "risk_decile": 6,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 50,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 131
+      },
+      "top_drivers": [
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9068.386,
+          "contribution_log_odds": 0.62018,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.554,
+          "contribution_log_odds": 0.53321,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.078,
+          "contribution_log_odds": -0.37655,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_std",
+          "label": "Sensor 9, trailing std dev",
+          "value": 2.3636,
+          "contribution_log_odds": -0.3683,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s7_std",
+          "label": "Sensor 7, trailing std dev",
+          "value": 0.4766,
+          "contribution_log_odds": 0.3665,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_053",
+      "asset_health_score": 0.31747,
+      "risk_decile": 8,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 26,
+        "failed_within_30_cycles": true,
+        "last_observed_cycle": 164
+      },
+      "top_drivers": [
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9102.977,
+          "contribution_log_odds": 5.63105,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.676,
+          "contribution_log_odds": 2.38983,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.691,
+          "contribution_log_odds": -1.09767,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s14_mean",
+          "label": "Sensor 14 (corr. core speed), trailing mean",
+          "value": 8176.867,
+          "contribution_log_odds": -0.94274,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1413.047,
+          "contribution_log_odds": -0.64952,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_050",
+      "asset_health_score": 0.00002,
+      "risk_decile": 2,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 79,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 74
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.42,
+          "contribution_log_odds": -1.50604,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.05,
+          "contribution_log_odds": -1.1355,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.067,
+          "contribution_log_odds": -0.79314,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1402.895,
+          "contribution_log_odds": 0.71051,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s2_std",
+          "label": "Sensor 2, trailing std dev",
+          "value": 0.1337,
+          "contribution_log_odds": -0.67778,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_074",
+      "asset_health_score": 0.00139,
+      "risk_decile": 5,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 126,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 137
+      },
+      "top_drivers": [
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9060.359,
+          "contribution_log_odds": -0.54262,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s7_std",
+          "label": "Sensor 7, trailing std dev",
+          "value": 0.5029,
+          "contribution_log_odds": 0.44815,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s14_std",
+          "label": "Sensor 14, trailing std dev",
+          "value": 3.7007,
+          "contribution_log_odds": 0.35545,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.496,
+          "contribution_log_odds": -0.34945,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.099,
+          "contribution_log_odds": 0.25379,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_035",
+      "asset_health_score": 0.99614,
+      "risk_decile": 10,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 11,
+        "failed_within_30_cycles": true,
+        "last_observed_cycle": 198
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.994,
+          "contribution_log_odds": 7.22923,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.196,
+          "contribution_log_odds": 3.42728,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.218,
+          "contribution_log_odds": 3.41818,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9079.468,
+          "contribution_log_odds": 2.22552,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1424.482,
+          "contribution_log_odds": -2.18143,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_037",
+      "asset_health_score": 0.02045,
+      "risk_decile": 7,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 21,
+        "failed_within_30_cycles": true,
+        "last_observed_cycle": 121
+      },
+      "top_drivers": [
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9041.842,
+          "contribution_log_odds": -3.225,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.184,
+          "contribution_log_odds": 2.49661,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.166,
+          "contribution_log_odds": 2.44579,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.674,
+          "contribution_log_odds": 2.3594,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.715,
+          "contribution_log_odds": -0.90808,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_054",
+      "asset_health_score": 0,
+      "risk_decile": 1,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 97,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 121
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.261,
+          "contribution_log_odds": -3.92574,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2387.997,
+          "contribution_log_odds": -3.08329,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.009,
+          "contribution_log_odds": -2.24682,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 39.01,
+          "contribution_log_odds": 1.42229,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1400.917,
+          "contribution_log_odds": 0.9755,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_062",
+      "asset_health_score": 0.00267,
+      "risk_decile": 6,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 54,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 232
+      },
+      "top_drivers": [
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9091.338,
+          "contribution_log_odds": 3.94502,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.059,
+          "contribution_log_odds": -1.05487,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.721,
+          "contribution_log_odds": -0.86068,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s14_std",
+          "label": "Sensor 14, trailing std dev",
+          "value": 4.3174,
+          "contribution_log_odds": 0.65158,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.069,
+          "contribution_log_odds": -0.6205,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_064",
+      "asset_health_score": 0.16361,
+      "risk_decile": 8,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 28,
+        "failed_within_30_cycles": true,
+        "last_observed_cycle": 168
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.757,
+          "contribution_log_odds": 3.62251,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.176,
+          "contribution_log_odds": 2.77295,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.181,
+          "contribution_log_odds": 2.41529,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.622,
+          "contribution_log_odds": -1.64273,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9055.857,
+          "contribution_log_odds": -1.19478,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_085",
+      "asset_health_score": 0.00014,
+      "risk_decile": 4,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 118,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 34
+      },
+      "top_drivers": [
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9050.252,
+          "contribution_log_odds": -2.00672,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.459,
+          "contribution_log_odds": -0.91253,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.107,
+          "contribution_log_odds": 0.51552,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.895,
+          "contribution_log_odds": 0.51384,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s14_std",
+          "label": "Sensor 14, trailing std dev",
+          "value": 2.1643,
+          "contribution_log_odds": -0.38225,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_096",
+      "asset_health_score": 1e-05,
+      "risk_decile": 1,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 137,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 97
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.276,
+          "contribution_log_odds": -3.69747,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.027,
+          "contribution_log_odds": -2.1018,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.028,
+          "contribution_log_odds": -1.73182,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 39.006,
+          "contribution_log_odds": 1.39069,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1400.582,
+          "contribution_log_odds": 1.02038,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_007",
+      "asset_health_score": 0.00002,
+      "risk_decile": 2,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 91,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 160
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.373,
+          "contribution_log_odds": -2.2213,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.034,
+          "contribution_log_odds": -1.87278,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.023,
+          "contribution_log_odds": -1.86735,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.959,
+          "contribution_log_odds": 1.01941,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s2_mean",
+          "label": "Sensor 2 (LPC outlet temp), trailing mean",
+          "value": 642.242,
+          "contribution_log_odds": -0.72417,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_027",
+      "asset_health_score": 0.00003,
+      "risk_decile": 3,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 66,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 140
+      },
+      "top_drivers": [
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9050.555,
+          "contribution_log_odds": -1.96283,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.424,
+          "contribution_log_odds": -1.44517,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s14_std",
+          "label": "Sensor 14, trailing std dev",
+          "value": 4.0113,
+          "contribution_log_odds": 0.50458,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s17_mean",
+          "label": "Sensor 17 (bleed enthalpy), trailing mean",
+          "value": 392.4,
+          "contribution_log_odds": 0.40469,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.081,
+          "contribution_log_odds": -0.33511,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_057",
+      "asset_health_score": 0.00178,
+      "risk_decile": 6,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 103,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 160
+      },
+      "top_drivers": [
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9049.266,
+          "contribution_log_odds": -2.14956,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.133,
+          "contribution_log_odds": 1.36615,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.119,
+          "contribution_log_odds": 0.73476,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.566,
+          "contribution_log_odds": 0.71583,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s15_std",
+          "label": "Sensor 15, trailing std dev",
+          "value": 0.0341,
+          "contribution_log_odds": 0.53714,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_077",
+      "asset_health_score": 0.14313,
+      "risk_decile": 8,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 34,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 162
+      },
+      "top_drivers": [
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.194,
+          "contribution_log_odds": 3.36185,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.705,
+          "contribution_log_odds": 2.83116,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.184,
+          "contribution_log_odds": 2.49661,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9047.24,
+          "contribution_log_odds": -2.44304,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1416.149,
+          "contribution_log_odds": -1.06508,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_080",
+      "asset_health_score": 0.00128,
+      "risk_decile": 5,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 90,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 133
+      },
+      "top_drivers": [
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9066.94,
+          "contribution_log_odds": 0.41071,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s14_std",
+          "label": "Sensor 14, trailing std dev",
+          "value": 2.4473,
+          "contribution_log_odds": -0.24636,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.084,
+          "contribution_log_odds": -0.23696,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s17_mean",
+          "label": "Sensor 17 (bleed enthalpy), trailing mean",
+          "value": 392.7,
+          "contribution_log_odds": 0.22943,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.084,
+          "contribution_log_odds": -0.21392,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_084",
+      "asset_health_score": 0.01036,
+      "risk_decile": 7,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 58,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 172
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.676,
+          "contribution_log_odds": 2.38983,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9048.56,
+          "contribution_log_odds": -2.25183,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.149,
+          "contribution_log_odds": 1.88961,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.159,
+          "contribution_log_odds": 1.81897,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.726,
+          "contribution_log_odds": -0.82118,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_086",
+      "asset_health_score": 0.00088,
+      "risk_decile": 5,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 89,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 110
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.47,
+          "contribution_log_odds": -0.74513,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.068,
+          "contribution_log_odds": -0.64761,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s2_std",
+          "label": "Sensor 2, trailing std dev",
+          "value": 0.3605,
+          "contribution_log_odds": 0.4779,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_std",
+          "label": "Sensor 9, trailing std dev",
+          "value": 5.5212,
+          "contribution_log_odds": 0.41402,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1405.532,
+          "contribution_log_odds": 0.35724,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_090",
+      "asset_health_score": 0.78742,
+      "risk_decile": 9,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 28,
+        "failed_within_30_cycles": true,
+        "last_observed_cycle": 146
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.863,
+          "contribution_log_odds": 5.23564,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9079.96,
+          "contribution_log_odds": 2.2968,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.152,
+          "contribution_log_odds": 1.62924,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1418.121,
+          "contribution_log_odds": -1.32927,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.665,
+          "contribution_log_odds": -1.30305,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_015",
+      "asset_health_score": 0.00004,
+      "risk_decile": 3,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 83,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 76
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.348,
+          "contribution_log_odds": -2.60175,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 39.022,
+          "contribution_log_odds": 1.51708,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.057,
+          "contribution_log_odds": -1.1203,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9056.448,
+          "contribution_log_odds": -1.10917,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.056,
+          "contribution_log_odds": -0.97287,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_048",
+      "asset_health_score": 0.00021,
+      "risk_decile": 4,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 92,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 78
+      },
+      "top_drivers": [
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9056.808,
+          "contribution_log_odds": -1.05702,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s14_std",
+          "label": "Sensor 14, trailing std dev",
+          "value": 2.1724,
+          "contribution_log_odds": -0.37835,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.871,
+          "contribution_log_odds": 0.32425,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s7_std",
+          "label": "Sensor 7, trailing std dev",
+          "value": 0.267,
+          "contribution_log_odds": -0.28624,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s15_std",
+          "label": "Sensor 15, trailing std dev",
+          "value": 0.0106,
+          "contribution_log_odds": -0.23786,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_022",
+      "asset_health_score": 0.00052,
+      "risk_decile": 4,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 111,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 39
+      },
+      "top_drivers": [
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9048.44,
+          "contribution_log_odds": -2.26921,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.465,
+          "contribution_log_odds": -0.82122,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.917,
+          "contribution_log_odds": 0.68763,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s14_std",
+          "label": "Sensor 14, trailing std dev",
+          "value": 3.9421,
+          "contribution_log_odds": 0.47139,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s17_mean",
+          "label": "Sensor 17 (bleed enthalpy), trailing mean",
+          "value": 392.4,
+          "contribution_log_odds": 0.40469,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_031",
+      "asset_health_score": 0.98281,
+      "risk_decile": 10,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 8,
+        "failed_within_30_cycles": true,
+        "last_observed_cycle": 196
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.967,
+          "contribution_log_odds": 6.81834,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9084.819,
+          "contribution_log_odds": 3.00067,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.181,
+          "contribution_log_odds": 2.93654,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.193,
+          "contribution_log_odds": 2.74055,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.546,
+          "contribution_log_odds": -2.2431,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_032",
+      "asset_health_score": 0.00028,
+      "risk_decile": 4,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 48,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 145
+      },
+      "top_drivers": [
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9096.314,
+          "contribution_log_odds": 4.66585,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.032,
+          "contribution_log_odds": -1.93821,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.033,
+          "contribution_log_odds": -1.59629,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.415,
+          "contribution_log_odds": -1.58213,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s14_mean",
+          "label": "Sensor 14 (corr. core speed), trailing mean",
+          "value": 8171.763,
+          "contribution_log_odds": -0.80082,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_052",
+      "asset_health_score": 0.33058,
+      "risk_decile": 8,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 29,
+        "failed_within_30_cycles": true,
+        "last_observed_cycle": 189
+      },
+      "top_drivers": [
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9106.829,
+          "contribution_log_odds": 6.18906,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s14_std",
+          "label": "Sensor 14, trailing std dev",
+          "value": 7.1722,
+          "contribution_log_odds": 2.02231,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s14_mean",
+          "label": "Sensor 14 (corr. core speed), trailing mean",
+          "value": 8182.598,
+          "contribution_log_odds": -1.10209,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.062,
+          "contribution_log_odds": -0.95672,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.575,
+          "contribution_log_odds": 0.85279,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_081",
+      "asset_health_score": 0.98731,
+      "risk_decile": 10,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 8,
+        "failed_within_30_cycles": true,
+        "last_observed_cycle": 213
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.996,
+          "contribution_log_odds": 7.25967,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.192,
+          "contribution_log_odds": 3.29642,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.201,
+          "contribution_log_odds": 2.9574,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.497,
+          "contribution_log_odds": -2.63018,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1424.889,
+          "contribution_log_odds": -2.23596,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_092",
+      "asset_health_score": 0.80259,
+      "risk_decile": 9,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 20,
+        "failed_within_30_cycles": true,
+        "last_observed_cycle": 150
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.907,
+          "contribution_log_odds": 5.90525,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.211,
+          "contribution_log_odds": 3.91803,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.212,
+          "contribution_log_odds": 3.25555,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9048.23,
+          "contribution_log_odds": -2.29963,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.551,
+          "contribution_log_odds": -2.2036,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_097",
+      "asset_health_score": 0.00008,
+      "risk_decile": 3,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 82,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 134
+      },
+      "top_drivers": [
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9076.98,
+          "contribution_log_odds": 1.86511,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.398,
+          "contribution_log_odds": -1.84084,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.047,
+          "contribution_log_odds": -1.21682,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.055,
+          "contribution_log_odds": -1.18574,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1403.306,
+          "contribution_log_odds": 0.65545,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_008",
+      "asset_health_score": 0.00098,
+      "risk_decile": 5,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 95,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 166
+      },
+      "top_drivers": [
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9050.238,
+          "contribution_log_odds": -2.00875,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.135,
+          "contribution_log_odds": 1.16845,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.126,
+          "contribution_log_odds": 1.13713,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s12_mean",
+          "label": "Sensor 12 (fuel flow ratio), trailing mean",
+          "value": 520.975,
+          "contribution_log_odds": 0.49321,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.768,
+          "contribution_log_odds": -0.4894,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_013",
+      "asset_health_score": 0.00007,
+      "risk_decile": 3,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 95,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 195
+      },
+      "top_drivers": [
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.064,
+          "contribution_log_odds": -0.75603,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.474,
+          "contribution_log_odds": -0.68425,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s2_std",
+          "label": "Sensor 2, trailing std dev",
+          "value": 0.166,
+          "contribution_log_odds": -0.51346,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.078,
+          "contribution_log_odds": -0.43326,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.875,
+          "contribution_log_odds": 0.35585,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_019",
+      "asset_health_score": 0.00018,
+      "risk_decile": 4,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 87,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 135
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.451,
+          "contribution_log_odds": -1.03427,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.065,
+          "contribution_log_odds": -0.85857,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1402.251,
+          "contribution_log_odds": 0.79679,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9059.933,
+          "contribution_log_odds": -0.60433,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s2_std",
+          "label": "Sensor 2, trailing std dev",
+          "value": 0.3681,
+          "contribution_log_odds": 0.51672,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_046",
+      "asset_health_score": 0.08276,
+      "risk_decile": 8,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 47,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 146
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.704,
+          "contribution_log_odds": 2.81594,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9082.848,
+          "contribution_log_odds": 2.71515,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.719,
+          "contribution_log_odds": -0.87648,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s2_mean",
+          "label": "Sensor 2 (LPC outlet temp), trailing mean",
+          "value": 643.001,
+          "contribution_log_odds": 0.63647,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s17_mean",
+          "label": "Sensor 17 (bleed enthalpy), trailing mean",
+          "value": 394.1,
+          "contribution_log_odds": -0.58845,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_059",
+      "asset_health_score": 0,
+      "risk_decile": 1,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 114,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 94
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.291,
+          "contribution_log_odds": -3.46919,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.033,
+          "contribution_log_odds": -1.59629,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.053,
+          "contribution_log_odds": -1.25117,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1400.435,
+          "contribution_log_odds": 1.04007,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9057.359,
+          "contribution_log_odds": -0.9772,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_061",
+      "asset_health_score": 0.07821,
+      "risk_decile": 8,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 21,
+        "failed_within_30_cycles": true,
+        "last_observed_cycle": 159
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.743,
+          "contribution_log_odds": 3.40945,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.153,
+          "contribution_log_odds": 2.02048,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.147,
+          "contribution_log_odds": 1.49371,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.661,
+          "contribution_log_odds": -1.33465,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1416.605,
+          "contribution_log_odds": -1.12617,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_066",
+      "asset_health_score": 0.99435,
+      "risk_decile": 10,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 14,
+        "failed_within_30_cycles": true,
+        "last_observed_cycle": 147
+      },
+      "top_drivers": [
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9117.158,
+          "contribution_log_odds": 7.68532,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.828,
+          "contribution_log_odds": 4.70301,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.63,
+          "contribution_log_odds": -1.57954,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1419.959,
+          "contribution_log_odds": -1.5755,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s2_mean",
+          "label": "Sensor 2 (LPC outlet temp), trailing mean",
+          "value": 643.421,
+          "contribution_log_odds": 1.3894,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_011",
+      "asset_health_score": 0.00333,
+      "risk_decile": 6,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 97,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 83
+      },
+      "top_drivers": [
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9038.095,
+          "contribution_log_odds": -3.76779,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.178,
+          "contribution_log_odds": 2.33397,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.155,
+          "contribution_log_odds": 2.08591,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.595,
+          "contribution_log_odds": 1.15715,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1414.51,
+          "contribution_log_odds": -0.84551,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_016",
+      "asset_health_score": 1e-05,
+      "risk_decile": 2,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 84,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 113
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.348,
+          "contribution_log_odds": -2.60175,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.049,
+          "contribution_log_odds": -1.38203,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.043,
+          "contribution_log_odds": -1.32524,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1401.541,
+          "contribution_log_odds": 0.8919,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.936,
+          "contribution_log_odds": 0.83772,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_026",
+      "asset_health_score": 0.00002,
+      "risk_decile": 2,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 119,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 76
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.322,
+          "contribution_log_odds": -2.99743,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.021,
+          "contribution_log_odds": -2.29809,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.029,
+          "contribution_log_odds": -1.70471,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1400.896,
+          "contribution_log_odds": 0.97831,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.936,
+          "contribution_log_odds": 0.83772,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_067",
+      "asset_health_score": 0.00002,
+      "risk_decile": 2,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 77,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 71
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.316,
+          "contribution_log_odds": -3.08874,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.055,
+          "contribution_log_odds": -1.18574,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9057.253,
+          "contribution_log_odds": -0.99255,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s14_std",
+          "label": "Sensor 14, trailing std dev",
+          "value": 4.9516,
+          "contribution_log_odds": 0.95608,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.064,
+          "contribution_log_odds": -0.75603,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_083",
+      "asset_health_score": 0.00002,
+      "risk_decile": 2,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 137,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 73
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.397,
+          "contribution_log_odds": -1.85606,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.06,
+          "contribution_log_odds": -1.02215,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9057.461,
+          "contribution_log_odds": -0.96242,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.061,
+          "contribution_log_odds": -0.83734,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1403.631,
+          "contribution_log_odds": 0.61191,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_091",
+      "asset_health_score": 0.91063,
+      "risk_decile": 9,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 38,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 234
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.922,
+          "contribution_log_odds": 6.13352,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.224,
+          "contribution_log_odds": 4.34334,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s8_mean",
+          "label": "Sensor 8 (phys. fan speed), trailing mean",
+          "value": 2388.208,
+          "contribution_log_odds": 3.14713,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9050.46,
+          "contribution_log_odds": -1.97659,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.593,
+          "contribution_log_odds": -1.87182,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    },
+    {
+      "engine_id": "test_engine_055",
+      "asset_health_score": 0.00004,
+      "risk_decile": 3,
+      "prediction_is_external_holdout": true,
+      "observed": {
+        "true_remaining_useful_life": 137,
+        "failed_within_30_cycles": false,
+        "last_observed_cycle": 113
+      },
+      "top_drivers": [
+        {
+          "variable": "s11_mean",
+          "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+          "value": 47.357,
+          "contribution_log_odds": -2.46479,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s20_mean",
+          "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+          "value": 38.966,
+          "contribution_log_odds": 1.07471,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s9_mean",
+          "label": "Sensor 9 (phys. core speed), trailing mean",
+          "value": 9057.693,
+          "contribution_log_odds": -0.92882,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s13_mean",
+          "label": "Sensor 13 (corr. fan speed), trailing mean",
+          "value": 2388.069,
+          "contribution_log_odds": -0.72771,
+          "direction": "decreases risk",
+          "relative_to": "training cohort mean"
+        },
+        {
+          "variable": "s4_mean",
+          "label": "Sensor 4 (LPT outlet temp), trailing mean",
+          "value": 1403.609,
+          "contribution_log_odds": 0.61486,
+          "direction": "increases risk",
+          "relative_to": "training cohort mean"
+        }
+      ]
+    }
+  ]
+}

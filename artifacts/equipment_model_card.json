@@ -1,0 +1,360 @@
+{
+  "name": "mortality-copilot / equipment extension",
+  "generated": "2026-08-29",
+  "purpose": "Educational demonstration of predictive-maintenance modelling on NASA's public, SIMULATED C-MAPSS turbofan degradation data (FD001). NOT a certified airworthiness or maintenance-scheduling system, and must not be used for any real fleet, safety or maintenance decision.",
+  "outcome": {
+    "definition": "Engine will need maintenance within 30 operating cycles (event_30)",
+    "remaining_useful_life": "Exact cycles-to-failure (train: run-to-failure; test: NASA-disclosed ground truth at the truncation point)"
+  },
+  "training_cohort": {
+    "source": "NASA C-MAPSS FD001, train_FD001.txt: 100 engines run to failure, single operating condition, one fault mode",
+    "snapshots": 2117,
+    "engines": 100,
+    "sampling": "one snapshot every 10 cycles per engine, plus cycle 1, to control pseudo-replication",
+    "event_30_positive": 311,
+    "event_30_rate": 0.14691
+  },
+  "external_holdout": {
+    "source": "NASA C-MAPSS FD001, test_FD001.txt + RUL_FD001.txt: 100 different engines, each truncated before failure at an unknown point, true remaining life disclosed only for evaluation",
+    "engines": 100,
+    "event_30_positive": 25,
+    "event_30_rate": 0.25,
+    "note": "None of these 100 engines, or any row derived from them, appears in training_cohort, in any CV fold, or in the full-data fit."
+  },
+  "predictors": {
+    "used": ["op1", "op2", "s2_mean", "s2_std", "s3_mean", "s3_std", "s4_mean", "s4_std", "s7_mean", "s7_std", "s8_mean", "s8_std", "s9_mean", "s9_std", "s11_mean", "s11_std", "s12_mean", "s12_std", "s13_mean", "s13_std", "s14_mean", "s14_std", "s15_mean", "s15_std", "s17_mean", "s17_std", "s20_mean", "s20_std", "s21_mean", "s21_std"],
+    "dropped": {
+      "op3": "Constant (std 0.0) under FD001's single operating condition",
+      "s1": "Constant (std 0.0)",
+      "s5": "Constant (std 0.0)",
+      "s6": "Near-constant (std 0.0014)",
+      "s10": "Constant (std 0.0)",
+      "s16": "Constant (std 0.0)",
+      "s18": "Constant (std 0.0)",
+      "s19": "Constant (std 0.0)"
+    }
+  },
+  "validation": {
+    "scheme": "5-fold cross-validation, GROUPED BY ENGINE (not by row), stratified on whether the engine ever reaches event_30, seed 20260829",
+    "cv_metrics": [
+      {
+        "Model": "Logistic GLM",
+        "AUC": "0.987",
+        "AUC 95% CI (DeLong)": "[0.983, 0.991]",
+        "Brier": "0.02935",
+        "Calibration intercept": "-0.102",
+        "Calibration slope": "0.837"
+      },
+      {
+        "Model": "Cox PH",
+        "AUC": "0.977",
+        "AUC 95% CI (DeLong)": "[0.972, 0.983]",
+        "Brier": "0.04286",
+        "Calibration intercept": "+0.576",
+        "Calibration slope": "1.598"
+      },
+      {
+        "Model": "Random forest",
+        "AUC": "0.987",
+        "AUC 95% CI (DeLong)": "[0.983, 0.991]",
+        "Brier": "0.03101",
+        "Calibration intercept": "-0.019",
+        "Calibration slope": "1.098"
+      }
+    ],
+    "external_holdout_metrics": [
+      {
+        "Model": "Logistic GLM",
+        "AUC": "0.972",
+        "AUC 95% CI (DeLong)": "[0.945, 0.998]",
+        "Brier": "0.07056",
+        "Calibration intercept": "+0.850",
+        "Calibration slope": "0.651"
+      },
+      {
+        "Model": "Cox PH",
+        "AUC": "0.958",
+        "AUC 95% CI (DeLong)": "[0.917, 1.000]",
+        "Brier": "0.08358",
+        "Calibration intercept": "+1.937",
+        "Calibration slope": "1.721"
+      },
+      {
+        "Model": "Random forest",
+        "AUC": "0.982",
+        "AUC 95% CI (DeLong)": "[0.960, 1.000]",
+        "Brier": "0.05932",
+        "Calibration intercept": "+1.150",
+        "Calibration slope": "1.011"
+      }
+    ],
+    "concordance_cox_training": {
+      "c_index": 0.8168,
+      "se": 0.0044
+    },
+    "proportional_hazards": {
+      "test": "cox.zph",
+      "violations": ["s2_mean", "s2_std", "s3_mean", "s3_std", "s4_mean", "s4_std", "s7_mean", "s7_std", "s8_mean", "s8_std", "s9_mean", "s11_mean", "s11_std", "s12_mean", "s12_std", "s13_mean", "s13_std", "s14_mean", "s15_mean", "s15_std", "s17_mean", "s17_std", "s20_mean", "s20_std", "s21_mean", "s21_std"],
+      "interpretation": "The proportional-hazards assumption is violated by 26 of 30 terms. FD001's sensor trajectories are monotonic degradation curves, and Cox PH's constant-hazard-ratio assumption is a structurally poor fit for that shape -- unlike the mortality model, where only one term violated it. Reported as a genuine domain difference, not smoothed over."
+    }
+  },
+  "coefficients": {
+    "logistic_glm": [
+      {
+        "term": "(Intercept)",
+        "label": "Intercept",
+        "estimate_log_odds": -145318.8716,
+        "odds_ratio": 0,
+        "ci_95": [0, 0],
+        "p_value": 0.0001152
+      },
+      {
+        "term": "op1",
+        "label": "Operational setting 1",
+        "estimate_log_odds": -27.83965,
+        "odds_ratio": 0,
+        "ci_95": [0, 2.1247020886856362e+45],
+        "p_value": 0.6767
+      },
+      {
+        "term": "op2",
+        "label": "Operational setting 2",
+        "estimate_log_odds": -278.82373,
+        "odds_ratio": 0,
+        "ci_95": [0, 1.386272511337795e+304],
+        "p_value": 0.5766
+      },
+      {
+        "term": "s2_mean",
+        "label": "Sensor 2 (LPC outlet temp), trailing mean",
+        "estimate_log_odds": 1.79268,
+        "odds_ratio": 6.0055,
+        "ci_95": [0.3161, 115.4635],
+        "p_value": 0.2322
+      },
+      {
+        "term": "s2_std",
+        "label": "Sensor 2, trailing std dev",
+        "estimate_log_odds": 5.09607,
+        "odds_ratio": 163.3793,
+        "ci_95": [2.2514, 13318.4058],
+        "p_value": 0.02109
+      },
+      {
+        "term": "s3_mean",
+        "label": "Sensor 3 (HPC outlet temp), trailing mean",
+        "estimate_log_odds": -0.02105,
+        "odds_ratio": 0.9792,
+        "ci_95": [0.782, 1.2265],
+        "p_value": 0.8541
+      },
+      {
+        "term": "s3_std",
+        "label": "Sensor 3, trailing std dev",
+        "estimate_log_odds": 0.03775,
+        "odds_ratio": 1.0385,
+        "ci_95": [0.7691, 1.4035],
+        "p_value": 0.8051
+      },
+      {
+        "term": "s4_mean",
+        "label": "Sensor 4 (LPT outlet temp), trailing mean",
+        "estimate_log_odds": -0.13397,
+        "odds_ratio": 0.8746,
+        "ci_95": [0.7012, 1.0864],
+        "p_value": 0.2291
+      },
+      {
+        "term": "s4_std",
+        "label": "Sensor 4, trailing std dev",
+        "estimate_log_odds": 0.05503,
+        "odds_ratio": 1.0566,
+        "ci_95": [0.7706, 1.4492],
+        "p_value": 0.7319
+      },
+      {
+        "term": "s7_mean",
+        "label": "Sensor 7 (total press., HPC outlet), trailing mean",
+        "estimate_log_odds": -0.02485,
+        "odds_ratio": 0.9755,
+        "ci_95": [0.1118, 8.5227],
+        "p_value": 0.982
+      },
+      {
+        "term": "s7_std",
+        "label": "Sensor 7, trailing std dev",
+        "estimate_log_odds": 3.11357,
+        "odds_ratio": 22.5013,
+        "ci_95": [0.918, 579.763],
+        "p_value": 0.05772
+      },
+      {
+        "term": "s8_mean",
+        "label": "Sensor 8 (phys. fan speed), trailing mean",
+        "estimate_log_odds": 27.10528,
+        "odds_ratio": 591118586858.94104,
+        "ci_95": [0.3551, 2.0276460169486643e+24],
+        "p_value": 0.0616
+      },
+      {
+        "term": "s8_std",
+        "label": "Sensor 8, trailing std dev",
+        "estimate_log_odds": 12.60973,
+        "odds_ratio": 299457.6324,
+        "ci_95": [0, 1.6125686394969413e+24],
+        "p_value": 0.5647
+      },
+      {
+        "term": "s9_mean",
+        "label": "Sensor 9 (phys. core speed), trailing mean",
+        "estimate_log_odds": 0.14486,
+        "odds_ratio": 1.1559,
+        "ci_95": [0.9725, 1.382],
+        "p_value": 0.1051
+      },
+      {
+        "term": "s9_std",
+        "label": "Sensor 9, trailing std dev",
+        "estimate_log_odds": 0.24775,
+        "odds_ratio": 1.2811,
+        "ci_95": [0.9488, 1.7409],
+        "p_value": 0.1085
+      },
+      {
+        "term": "s11_mean",
+        "label": "Sensor 11 (static press., HPC outlet), trailing mean",
+        "estimate_log_odds": 15.21824,
+        "odds_ratio": 4066298.9159,
+        "ci_95": [698.9184, 32694635812.138],
+        "p_value": 0.0007067
+      },
+      {
+        "term": "s11_std",
+        "label": "Sensor 11, trailing std dev",
+        "estimate_log_odds": 4.67537,
+        "odds_ratio": 107.2723,
+        "ci_95": [0.0008, 14505615.1558],
+        "p_value": 0.4358
+      },
+      {
+        "term": "s12_mean",
+        "label": "Sensor 12 (fuel flow ratio), trailing mean",
+        "estimate_log_odds": -0.99522,
+        "odds_ratio": 0.3696,
+        "ci_95": [0.0252, 5.3378],
+        "p_value": 0.4651
+      },
+      {
+        "term": "s12_std",
+        "label": "Sensor 12, trailing std dev",
+        "estimate_log_odds": 1.57268,
+        "odds_ratio": 4.8195,
+        "ci_95": [0.0653, 344.86],
+        "p_value": 0.4708
+      },
+      {
+        "term": "s13_mean",
+        "label": "Sensor 13 (corr. fan speed), trailing mean",
+        "estimate_log_odds": 32.71644,
+        "odds_ratio": 161648025541618.56,
+        "ci_95": [2433.4648, 2.248577496215699e+25],
+        "p_value": 0.01101
+      },
+      {
+        "term": "s13_std",
+        "label": "Sensor 13, trailing std dev",
+        "estimate_log_odds": 9.76133,
+        "odds_ratio": 17349.7519,
+        "ci_95": [0, 5.9900343430210755e+21],
+        "p_value": 0.6339
+      },
+      {
+        "term": "s14_mean",
+        "label": "Sensor 14 (corr. core speed), trailing mean",
+        "estimate_log_odds": -0.02781,
+        "odds_ratio": 0.9726,
+        "ci_95": [0.796, 1.1856],
+        "p_value": 0.7838
+      },
+      {
+        "term": "s14_std",
+        "label": "Sensor 14, trailing std dev",
+        "estimate_log_odds": 0.48015,
+        "odds_ratio": 1.6163,
+        "ci_95": [1.1234, 2.354],
+        "p_value": 0.01076
+      },
+      {
+        "term": "s15_mean",
+        "label": "Sensor 15 (bypass ratio), trailing mean",
+        "estimate_log_odds": 3.07469,
+        "odds_ratio": 21.6432,
+        "ci_95": [0, 4.6454783918628049e+21],
+        "p_value": 0.8974
+      },
+      {
+        "term": "s15_std",
+        "label": "Sensor 15, trailing std dev",
+        "estimate_log_odds": 32.90983,
+        "odds_ratio": 196136167332675.28,
+        "ci_95": [0, 2.8611193792808534e+43],
+        "p_value": 0.3347
+      },
+      {
+        "term": "s17_mean",
+        "label": "Sensor 17 (bleed enthalpy), trailing mean",
+        "estimate_log_odds": -0.5842,
+        "odds_ratio": 0.5576,
+        "ci_95": [0.2271, 1.3515],
+        "p_value": 0.1977
+      },
+      {
+        "term": "s17_std",
+        "label": "Sensor 17, trailing std dev",
+        "estimate_log_odds": 0.33949,
+        "odds_ratio": 1.4042,
+        "ci_95": [0.3319, 6.1096],
+        "p_value": 0.647
+      },
+      {
+        "term": "s20_mean",
+        "label": "Sensor 20 (HPT coolant bleed), trailing mean",
+        "estimate_log_odds": 7.89953,
+        "odds_ratio": 2696.0275,
+        "ci_95": [0.3254, 27441496.4366],
+        "p_value": 0.08885
+      },
+      {
+        "term": "s20_std",
+        "label": "Sensor 20, trailing std dev",
+        "estimate_log_odds": 1.96423,
+        "odds_ratio": 7.1294,
+        "ci_95": [0, 4850932.6702],
+        "p_value": 0.7728
+      },
+      {
+        "term": "s21_mean",
+        "label": "Sensor 21 (LPT coolant bleed), trailing mean",
+        "estimate_log_odds": 5.76662,
+        "odds_ratio": 319.4574,
+        "ci_95": [0.0001, 974573283.8154],
+        "p_value": 0.4454
+      },
+      {
+        "term": "s21_std",
+        "label": "Sensor 21, trailing std dev",
+        "estimate_log_odds": -0.84916,
+        "odds_ratio": 0.4278,
+        "ci_95": [0, 1200584719.74569988],
+        "p_value": 0.939
+      }
+    ]
+  },
+  "limitations": ["FD001 is SIMULATED data from NASA's C-MAPSS turbofan model, not measurements from a real fleet.", "Single operating condition, one fault mode only -- FD002/FD003/FD004 (multiple conditions and/or fault modes) are not covered.", "Snapshots within one engine are not independent even after engine-grouped CV; adjacent snapshots share most of their trailing window.", "The Cox PH model's proportional-hazards assumption does not hold for most predictors here (see proportional_hazards above); its role is a documented cross-check, not the reference model.", "The GLM shows signs of quasi-complete separation (max |coefficient| in the hundreds of thousands, unstable confidence intervals) because FD001's simulated degradation is easy to separate given 30 continuous predictors. Discriminative ranking (AUC) is unaffected; the coefficients in the table above are NOT reliable effect-size estimates the way the mortality model's GLM coefficients are.", "No lab-verified ground truth beyond the simulation itself.", "Every training-engine snapshot is uncensored (the engine is known to run to failure), which is a real difference from the mortality model's censored survival times."],
+  "provenance": {
+    "nasa_original": "NASA Prognostics Center of Excellence Data Set Repository (C-MAPSS), U.S. public domain",
+    "mirror_used": "https://github.com/edwardzjl/CMAPSSData (original ti.arc.nasa.gov host is defunct)",
+    "licence": "U.S. public domain",
+    "verified": "2026-08-29"
+  }
+}

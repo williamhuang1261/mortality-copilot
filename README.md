@@ -241,6 +241,85 @@ use the base model. Full method and reasoning in [`docs/retrieval_eval.md`](docs
 This fine-tunes a bi-encoder for retrieval — it is not instruction-tuning and not
 LoRA on a generative model.
 
+## Second domain: equipment health scoring (predictive maintenance)
+
+The same survival-analysis pipeline, applied to a second dataset in a different
+physical domain: NASA's public **C-MAPSS FD001** turbofan engine degradation
+data, instead of a human health survey. The output is an **asset health score**
+and a **remaining-useful-life** estimate — multivariate sensor telemetry in,
+instead of a health survey.
+
+```mermaid
+flowchart LR
+    A["train_FD001.txt<br/>100 engines, run to failure"] -->|"R: eq01_ingest.R"| C[(DuckDB)]
+    B["test_FD001.txt + RUL_FD001.txt<br/>100 engines, truncated"] -->|"R: eq01_ingest.R"| C
+    C -->|"sql/eq02_features.sql"| D["equipment_train_analytic<br/>2,117 snapshots"]
+    C -->|"sql/eq02_features.sql"| E["equipment_test_analytic<br/>100 engines — external holdout"]
+    D -->|"R: eq03_models.R (grouped CV)"| F["logistic GLM<br/>Cox PH<br/>random forest"]
+    E -->|"scored once, never trained on"| F
+    F --> G["equipment_model_card.json<br/>equipment_cases.json"]
+```
+
+### Data
+
+NASA Prognostics Center of Excellence C-MAPSS dataset, FD001 subset (single
+operating condition, one fault mode), U.S. public domain. Fetched from
+[github.com/edwardzjl/CMAPSSData](https://github.com/edwardzjl/CMAPSSData)
+since the original `ti.arc.nasa.gov` host is defunct.
+
+| File | Contents |
+| --- | --- |
+| `train_FD001.txt` | 100 engines run to failure, 20,631 rows |
+| `test_FD001.txt` | 100 different engines, truncated before failure, 13,096 rows |
+| `RUL_FD001.txt` | True remaining life at each test engine's truncation point |
+
+### What plays the role of what
+
+| Mortality domain | Equipment domain |
+| --- | --- |
+| One NHANES exam per participant | Sensor snapshot every 10 cycles per engine |
+| 36-month binary mortality endpoint | 30-cycle binary "fails soon" endpoint (`event_30`) |
+| Censored time-to-death for Cox | Uncensored remaining-useful-life (every training engine runs to failure) |
+| Stratified 5-fold CV **on rows** | Stratified 5-fold CV **grouped by engine** (a row-level split would leak one engine's trajectory across folds) |
+| No true external holdout | `test_FD001` + `RUL_FD001`: 100 engines never seen in any fold or the full-data fit |
+
+### Results
+
+Out-of-fold, 5-fold grouped cross-validation, seed 20260829:
+
+| Model | AUC | 95% CI (DeLong) | Brier | Calibration slope |
+| --- | ---: | :---: | ---: | ---: |
+| Logistic GLM | **0.987** | [0.983, 0.991] | 0.02935 | 0.837 |
+| Random forest | **0.987** | [0.983, 0.991] | 0.03101 | 1.098 |
+| Cox proportional hazards | 0.977 | [0.972, 0.983] | 0.04286 | 1.598 |
+
+External holdout — 100 engines never seen in training:
+
+| Model | AUC | 95% CI (DeLong) | Brier |
+| --- | ---: | :---: | ---: |
+| Random forest | **0.982** | [0.960, 1.000] | 0.05932 |
+| Logistic GLM | 0.972 | [0.945, 0.998] | 0.07056 |
+| Cox proportional hazards | 0.958 | [0.917, 1.000] | 0.08358 |
+
+Cox concordance on training data: 0.817 (SE 0.004).
+
+Two findings worth stating plainly, because this domain does not behave like
+the mortality domain:
+
+1. **`cox.zph` finds proportional-hazards violations in 25 of 28 predictors**
+   (against just one in the mortality model). FD001's sensor trajectories are
+   monotonic degradation curves — a structurally poor fit for Cox's
+   constant-hazard-ratio assumption. Cox PH is kept as a documented
+   cross-check here, not the reference model.
+2. **The GLM shows quasi-complete separation** — `max(abs(coef))` is 145,319
+   and several confidence intervals span hundreds of thousands. FD001's
+   simulated degradation is easy to separate given 30 continuous predictors.
+   AUC/ranking are unaffected; the coefficient table is not a reliable
+   effect-size estimate the way the mortality model's GLM is.
+
+Full methodology, the complete results table, and the stated limitations:
+[`docs/equipment.md`](docs/equipment.md).
+
 ## Why explainability was built in first
 
 A mortality model that cannot say *why* is useless to the person who has to act on
@@ -294,6 +373,23 @@ dependency trees to install and to justify.
 library that pytest imports internally, which breaks the entire suite the moment the
 repository root is on `sys.path`.
 
+**`evaluate()` is duplicated in `R/eq03_models.R`, not extracted into a shared
+module.** The equipment extension needed the same AUC/Brier/calibration
+report as `R/04_models.R`, but sharing the function would mean editing
+`04_models.R` to source it — and this extension's whole guarantee is that the
+mortality pipeline is untouched, so its committed AUC 0.856 cannot move. ~15
+duplicated lines is a small price for that guarantee holding by construction
+rather than by discipline.
+
+**Cross-validation is grouped by engine, not stratified by row.** The
+mortality model's folds are row-level because each row is one independent
+person. Here, one row is one snapshot of one engine's degradation
+trajectory, and adjacent snapshots are highly correlated — a random
+row-level split would let one engine's own history leak across train and
+test folds. `R/eq03_models.R` asserts (`stopifnot`) that no engine's
+snapshots ever span two folds, rather than trusting the sampling to get it
+right.
+
 ## Limitations
 
 - **Survey weights are not applied.** NHANES uses a complex multistage design.
@@ -313,15 +409,20 @@ repository root is on `sys.path`.
 - **The 42 excluded `unknown` rows are not missing at random**, and excluding them
   is a modelling convenience, not a neutral act.
 
+(For the equipment health-score domain's limitations — simulated data, single
+operating condition, quasi-complete separation, and more — see
+[`docs/equipment.md`](docs/equipment.md).)
+
 ## Layout
 
 ```
-R/           ingest, EDA, models, export        — every statistic
-sql/         the analytic cohort                — feature engineering
-pipeline/    DuckDB loading, indexing, the CLI  — plumbing and retrieval
+R/           ingest, EDA, models, export        — every statistic (eq0N_*.R — equipment domain)
+sql/         the analytic cohort                — feature engineering (eq02_features.sql — equipment domain)
+pipeline/    DuckDB loading, indexing, the CLI  — plumbing and retrieval (eq_*.py — equipment domain)
 prompts/     the case-note prompt template      — versioned, not inlined
 artifacts/   model_card.json, cases.json        — committed, readable without running anything
-docs/        eda.md, retrieval_eval.md, figs/   — committed results
+                                                   (equipment_model_card.json, equipment_cases.json — equipment domain)
+docs/        eda.md, retrieval_eval.md, figs/   — committed results (equipment.md — equipment domain)
 tests/       no network, no LLM, no R           — what CI runs
 ```
 
