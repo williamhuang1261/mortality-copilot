@@ -28,7 +28,8 @@ def readme() -> str:
 @pytest.mark.parametrize("heading", [
     "## What it does", "## Architecture", "## Quickstart", "## Data",
     "## Cohort", "## Methodology", "## Results", "## Retrieval",
-    "## Engineering notes", "## Limitations", "## Licence",
+    "## Agentic tool-use mode", "## Engineering notes", "## Limitations",
+    "## Licence",
 ])
 def test_readme_has_section(readme, heading):
     assert heading in readme
@@ -93,3 +94,9 @@ def test_readme_does_not_claim_to_have_fine_tuned_an_llm(readme):
     section = readme.split("## Retrieval", 1)[1]
     assert "not instruction-tuning" in section
     assert "bi-encoder" in section
+
+
+def test_readme_states_the_what_if_scope_limitation(readme):
+    section = readme.split("## Agentic tool-use mode", 1)[1].split("##", 1)[0]
+    assert "race_eth" in section and "education" in section
+    assert "not silently ignored" in section or "silently ignored" in section

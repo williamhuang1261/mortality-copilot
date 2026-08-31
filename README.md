@@ -241,6 +241,80 @@ use the base model. Full method and reasoning in [`docs/retrieval_eval.md`](docs
 This fine-tunes a bi-encoder for retrieval — it is not instruction-tuning and not
 LoRA on a generative model.
 
+## Agentic tool-use mode
+
+`pipeline/copilot.py` is single-shot: one case in, one cited note out, no
+memory between runs. `python -m pipeline.agent` is a multi-turn session on
+top of the same artifacts, built around three tools instead of one retrieval
+call:
+
+| Tool | Does |
+| --- | --- |
+| `lookup_case_by_number` | returns a case's predicted risk, decile and top drivers |
+| `query_model_card` | keyword-matches a question against the model card's own JSON sections (cohort, validation, limitations, coefficients, ...) and returns them verbatim |
+| `what_if` | recomputes a case's risk with one feature changed, using the fitted GLM's own coefficient for that term |
+
+Two dispatch paths, same fail-closed shape as `copilot.py`'s Ollama-or-fallback
+split:
+
+- **Deterministic dispatcher (default).** A small regex/keyword parser maps
+  an utterance to a tool call. This is what the test suite exercises — no
+  Ollama required, so CI covers the whole tool-use path.
+- **`--llm` (opt-in).** Sends the tool schemas and the running conversation to
+  a local Ollama model via its `tools=[...]` chat parameter; the model's tool
+  call is executed and the result fed back for a final reply. Any failure — no
+  Ollama installed, a malformed call, an unknown tool name — falls back to the
+  deterministic dispatcher for that turn. Not installed on this machine, so
+  (like the rest of this project's Ollama path) it is the fallback that gets
+  verified, not the model-driven call itself.
+
+Session memory is a single `Session` object holding the last case discussed,
+so a follow-up does not need to repeat the case id:
+
+```
+$ make agent-demo
+> case 1
+[deterministic dispatcher] case_001: predicted 36-month risk 4.63%, decile 9/10.
+Top drivers: Age = 67, Diabetes = yes, Sex = male.
+
+> what if age were 80
+[deterministic dispatcher] Case case_001: changing age from 67 to 80.0 moves the
+predicted 36-month risk from 4.63% to 11.58% (+6.95 points), recomputed from the
+fitted GLM's own coefficient for age (+0.9924 log-odds). This is relative to the
+case's original modelled risk, not a chained previous what-if.
+
+> now raise hba1c by 20%
+[deterministic dispatcher] Case case_001: changing hba1c from 8.6 to
+10.32 moves the predicted 36-month risk from 4.63% to 4.64% (+0.01 points),
+recomputed from the fitted GLM's own coefficient for hba1c (+0.0020 log-odds).
+
+> how many people are in the cohort?
+[deterministic dispatcher] {
+  "cohort": {
+    "n": 4906,
+    "deaths_36_months": 151,
+    "event_rate_36_months": 0.03078
+    ...
+  }
+}
+```
+
+Note the second and third turns never repeat `case_001` — the session
+remembers it from the first turn.
+
+**Why `what_if` is scoped to twelve features, not all fifteen the model
+uses.** The fitted GLM has terms for `race_eth` and `education`, but
+`artifacts/cases.json`'s per-case export never carried those two fields, only
+the twelve others. For the seven continuous terms (age, bmi, sbp, dbp, hdl,
+hba1c, income_ratio), moving one by `delta` changes the log-odds by exactly
+`coefficient * delta` — a GLM is linear in log-odds for a continuous term
+regardless of what else is held fixed, so this is a real re-application of
+the fitted model, not an approximation. The five categorical terms with a
+per-case counterpart (smoker, diabetes, sex, prior_chd, prior_cancer) work
+the same way: swap the old dummy coefficient out, the new one in.
+`race_eth`/`education` are refused with an explicit message rather than
+silently ignored — `pipeline/tools.py`'s `OUT_OF_SCOPE_FEATURES`.
+
 ## Second domain: equipment health scoring (predictive maintenance)
 
 The same survival-analysis pipeline, applied to a second dataset in a different
