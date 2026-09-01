@@ -315,6 +315,37 @@ the same way: swap the old dummy coefficient out, the new one in.
 `race_eth`/`education` are refused with an explicit message rather than
 silently ignored — `pipeline/tools.py`'s `OUT_OF_SCOPE_FEATURES`.
 
+### Agent evaluation harness
+
+`tests/test_agent.py` checks individual dispatcher calls in isolation.
+`pipeline/agent_eval.py` sits a level above that: it scores the agent against
+**6 golden multi-turn conversations (15 turns)** covering explicit case
+lookup, percentage/absolute/categorical what-ifs, model-card questions,
+mid-conversation case switching, and the two fail-closed error paths (no
+case in context, an unparseable change direction). Each what-if turn is
+checked two ways against a value pinned once from `artifacts/model_card.json`'s
+own fitted coefficients: that `parse_utterance` selects the `what_if` tool,
+and that `dispatch`'s natural-language reply surfaces the exact same rounded
+risk percentage a direct `tools.what_if` call produces — catching a
+formatting drift the existing substring-only tests would miss.
+
+```
+$ make agent-eval
+agent eval: 6/6 scenarios, 15/15 turns, accuracy 100.0%
+  [PASS] explicit_case_then_absolute_what_if
+  [PASS] percentage_what_if_and_limitations_query
+  [PASS] categorical_what_if_and_cohort_query
+  [PASS] case_switch_mid_conversation_uses_latest_context
+  [PASS] what_if_without_case_in_context_fails_closed
+  [PASS] unparseable_change_direction_fails_closed
+```
+
+The harness writes `artifacts/agent_eval_report.json` and exits non-zero
+on any regression, so it can gate CI the same way the other golden-run
+tests in this repo do. `tests/test_agent_eval.py` pins the scenario/turn
+counts and the 100% accuracy figure above against the real, committed
+artifacts — not a fixture.
+
 ## Second domain: equipment health scoring (predictive maintenance)
 
 The same survival-analysis pipeline, applied to a second dataset in a different

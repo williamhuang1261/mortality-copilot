@@ -1,0 +1,120 @@
+{
+  "scenarios_total": 6,
+  "scenarios_passed": 6,
+  "turns_total": 15,
+  "turns_passed": 15,
+  "accuracy": 1.0,
+  "scenarios": [
+    {
+      "name": "explicit_case_then_absolute_what_if",
+      "passed": true,
+      "turns": [
+        {
+          "utterance": "case 1",
+          "passed": true,
+          "detail": "tool='lookup_case_by_number'"
+        },
+        {
+          "utterance": "what if age were 80",
+          "passed": true,
+          "detail": "tool='what_if', risk_delta=6.947685pts"
+        },
+        {
+          "utterance": "what's the AUC?",
+          "passed": true,
+          "detail": "tool='query_model_card'"
+        }
+      ]
+    },
+    {
+      "name": "percentage_what_if_and_limitations_query",
+      "passed": true,
+      "turns": [
+        {
+          "utterance": "case 10",
+          "passed": true,
+          "detail": "tool='lookup_case_by_number'"
+        },
+        {
+          "utterance": "raise hba1c by 20%",
+          "passed": true,
+          "detail": "tool='what_if', risk_delta=0.000644pts"
+        },
+        {
+          "utterance": "what are the limitations?",
+          "passed": true,
+          "detail": "tool='query_model_card'"
+        }
+      ]
+    },
+    {
+      "name": "categorical_what_if_and_cohort_query",
+      "passed": true,
+      "turns": [
+        {
+          "utterance": "case 5",
+          "passed": true,
+          "detail": "tool='lookup_case_by_number'"
+        },
+        {
+          "utterance": "what if smoker is current",
+          "passed": true,
+          "detail": "tool='what_if', risk_delta=0.293374pts"
+        },
+        {
+          "utterance": "how many people are in the cohort?",
+          "passed": true,
+          "detail": "tool='query_model_card'"
+        }
+      ]
+    },
+    {
+      "name": "case_switch_mid_conversation_uses_latest_context",
+      "passed": true,
+      "turns": [
+        {
+          "utterance": "case 1",
+          "passed": true,
+          "detail": "tool='lookup_case_by_number'"
+        },
+        {
+          "utterance": "case 2",
+          "passed": true,
+          "detail": "tool='lookup_case_by_number'"
+        },
+        {
+          "utterance": "what if age were 90",
+          "passed": true,
+          "detail": "tool='what_if'"
+        }
+      ]
+    },
+    {
+      "name": "what_if_without_case_in_context_fails_closed",
+      "passed": true,
+      "turns": [
+        {
+          "utterance": "what if age were 80",
+          "passed": true,
+          "detail": "raised expected error: No case in context yet. Say 'case 1' (or any case number) first."
+        }
+      ]
+    },
+    {
+      "name": "unparseable_change_direction_fails_closed",
+      "passed": true,
+      "turns": [
+        {
+          "utterance": "case 1",
+          "passed": true,
+          "detail": "tool='lookup_case_by_number'"
+        },
+        {
+          "utterance": "what if age changes",
+          "passed": true,
+          "detail": "raised expected error: Say how 'age' should change, e.g. 'raise it by 10%' or 'set it to 30'."
+        }
+      ]
+    }
+  ]
+}
