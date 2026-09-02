@@ -7,7 +7,7 @@ PY      := $(VENV)/bin/python
 PIP     := $(VENV)/bin/pip
 RSCRIPT := Rscript
 
-.PHONY: help setup setup-rag data features eda models sklearn-baseline index demo finetune agent-demo agent-eval equipment-data equipment-features equipment-models test all clean
+.PHONY: help setup setup-rag data features eda models sklearn-baseline index demo finetune agent-demo agent-eval rules-demo equipment-data equipment-features equipment-models test all clean
 
 help:
 	@echo "mortality-copilot"
@@ -24,6 +24,7 @@ help:
 	@echo "  make finetune   fine-tune the retriever, report recall@5"
 	@echo "  make agent-demo run a scripted multi-turn session against the tool-calling agent"
 	@echo "  make agent-eval score the agent against golden multi-turn scenarios"
+	@echo "  make rules-demo evaluate versioned rules against one case, log the audit trail"
 	@echo "  make equipment-data      download NASA C-MAPSS FD001 into DuckDB (second domain)"
 	@echo "  make equipment-features  build the equipment health-score analytic tables"
 	@echo "  make equipment-models   fit/validate equipment models, score the external holdout"
@@ -82,6 +83,9 @@ agent-demo:
 
 agent-eval:
 	$(PY) -m pipeline.agent_eval
+
+rules-demo:
+	$(PY) -m pipeline.rules_demo --case case_001 --as-of 2026-08-01
 
 equipment-data:
 	$(RSCRIPT) R/eq01_ingest.R

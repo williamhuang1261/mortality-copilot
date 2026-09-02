@@ -11,3 +11,6 @@ pytest==8.3.4
 scikit-learn==1.9.0
 pandas==3.0.5
 numpy==2.4.6
+# versioned rules engine (pipeline/rules.py) -- rule definitions are data
+# (YAML), not code, so a non-engineer could review them.
+pyyaml==6.0.2

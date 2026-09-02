@@ -346,6 +346,88 @@ tests in this repo do. `tests/test_agent_eval.py` pins the scenario/turn
 counts and the 100% accuracy figure above against the real, committed
 artifacts — not a fixture.
 
+## Versioned rules and audit trail
+
+The tool-calling agent answers ad hoc questions about a case. `pipeline/rules.py`
+and `pipeline/audit.py` are a different kind of layer: a small, versioned
+**eligibility/risk-flagging rules engine** that produces the same decision
+every time it is asked about the same case as of the same date, plus a
+durable, append-only **audit trail** recording which rule version fired and
+why.
+
+Rule conditions live in [`rules/eligibility_rules.yaml`](rules/eligibility_rules.yaml)
+as data, not code, so a compliance reviewer without a Python background could
+read the file. A rule can have several **versions** over time — each version
+declares the date range during which it is the one in force
+(`effective_from` inclusive, `effective_to` exclusive, or open-ended when
+`effective_to` is null):
+
+```yaml
+- rule_id: high_risk_flag
+  version: 1
+  effective_from: "2026-01-01"
+  effective_to: "2026-06-01"
+  condition: {field: predicted_risk_36mo, operator: gte, value: 0.10}
+  reason: "36-month predicted risk {value:.4f} meets or exceeds the v1 threshold of 0.10."
+
+- rule_id: high_risk_flag
+  version: 2
+  effective_from: "2026-06-01"
+  effective_to: null
+  condition: {field: predicted_risk_36mo, operator: gte, value: 0.08}
+  reason: "36-month predicted risk {value:.4f} meets or exceeds the v2 threshold of 0.08 ..."
+```
+
+`active_version()` picks the one version whose window covers a given date
+— and **raises rather than guessing** if two versions of the same rule ever
+have overlapping windows, since that means the rule data itself is wrong,
+not that the code should pick a favourite.
+
+`evaluate_and_log()` runs every rule's active version against a case and
+appends one JSON line per rule to `artifacts/audit_log.jsonl`. The function
+only ever opens that file in append (`"a"`) mode — nothing in this module
+reads the log back in order to rewrite it, so a rule change made today
+cannot retroactively alter a decision that was already logged for a past
+date. `tests/test_audit_immutability.py` proves this directly: it logs a
+case's evaluation as of a past date under one rule version, adds a *new*
+version effective later that would flip the outcome if misapplied, then
+re-evaluates the same case at the same past date and asserts both the
+original file bytes and the recomputed result are byte-for-byte unchanged.
+
+```
+$ make rules-demo   # case_001, diabetes=yes, risk 4.63%, evaluated 2026-08-01
+{
+  "case_id": "case_001",
+  "rule_id": "comorbidity_review_flag",
+  "version": 1,
+  "fired": true,
+  "reason": "Case reports diabetes = yes, so it is routed for manual comorbidity review.",
+  ...
+}
+{
+  "case_id": "case_001",
+  "rule_id": "high_risk_flag",
+  "version": 2,
+  "fired": false,
+  "reason": "36-month predicted risk 0.0463 meets or exceeds the v2 threshold of 0.08 ...",
+  ...
+}
+
+$ python -m pipeline.rules_demo --case case_043 --as-of 2026-03-01   # risk 8.66%
+{"rule_id": "high_risk_flag", "version": 1, "fired": false,
+ "reason": "36-month predicted risk 0.0866 meets or exceeds the v1 threshold of 0.10."}
+
+$ python -m pipeline.rules_demo --case case_043 --as-of 2026-08-01   # same case, later date
+{"rule_id": "high_risk_flag", "version": 2, "fired": true,
+ "reason": "36-month predicted risk 0.0866 meets or exceeds the v2 threshold of 0.08 ..."}
+```
+
+The last two calls are the same case, the same risk score, evaluated at two
+different dates: the earlier one resolves to v1 (does not fire), the later
+one resolves to v2 (fires) because that date falls inside v2's own effective
+window — the rule set is allowed to change what *future* evaluations do, it
+is only *past* evaluations that stay pinned.
+
 ## Second domain: equipment health scoring (predictive maintenance)
 
 The same survival-analysis pipeline, applied to a second dataset in a different
@@ -524,9 +606,12 @@ operating condition, quasi-complete separation, and more — see
 R/           ingest, EDA, models, export        — every statistic (eq0N_*.R — equipment domain)
 sql/         the analytic cohort                — feature engineering (eq02_features.sql — equipment domain)
 pipeline/    DuckDB loading, indexing, the CLI  — plumbing and retrieval (eq_*.py — equipment domain)
+                                                   (rules.py, audit.py, rules_demo.py — versioned rules engine)
 prompts/     the case-note prompt template      — versioned, not inlined
+rules/       eligibility_rules.yaml             — versioned rule definitions, plain data, no code
 artifacts/   model_card.json, cases.json        — committed, readable without running anything
                                                    (equipment_model_card.json, equipment_cases.json — equipment domain)
+                                                   (audit_log.jsonl — append-only rule-evaluation trail)
 docs/        eda.md, retrieval_eval.md, figs/   — committed results (equipment.md — equipment domain)
 tests/       no network, no LLM, no R           — what CI runs
 ```

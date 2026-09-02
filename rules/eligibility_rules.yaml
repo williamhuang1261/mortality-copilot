@@ -1,0 +1,40 @@
+# Versioned eligibility / risk-flagging rules over artifacts/cases.json.
+#
+# Each entry is one VERSION of a rule. A rule can have several versions
+# over time; only one version's [effective_from, effective_to) window may
+# contain any given date -- overlapping windows are a data error and
+# pipeline/rules.py raises rather than silently picking one.
+#
+# `field` is a dotted path into a case record (e.g. "predicted_risk_36mo"
+# or "features.diabetes"). `operator` is one of: gte, lte, gt, lt, eq.
+# `effective_to: null` means the version is still open-ended (current).
+
+- rule_id: high_risk_flag
+  version: 1
+  effective_from: "2026-01-01"
+  effective_to: "2026-06-01"
+  condition:
+    field: predicted_risk_36mo
+    operator: gte
+    value: 0.10
+  reason: "36-month predicted risk {value:.4f} meets or exceeds the v1 threshold of 0.10."
+
+- rule_id: high_risk_flag
+  version: 2
+  effective_from: "2026-06-01"
+  effective_to: null
+  condition:
+    field: predicted_risk_36mo
+    operator: gte
+    value: 0.08
+  reason: "36-month predicted risk {value:.4f} meets or exceeds the v2 threshold of 0.08 (lowered from v1's 0.10 to catch borderline cases earlier)."
+
+- rule_id: comorbidity_review_flag
+  version: 1
+  effective_from: "2026-01-01"
+  effective_to: null
+  condition:
+    field: features.diabetes
+    operator: eq
+    value: "yes"
+  reason: "Case reports diabetes = yes, so it is routed for manual comorbidity review."
