@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mortality-copilot-api
+  labels:
+    app: mortality-copilot-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mortality-copilot-api
+  template:
+    metadata:
+      labels:
+        app: mortality-copilot-api
+    spec:
+      containers:
+        - name: api
+          # Built from this repo: `docker build -t mortality-copilot-api .`
+          # No Dockerfile is committed by this extension -- the API and its
+          # dependencies already run from `requirements.txt` under
+          # `uvicorn pipeline.api:app`; a container build is a packaging
+          # step, not something this extension's tools/tests exercise, so
+          # it is a stated next step rather than claimed as done.
+          image: mortality-copilot-api:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - configMapRef:
+                name: mortality-copilot-api-config
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 15
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"

@@ -28,7 +28,8 @@ def readme() -> str:
 @pytest.mark.parametrize("heading", [
     "## What it does", "## Architecture", "## Quickstart", "## Data",
     "## Cohort", "## Methodology", "## Results", "## Retrieval",
-    "## Agentic tool-use mode", "## Versioned rules and audit trail",
+    "## Agentic tool-use mode", "## FastAPI service, PostgreSQL and Kubernetes",
+    "## Versioned rules and audit trail",
     "## Engineering notes", "## Limitations", "## Licence",
 ])
 def test_readme_has_section(readme, heading):
@@ -41,6 +42,15 @@ def test_readme_states_the_audit_immutability_guarantee(readme):
     )[0]
     assert "append" in section.lower()
     assert "cannot retroactively alter" in section
+
+
+def test_readme_documents_the_mcp_server(readme):
+    section = readme.split("### MCP server", 1)[1].split(
+        "## Versioned rules and audit trail", 1
+    )[0]
+    assert "mcpServers" in section
+    assert "additive" in section
+    assert "mcp-demo" in section
 
 
 def test_disclaimer_appears_before_anything_else(readme):

@@ -7,7 +7,7 @@ PY      := $(VENV)/bin/python
 PIP     := $(VENV)/bin/pip
 RSCRIPT := Rscript
 
-.PHONY: help setup setup-rag data features eda models sklearn-baseline index demo finetune agent-demo agent-eval rules-demo equipment-data equipment-features equipment-models test all clean
+.PHONY: help setup setup-rag data features eda models sklearn-baseline index demo finetune agent-demo agent-eval rules-demo mcp-demo api-serve api-demo equipment-data equipment-features equipment-models test all clean
 
 help:
 	@echo "mortality-copilot"
@@ -25,6 +25,9 @@ help:
 	@echo "  make agent-demo run a scripted multi-turn session against the tool-calling agent"
 	@echo "  make agent-eval score the agent against golden multi-turn scenarios"
 	@echo "  make rules-demo evaluate versioned rules against one case, log the audit trail"
+	@echo "  make mcp-demo   call the MCP server's tools through a real client session"
+	@echo "  make api-serve  run the FastAPI service locally (uvicorn, port 8000)"
+	@echo "  make api-demo   curl the running FastAPI service's endpoints"
 	@echo "  make equipment-data      download NASA C-MAPSS FD001 into DuckDB (second domain)"
 	@echo "  make equipment-features  build the equipment health-score analytic tables"
 	@echo "  make equipment-models   fit/validate equipment models, score the external holdout"
@@ -86,6 +89,18 @@ agent-eval:
 
 rules-demo:
 	$(PY) -m pipeline.rules_demo --case case_001 --as-of 2026-08-01
+
+mcp-demo:
+	$(PY) -m pipeline.mcp_demo
+
+api-serve:
+	$(VENV)/bin/uvicorn pipeline.api:app --port 8000
+
+api-demo:
+	curl -s http://localhost:8000/health && echo
+	curl -s http://localhost:8000/cases/case_001 && echo
+	curl -s -X POST http://localhost:8000/what-if -H "Content-Type: application/json" \
+	    -d '{"case_id":"case_001","feature":"age","new_value":"80"}' && echo
 
 equipment-data:
 	$(RSCRIPT) R/eq01_ingest.R

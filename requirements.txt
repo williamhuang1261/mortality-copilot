@@ -14,3 +14,12 @@ numpy==2.4.6
 # versioned rules engine (pipeline/rules.py) -- rule definitions are data
 # (YAML), not code, so a non-engineer could review them.
 pyyaml==6.0.2
+# MCP server (pipeline/mcp_server.py) -- pinned below 2.x, which renamed
+# FastMCP to MCPServer and changed its API.
+mcp==1.29.1
+# FastAPI service (pipeline/api.py)
+fastapi==0.141.1
+uvicorn[standard]==0.52.4
+# PostgreSQL persistence (pipeline/db.py)
+sqlalchemy==2.0.52
+psycopg[binary]==3.3.5

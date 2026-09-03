@@ -346,6 +346,200 @@ tests in this repo do. `tests/test_agent_eval.py` pins the scenario/turn
 counts and the 100% accuracy figure above against the real, committed
 artifacts — not a fixture.
 
+### MCP server
+
+`pipeline/agent.py`'s `--llm` path reaches Ollama's own `tools=[...]`
+function-calling API. `pipeline/mcp_server.py` puts the same three tools
+(`lookup_case`, `query_model_card`, `what_if`, from the identical
+`pipeline/tools.py` functions) behind a second, protocol-compliant
+interface: the [Model Context Protocol](https://modelcontextprotocol.io/),
+over a `FastMCP` stdio server. This is additive, not a replacement — no
+tool logic is duplicated or reimplemented, `pipeline/agent.py`'s
+dispatcher and `--llm` path are untouched, and the two interfaces read the
+same `artifacts/cases.json` / `artifacts/model_card.json` files. The point
+is that a generic MCP client (Claude Desktop, an MCP inspector, another
+agent framework) can call these tools without speaking Ollama's API
+specifically.
+
+Run it directly:
+
+```
+python -m pipeline.mcp_server
+```
+
+It speaks stdio, so an MCP client launches it as a subprocess and talks to
+it over stdin/stdout — no network port, no auth to configure. Point a
+client such as Claude Desktop at it with an `mcpServers` block like:
+
+```json
+{
+  "mcpServers": {
+    "mortality-copilot": {
+      "command": "/absolute/path/to/mortality-copilot/.venv/bin/python",
+      "args": ["-m", "pipeline.mcp_server"],
+      "cwd": "/absolute/path/to/mortality-copilot"
+    }
+  }
+}
+```
+
+`make mcp-demo` drives the server through a real in-process client session
+(the same connection helper `tests/test_mcp_server.py` uses) and prints
+each call and its result:
+
+```
+$ make mcp-demo
+$ python -m pipeline.mcp_server  (stdio, 3 tools)
+
+> call mcp_lookup_case({"case_id": "case_001"})
+{
+  "case_id": "case_001",
+  "predicted_risk_36mo": 0.04628,
+  "risk_decile": 9,
+  ...
+}
+
+> call mcp_what_if({"case_id": "case_001", "feature": "age", "new_value": "80"})
+{
+  "case_id": "case_001",
+  "feature": "age",
+  "old_value": 67,
+  "new_value": 80.0,
+  "base_risk": 0.04628,
+  "new_risk": 0.11575684855695788,
+  "risk_delta_pct_points": 6.947684855695788
+}
+
+> call mcp_query_model_card({"question": "what is the AUC?"})
+{
+  "validation": {
+    "scheme": "5-fold cross-validation, stratified on the outcome, seed 20260823",
+    "metrics": [
+      {"Model": "Logistic GLM", "AUC": "0.853", ...},
+      ...
+    ]
+  }
+}
+```
+
+`tests/test_mcp_server.py` proves the server is not just importable: it
+opens a real MCP client session and asserts every tool's round-tripped
+result matches calling `pipeline/tools.py` directly on the same artifacts.
+
+**Deviation:** pinned `mcp==1.29.1`. The `mcp` package's 2.x line renamed
+`FastMCP` to `MCPServer` and changed its API; 1.29.1 is the last release
+on the `FastMCP` surface this section documents.
+
+## FastAPI service, PostgreSQL and Kubernetes
+
+A fourth, additive interface over the same `pipeline/tools.py` functions
+the CLI agent and the MCP server already call: `pipeline/api.py` is a
+FastAPI app with typed Pydantic request/response models, `pipeline/db.py`
+persists the case and audit-log artifacts to PostgreSQL, and `k8s/` deploys
+the API. None of this replaces the CLI, the MCP server, or the JSON/JSONL
+artifacts -- they stay the source of truth a reviewer reads without
+running anything.
+
+### API
+
+```
+uvicorn pipeline.api:app --reload
+```
+
+| Endpoint | Does |
+| --- | --- |
+| `GET /health` | liveness/readiness check; reports whether `DATABASE_URL` is configured |
+| `GET /cases/{case_id}` | the same record `lookup_case` returns, from Postgres when configured, the JSON artifact otherwise |
+| `GET /model-card?question=...` | the same section(s) `query_model_card` returns |
+| `POST /what-if` | the same recomputation `what_if` returns |
+
+Real output from a running server, no `DATABASE_URL` set:
+
+```
+$ curl -s http://localhost:8000/health
+{"status":"ok","database":"fallback"}
+
+$ curl -s http://localhost:8000/cases/case_001
+{"case_id":"case_001","predicted_risk_36mo":0.04628,"risk_decile":9,
+ "features":{"age":67,"sex":"male","bmi":28.8, ...}, ...}
+
+$ curl -s -X POST http://localhost:8000/what-if \
+    -H "Content-Type: application/json" \
+    -d '{"case_id":"case_001","feature":"age","new_value":"80"}'
+{"case_id":"case_001","feature":"age","old_value":67,"new_value":80.0,
+ "base_risk":0.04628,"new_risk":0.11575684855695788,
+ "risk_delta_pct_points":6.947684855695788}
+```
+
+`tests/test_api.py` hits all four endpoints through FastAPI's real
+`TestClient` and checks each response against calling `pipeline/tools.py`
+directly, plus a 404 on an unknown case, a 400 on an out-of-scope
+what-if feature, and a real connection-failure fallback test (below).
+
+### PostgreSQL
+
+`pipeline/db.py` loads `artifacts/cases.json` and `artifacts/audit_log.jsonl`
+into two Postgres tables (`cases`, `audit_log`) and `GET /cases/{case_id}`
+reads from Postgres when `DATABASE_URL` is set, falling back to the JSON
+artifact otherwise -- and **also** falling back if `DATABASE_URL` is set
+but the database is genuinely unreachable, the same fail-closed-to-a-
+simpler-path pattern the Ollama and RAG fallbacks use elsewhere in this
+project. `tests/test_db.py` proves this against a real, disposable
+`postgres:16` container (`docker-compose.test.yml`, port 55432 -- chosen
+to never collide with another local project's own Postgres container on
+the default 5432): load-and-read matches the JSON artifact exactly, the
+loader is idempotent, and one test injects a marker value directly into a
+Postgres row and confirms the API returns *that* value, proving the
+Postgres path is genuinely taken, not just present in the code. A second
+test sets `DATABASE_URL` to a real unreachable address and confirms the
+API still returns the correct case from the JSON fallback rather than a
+500.
+
+```
+$ docker compose -f docker-compose.test.yml up -d --wait
+$ pytest tests/test_db.py -q
+....                                                                    [100%]
+4 passed in 19.00s
+$ docker compose -f docker-compose.test.yml down -v
+```
+
+### Kubernetes
+
+`k8s/deployment.yaml` (2 replicas, liveness/readiness probes against
+`/health`), `k8s/service.yaml` (ClusterIP) and `k8s/configmap.yaml`
+(`DATABASE_URL`) deploy the API built by the `Dockerfile`. Validated for
+real, not just linted: built the image, loaded it into a real local `kind`
+cluster, applied the manifests, and confirmed both replicas reached
+`Running`/`Ready` and the Service actually routed traffic to them through
+a `kubectl port-forward` -- which is how the DATABASE_URL-unreachable
+fallback above was caught in the first place, before it was ever a unit
+test.
+
+```
+$ kind create cluster --name mortality-copilot-test
+$ kind load docker-image mortality-copilot-api:latest --name mortality-copilot-test
+$ kubectl apply -f k8s/
+configmap/mortality-copilot-api-config created
+deployment.apps/mortality-copilot-api created
+service/mortality-copilot-api created
+$ kubectl rollout status deployment/mortality-copilot-api
+deployment "mortality-copilot-api" successfully rolled out
+$ kubectl get pods
+NAME                                    READY   STATUS    RESTARTS   AGE
+mortality-copilot-api-5bf97f4f6-4whsj   1/1     Running   0          6s
+mortality-copilot-api-5bf97f4f6-znp7s   1/1     Running   0          6s
+```
+
+**Limitations, stated plainly:** the ConfigMap embeds a placeholder
+`DATABASE_URL` including a placeholder password rather than splitting
+credentials into a separate Secret -- a real deployment would need that
+split, noted here rather than presented as finished; no Postgres is
+deployed inside the test cluster, so the ConfigMap's `DATABASE_URL` points
+at a host that does not exist there on purpose, which is exactly what
+exercises the fallback path above; the `Dockerfile` builds the API only
+(no R, no RAG stack), since serving already-committed artifacts is all it
+needs.
+
 ## Versioned rules and audit trail
 
 The tool-calling agent answers ad hoc questions about a case. `pipeline/rules.py`
@@ -607,6 +801,8 @@ R/           ingest, EDA, models, export        — every statistic (eq0N_*.R �
 sql/         the analytic cohort                — feature engineering (eq02_features.sql — equipment domain)
 pipeline/    DuckDB loading, indexing, the CLI  — plumbing and retrieval (eq_*.py — equipment domain)
                                                    (rules.py, audit.py, rules_demo.py — versioned rules engine)
+                                                   (mcp_server.py, mcp_demo.py — MCP server interface)
+                                                   (api.py, db.py — FastAPI service + PostgreSQL persistence)
 prompts/     the case-note prompt template      — versioned, not inlined
 rules/       eligibility_rules.yaml             — versioned rule definitions, plain data, no code
 artifacts/   model_card.json, cases.json        — committed, readable without running anything
@@ -614,6 +810,8 @@ artifacts/   model_card.json, cases.json        — committed, readable without 
                                                    (audit_log.jsonl — append-only rule-evaluation trail)
 docs/        eda.md, retrieval_eval.md, figs/   — committed results (equipment.md — equipment domain)
 tests/       no network, no LLM, no R           — what CI runs
+k8s/         deployment.yaml, service.yaml, configmap.yaml — the FastAPI service's manifest
+Dockerfile   builds the FastAPI service only    — no R, no RAG stack
 ```
 
 ## Licence

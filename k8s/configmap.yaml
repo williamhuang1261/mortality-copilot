@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mortality-copilot-api-config
+  labels:
+    app: mortality-copilot-api
+data:
+  # Points the API at the Postgres persistence layer (pipeline/db.py). If
+  # this key is absent, GET /cases/{id} falls back to the JSON artifact --
+  # the same fail-closed-to-a-simpler-path pattern the rest of this
+  # project uses (Ollama, RAG). The password belongs in a Secret, not
+  # here; this value is a placeholder host:port/db, not a credential.
+  DATABASE_URL: "postgresql+psycopg://mortality:PLACEHOLDER@postgres:5432/mortality"
