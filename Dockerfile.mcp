@@ -1,0 +1,21 @@
+# Builds the MCP service only (pipeline/mcp_server.py). Unlike Dockerfile
+# (the API service), this image does not need artifacts/: the MCP server no
+# longer reads them directly -- every tool call is a real HTTP request to
+# the API service, addressed via MCP_API_BASE_URL (set by
+# k8s/mcp-configmap.yaml to the API Service's in-cluster DNS name).
+FROM python:3.11-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY pipeline/ pipeline/
+
+EXPOSE 8001
+
+ENV MCP_TRANSPORT=streamable-http
+ENV MCP_HOST=0.0.0.0
+ENV MCP_PORT=8001
+
+CMD ["python", "-m", "pipeline.mcp_server"]

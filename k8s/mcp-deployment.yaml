@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mortality-copilot-mcp
+  labels:
+    app: mortality-copilot-mcp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mortality-copilot-mcp
+  template:
+    metadata:
+      labels:
+        app: mortality-copilot-mcp
+    spec:
+      containers:
+        - name: mcp
+          # Built from this repo: `docker build -f Dockerfile.mcp -t
+          # mortality-copilot-mcp:latest .`
+          image: mortality-copilot-mcp:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8001
+          envFrom:
+            - configMapRef:
+                name: mortality-copilot-mcp-config
+          # The MCP SDK's streamable-http transport has no plain health
+          # endpoint (its one HTTP route, /mcp, expects real MCP protocol
+          # messages, not a GET), so probes check the port is accepting
+          # connections rather than a specific response body.
+          readinessProbe:
+            tcpSocket:
+              port: 8001
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          livenessProbe:
+            tcpSocket:
+              port: 8001
+            initialDelaySeconds: 10
+            periodSeconds: 15
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
