@@ -7,7 +7,7 @@ PY      := $(VENV)/bin/python
 PIP     := $(VENV)/bin/pip
 RSCRIPT := Rscript
 
-.PHONY: help setup setup-rag data features eda models sklearn-baseline index demo finetune agent-demo agent-eval rules-demo mcp-demo api-serve api-demo equipment-data equipment-features equipment-models test all clean
+.PHONY: help setup setup-rag data features eda models sklearn-baseline index demo finetune agent-demo agent-eval rules-demo mcp-demo mcp-serve api-serve api-demo equipment-data equipment-features equipment-models test all clean
 
 help:
 	@echo "mortality-copilot"
@@ -26,6 +26,7 @@ help:
 	@echo "  make agent-eval score the agent against golden multi-turn scenarios"
 	@echo "  make rules-demo evaluate versioned rules against one case, log the audit trail"
 	@echo "  make mcp-demo   call the MCP server's tools through a real client session"
+	@echo "  make mcp-serve  run the MCP server as a network service (streamable-http, port 8001)"
 	@echo "  make api-serve  run the FastAPI service locally (uvicorn, port 8000)"
 	@echo "  make api-demo   curl the running FastAPI service's endpoints"
 	@echo "  make equipment-data      download NASA C-MAPSS FD001 into DuckDB (second domain)"
@@ -92,6 +93,9 @@ rules-demo:
 
 mcp-demo:
 	$(PY) -m pipeline.mcp_demo
+
+mcp-serve:
+	MCP_TRANSPORT=streamable-http $(PY) -m pipeline.mcp_server
 
 api-serve:
 	$(VENV)/bin/uvicorn pipeline.api:app --port 8000

@@ -350,26 +350,31 @@ artifacts — not a fixture.
 
 `pipeline/agent.py`'s `--llm` path reaches Ollama's own `tools=[...]`
 function-calling API. `pipeline/mcp_server.py` puts the same three tools
-(`lookup_case`, `query_model_card`, `what_if`, from the identical
-`pipeline/tools.py` functions) behind a second, protocol-compliant
-interface: the [Model Context Protocol](https://modelcontextprotocol.io/),
-over a `FastMCP` stdio server. This is additive, not a replacement — no
-tool logic is duplicated or reimplemented, `pipeline/agent.py`'s
-dispatcher and `--llm` path are untouched, and the two interfaces read the
-same `artifacts/cases.json` / `artifacts/model_card.json` files. The point
-is that a generic MCP client (Claude Desktop, an MCP inspector, another
-agent framework) can call these tools without speaking Ollama's API
-specifically.
+(`lookup_case`, `query_model_card`, `what_if`) behind a second,
+protocol-compliant interface: the
+[Model Context Protocol](https://modelcontextprotocol.io/), over `FastMCP`.
+This is additive, not a replacement — `pipeline/agent.py`'s dispatcher and
+`--llm` path are untouched.
 
-Run it directly:
+Since the [MCP/API microservices split](#mcp-as-a-second-deployed-service)
+below, this server no longer reads `artifacts/` or calls
+`pipeline/tools.py` itself: every tool call is a real HTTP request to
+`pipeline/api.py`'s REST endpoints, addressed via `MCP_API_BASE_URL`
+(default `http://localhost:8000`, matching `make api-serve`). No tool
+logic is duplicated in either process — both eventually reach the same
+`pipeline/tools.py` functions, but this one only ever reaches them over
+the network, through the API service.
+
+Run it directly (with `make api-serve` running in another terminal):
 
 ```
 python -m pipeline.mcp_server
 ```
 
-It speaks stdio, so an MCP client launches it as a subprocess and talks to
-it over stdin/stdout — no network port, no auth to configure. Point a
-client such as Claude Desktop at it with an `mcpServers` block like:
+By default it speaks stdio, so an MCP client launches it as a subprocess
+and talks to it over stdin/stdout — no port to bind, no auth to configure.
+Point a client such as Claude Desktop at it with an `mcpServers` block
+like:
 
 ```json
 {
@@ -377,19 +382,27 @@ client such as Claude Desktop at it with an `mcpServers` block like:
     "mortality-copilot": {
       "command": "/absolute/path/to/mortality-copilot/.venv/bin/python",
       "args": ["-m", "pipeline.mcp_server"],
-      "cwd": "/absolute/path/to/mortality-copilot"
+      "cwd": "/absolute/path/to/mortality-copilot",
+      "env": {"MCP_API_BASE_URL": "http://localhost:8000"}
     }
   }
 }
 ```
 
-`make mcp-demo` drives the server through a real in-process client session
-(the same connection helper `tests/test_mcp_server.py` uses) and prints
-each call and its result:
+Set `MCP_TRANSPORT=streamable-http` (plus `MCP_HOST`/`MCP_PORT`) to run it
+as a standalone network service instead of a stdio subprocess — this is
+how `k8s/mcp-deployment.yaml` runs it (see below).
+
+`make mcp-demo` boots a real `uvicorn` server for `pipeline/api.py` on a
+local port in a background thread, points the MCP server at it, then
+drives the MCP server through a real in-process client session (the same
+connection helper `tests/test_mcp_server.py` uses) and prints each call
+and its result:
 
 ```
 $ make mcp-demo
-$ python -m pipeline.mcp_server  (stdio, 3 tools)
+$ uvicorn pipeline.api:app --port 8010  (background, for this demo)
+$ python -m pipeline.mcp_server  (stdio, 3 tools, calling http://127.0.0.1:8010)
 
 > call mcp_lookup_case({"case_id": "case_001"})
 {
@@ -423,8 +436,11 @@ $ python -m pipeline.mcp_server  (stdio, 3 tools)
 ```
 
 `tests/test_mcp_server.py` proves the server is not just importable: it
-opens a real MCP client session and asserts every tool's round-tripped
-result matches calling `pipeline/tools.py` directly on the same artifacts.
+boots a real `uvicorn` server on a real local TCP port, opens a real MCP
+client session against `pipeline/mcp_server.py`, and asserts every tool's
+round-tripped result matches calling the FastAPI service's own endpoints
+directly with `httpx` — proving the MCP layer reaches the API service
+over the network, not through an import.
 
 **Deviation:** pinned `mcp==1.29.1`. The `mcp` package's 2.x line renamed
 `FastMCP` to `MCPServer` and changed its API; 1.29.1 is the last release
@@ -539,6 +555,89 @@ at a host that does not exist there on purpose, which is exactly what
 exercises the fallback path above; the `Dockerfile` builds the API only
 (no R, no RAG stack), since serving already-committed artifacts is all it
 needs.
+
+### MCP as a second deployed service
+
+The [MCP server](#mcp-server) above and the API service used to be two
+*interfaces* over the same in-process functions -- both imported
+`pipeline/tools.py` and read `artifacts/` directly, so only one of them
+(the API) was ever actually deployed. This extension makes the MCP server
+a genuine second **service**: it no longer imports `pipeline/tools.py` at
+all, and every tool call is a real HTTP request to the API service,
+addressed via `MCP_API_BASE_URL`. `Dockerfile.mcp` builds it (no
+`artifacts/` needed -- it never reads them), and `k8s/mcp-deployment.yaml`
+/ `k8s/mcp-service.yaml` / `k8s/mcp-configmap.yaml` deploy it alongside the
+existing API manifests as its own Kubernetes Deployment and Service. The
+MCP ConfigMap sets `MCP_API_BASE_URL=http://mortality-copilot-api` -- the
+API Service's in-cluster DNS name -- so the two Deployments talk to each
+other over the cluster network, each independently scalable and
+restartable, not two copies of the same code reading the same local files.
+
+Validated for real against a second local `kind` cluster run: built both
+images, loaded them, applied all six manifests, confirmed both Deployments
+reached `Running`/`Ready`, then proved the network path in both directions.
+
+```
+$ kubectl exec deploy/mortality-copilot-mcp -- python -c "
+import urllib.request
+print(urllib.request.urlopen('http://mortality-copilot-api/health').read())"
+b'{"status":"ok","database":"configured"}'
+```
+
+That confirms the MCP pod resolves and reaches the API pod over cluster
+DNS. The stronger proof is calling the MCP service the way an MCP client
+actually would -- over `streamable-http`, from outside the cluster -- and
+checking the result could only have come from the API service:
+
+```
+$ kubectl port-forward svc/mortality-copilot-mcp 18001:80 &
+$ kubectl port-forward svc/mortality-copilot-api 18000:80 &
+$ python - <<'PY'
+# ... mcp SDK's streamablehttp_client calling mcp_lookup_case on
+# http://127.0.0.1:18001/mcp, compared against a direct httpx GET to
+# http://127.0.0.1:18000/cases/case_001
+PY
+direct API call: {"case_id": "case_001", "predicted_risk_36mo": 0.04628, ...
+via MCP (through kind cluster, real network hop): {"case_id": "case_001", "predicted_risk_36mo": 0.04628, ...
+MATCH: MCP service's tool call round-tripped through the API service over the cluster network.
+```
+
+The API pod's own access log recorded the request arriving from
+`10.244.0.5` -- the MCP pod's real cluster IP, not `localhost` or the
+port-forward -- which is what actually proves the call crossed the pod
+network rather than some local shortcut:
+
+```
+$ kubectl logs deploy/mortality-copilot-api
+INFO:     10.244.0.5:42614 - "GET /cases/case_001 HTTP/1.1" 200 OK
+```
+
+Cluster deleted afterward, confirmed via `kind get clusters` -> none.
+
+**Engineering notes -- why HTTP, not a shared filesystem:** the simpler
+alternative was leaving both services reading `artifacts/cases.json`
+independently, which would have made this "microservices" in name only --
+two processes with no runtime dependency on each other, unable to
+demonstrate service discovery, network failure handling, or independent
+scaling in any way a reviewer could verify. Routing every MCP tool call
+through the API service's REST endpoints instead means the MCP service has
+a real, observable dependency: kill the API Deployment and the MCP
+service's tool calls fail with a real connection error, not a silent stale
+read. That trade-off costs one network hop per tool call versus an
+in-process read; for a tool-calling interface where each call is already
+one LLM round trip, that hop is negligible.
+
+**Limitations, stated plainly:** the MCP Service's `tcpSocket` probes only
+confirm the port accepts connections, not that a real MCP handshake
+succeeds, because the `streamable-http` transport's one HTTP route
+(`/mcp`) expects real MCP protocol messages, not a plain `GET` a liveness
+probe could send; the MCP Deployment runs a single replica, since the MCP
+SDK's `streamable-http` transport keeps per-session state in memory and
+was not tested behind multiple replicas here (a real multi-replica
+deployment would need session affinity or a shared session store, a
+stated gap, not silently patched over); no authentication exists between
+the two services, matching the API service's own stated no-auth gap
+above.
 
 ## Versioned rules and audit trail
 
