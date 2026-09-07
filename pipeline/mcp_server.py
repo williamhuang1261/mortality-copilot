@@ -2,85 +2,103 @@
 
     python -m pipeline.mcp_server
 
-This is a second, additive interface over the same pure functions
-`pipeline/agent.py`'s deterministic dispatcher and `--llm` Ollama path
-already call (`pipeline/tools.py`). No tool logic is reimplemented here --
-each MCP tool loads the same artifacts `agent.py.load_data()` reads and
-delegates straight into `pipeline/tools.py`. `agent.py`'s own Ollama
-`tools=[...]` path is untouched and stays the default entry point; this
-server exists so a generic MCP client (Claude Desktop, an MCP inspector,
-another agent framework) can reach the same three tools over a standard
-protocol instead of Ollama's function-calling API specifically.
+This is a second, additive service in front of `pipeline/api.py`'s FastAPI
+service: each MCP tool makes a real HTTP request to that service's REST
+endpoints (`GET /cases/{id}`, `GET /model-card`, `POST /what-if`) instead of
+importing `pipeline/tools.py` or reading `artifacts/` directly. No tool logic
+is duplicated here or in `api.py` -- both eventually call the same
+`pipeline/tools.py` functions, but this process only ever reaches them over
+the network, through the API service. `pipeline/agent.py`'s Ollama
+`tools=[...]` path is untouched and stays the default local entry point;
+this server exists so a generic MCP client (Claude Desktop, an MCP
+inspector, another agent framework) can reach the same three tools over a
+standard protocol, backed by the same deployable API service used elsewhere.
 
-Transport is stdio, the standard local-MCP-server transport: an MCP client
-launches this process and talks to it over its stdin/stdout, so there is no
-network port to bind and no auth to configure.
+The API service's base URL is configurable via `MCP_API_BASE_URL` (default
+`http://localhost:8000`, matching `make api-serve`). In Kubernetes
+(`k8s/mcp-*.yaml`) it is set to the API Service's in-cluster DNS name, so the
+two Deployments talk to each other over the cluster network.
+
+Transport defaults to stdio, the standard local-MCP-server transport used
+when a client (Claude Desktop, an MCP inspector) launches this process and
+talks to it over its own stdin/stdout -- no port to bind, no auth to
+configure. Set `MCP_TRANSPORT=streamable-http` (plus `MCP_HOST`/`MCP_PORT`)
+to run it as a standalone network service instead, which is how the
+Kubernetes Deployment in `k8s/mcp-deployment.yaml` runs it.
 """
 
 from __future__ import annotations
 
+import os
+
+import httpx
 from mcp.server.fastmcp import FastMCP
 
-from pipeline.agent import load_data
-from pipeline.tools import ToolError
-from pipeline.tools import lookup_case as _lookup_case
-from pipeline.tools import query_model_card as _query_model_card
-from pipeline.tools import what_if as _what_if
+API_BASE_URL = os.environ.get("MCP_API_BASE_URL", "http://localhost:8000")
 
-mcp = FastMCP("mortality-copilot")
+mcp = FastMCP(
+    "mortality-copilot",
+    host=os.environ.get("MCP_HOST", "127.0.0.1"),
+    port=int(os.environ.get("MCP_PORT", "8001")),
+)
+
+
+def _client() -> httpx.Client:
+    return httpx.Client(base_url=API_BASE_URL, timeout=10.0)
+
+
+def _error_detail(response: httpx.Response, fallback: str) -> str:
+    try:
+        return str(response.json().get("detail", fallback))
+    except ValueError:
+        return fallback
 
 
 @mcp.tool()
 def mcp_lookup_case(case_id: str) -> dict:
-    """Return the full case record for `case_id` (e.g. "case_017")."""
-    cases, _ = load_data()
-    try:
-        return _lookup_case(cases, case_id)
-    except ToolError as exc:
-        raise ValueError(str(exc)) from exc
+    """Return the full case record for `case_id` (e.g. "case_017"), fetched
+    from the FastAPI service's `GET /cases/{case_id}` endpoint."""
+    with _client() as client:
+        response = client.get(f"/cases/{case_id}")
+    if response.status_code == 404:
+        raise ValueError(_error_detail(response, "case not found"))
+    response.raise_for_status()
+    return response.json()
 
 
 @mcp.tool()
 def mcp_query_model_card(question: str) -> dict:
     """Return the model-card section(s) matching a question about the
     fitted mortality model (cohort, validation metrics, predictors,
-    limitations, coefficients, provenance)."""
-    _, model_card = load_data()
-    try:
-        return _query_model_card(model_card, question)
-    except ToolError as exc:
-        raise ValueError(str(exc)) from exc
+    limitations, coefficients, provenance), fetched from the FastAPI
+    service's `GET /model-card` endpoint."""
+    with _client() as client:
+        response = client.get("/model-card", params={"question": question})
+    if response.status_code == 400:
+        raise ValueError(_error_detail(response, "no matching section"))
+    response.raise_for_status()
+    return response.json()["sections"]
 
 
 @mcp.tool()
 def mcp_what_if(case_id: str, feature: str, new_value: str) -> dict:
     """Recompute `case_id`'s predicted 36-month mortality risk with one
     feature changed to `new_value`, using the fitted GLM's own log-odds
-    coefficients. `new_value` is parsed as a number for a continuous
-    feature (age, bmi, sbp, dbp, hdl, hba1c, income_ratio) or a category
-    label for a categorical one (sex, smoker, diabetes, prior_chd,
-    prior_cancer)."""
-    cases, model_card = load_data()
-    parsed_value: object = new_value
-    if feature not in {"sex", "smoker", "diabetes", "prior_chd", "prior_cancer"}:
-        try:
-            parsed_value = float(new_value)
-        except ValueError:
-            pass
-    try:
-        result = _what_if(cases, model_card, case_id, feature, parsed_value)
-    except ToolError as exc:
-        raise ValueError(str(exc)) from exc
-    return {
-        "case_id": result.case_id,
-        "feature": result.feature,
-        "old_value": result.old_value,
-        "new_value": result.new_value,
-        "base_risk": result.base_risk,
-        "new_risk": result.new_risk,
-        "risk_delta_pct_points": result.risk_delta_pct_points,
-    }
+    coefficients. `new_value` is a number for a continuous feature (age,
+    bmi, sbp, dbp, hdl, hba1c, income_ratio) or a category label for a
+    categorical one (sex, smoker, diabetes, prior_chd, prior_cancer);
+    parsing happens in the FastAPI service's `POST /what-if` endpoint."""
+    with _client() as client:
+        response = client.post(
+            "/what-if",
+            json={"case_id": case_id, "feature": feature, "new_value": new_value},
+        )
+    if response.status_code == 400:
+        raise ValueError(_error_detail(response, "invalid what-if request"))
+    response.raise_for_status()
+    return response.json()
 
 
 if __name__ == "__main__":
-    mcp.run(transport="stdio")
+    transport = os.environ.get("MCP_TRANSPORT", "stdio")
+    mcp.run(transport=transport)

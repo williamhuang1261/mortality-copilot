@@ -1,24 +1,36 @@
 """Round-trip tests over a real MCP client session against the server in
-pipeline/mcp_server.py.
+pipeline/mcp_server.py, which itself makes real HTTP requests to a live
+pipeline/api.py FastAPI server on a real local TCP port.
 
-No mocked transport: `create_connected_server_and_client_session` (part of
-the `mcp` SDK's own testing surface) wires an in-memory client and server
-together and speaks the real protocol between them. Every assertion
-compares the round-tripped MCP result against calling `pipeline/tools.py`
-directly on the same artifacts, proving the MCP layer does not drift from
-the tools it wraps.
+No mocked transport at either layer: `create_connected_server_and_client_session`
+(part of the `mcp` SDK's own testing surface) wires an in-memory MCP client
+and server together and speaks the real MCP protocol between them; the MCP
+server in turn reaches a real `uvicorn` process over a real socket for every
+tool call, via `MCP_API_BASE_URL`. Every assertion compares the round-tripped
+MCP result against calling the FastAPI service's own endpoints directly with
+`httpx`, proving the MCP layer does not drift from the API it wraps -- and
+proving the MCP server's tool calls actually reach the API service over the
+network rather than importing `pipeline/tools.py` in-process.
 """
 
 from __future__ import annotations
 
 import json
+import os
+import threading
+import time
 
+import httpx
 import pytest
+import uvicorn
+
+_TEST_API_PORT = 8011
+os.environ["MCP_API_BASE_URL"] = f"http://127.0.0.1:{_TEST_API_PORT}"
+
 from mcp.shared.memory import create_connected_server_and_client_session
 
-from pipeline.agent import load_data
+from pipeline.api import app as api_app
 from pipeline.mcp_server import mcp
-from pipeline.tools import lookup_case, query_model_card, what_if
 
 
 def _tool_json(result) -> dict:
@@ -26,8 +38,34 @@ def _tool_json(result) -> dict:
     return json.loads(result.content[0].text)
 
 
+@pytest.fixture(scope="module")
+def live_api_server():
+    """A real uvicorn server for pipeline/api.py, bound to a real local
+    port, running for the duration of this test module. The MCP server
+    under test reaches it purely over HTTP via MCP_API_BASE_URL -- no
+    import of pipeline.api or pipeline.tools on the MCP-server side."""
+    config = uvicorn.Config(
+        api_app, host="127.0.0.1", port=_TEST_API_PORT, log_level="warning"
+    )
+    server = uvicorn.Server(config)
+    thread = threading.Thread(target=server.run, daemon=True)
+    thread.start()
+    deadline = time.monotonic() + 10
+    base_url = f"http://127.0.0.1:{_TEST_API_PORT}"
+    while time.monotonic() < deadline:
+        try:
+            httpx.get(f"{base_url}/health", timeout=0.5)
+            break
+        except httpx.HTTPError:
+            time.sleep(0.1)
+    else:
+        raise RuntimeError("test API server did not start in time")
+    yield base_url
+    server.should_exit = True
+
+
 @pytest.mark.anyio
-async def test_list_tools_exposes_all_three():
+async def test_list_tools_exposes_all_three(live_api_server):
     async with create_connected_server_and_client_session(mcp._mcp_server) as client:
         result = await client.list_tools()
         names = {tool.name for tool in result.tools}
@@ -35,9 +73,8 @@ async def test_list_tools_exposes_all_three():
 
 
 @pytest.mark.anyio
-async def test_lookup_case_matches_direct_call():
-    cases, _ = load_data()
-    direct = lookup_case(cases, "case_001")
+async def test_lookup_case_matches_live_api_call(live_api_server):
+    direct = httpx.get(f"{live_api_server}/cases/case_001").json()
 
     async with create_connected_server_and_client_session(mcp._mcp_server) as client:
         result = await client.call_tool("mcp_lookup_case", {"case_id": "case_001"})
@@ -47,7 +84,7 @@ async def test_lookup_case_matches_direct_call():
 
 
 @pytest.mark.anyio
-async def test_lookup_case_unknown_id_is_a_tool_error():
+async def test_lookup_case_unknown_id_is_a_tool_error(live_api_server):
     async with create_connected_server_and_client_session(mcp._mcp_server) as client:
         result = await client.call_tool("mcp_lookup_case", {"case_id": "case_999"})
     assert result.isError
@@ -55,9 +92,10 @@ async def test_lookup_case_unknown_id_is_a_tool_error():
 
 
 @pytest.mark.anyio
-async def test_query_model_card_matches_direct_call():
-    _, model_card = load_data()
-    direct = query_model_card(model_card, "what is the AUC?")
+async def test_query_model_card_matches_live_api_call(live_api_server):
+    direct = httpx.get(
+        f"{live_api_server}/model-card", params={"question": "what is the AUC?"}
+    ).json()["sections"]
 
     async with create_connected_server_and_client_session(mcp._mcp_server) as client:
         result = await client.call_tool(
@@ -69,9 +107,11 @@ async def test_query_model_card_matches_direct_call():
 
 
 @pytest.mark.anyio
-async def test_what_if_matches_direct_call():
-    cases, model_card = load_data()
-    direct = what_if(cases, model_card, "case_001", "age", 80.0)
+async def test_what_if_matches_live_api_call(live_api_server):
+    direct = httpx.post(
+        f"{live_api_server}/what-if",
+        json={"case_id": "case_001", "feature": "age", "new_value": "80"},
+    ).json()
 
     async with create_connected_server_and_client_session(mcp._mcp_server) as client:
         result = await client.call_tool(
@@ -80,17 +120,19 @@ async def test_what_if_matches_direct_call():
         )
     via_mcp = _tool_json(result)
 
-    assert via_mcp["base_risk"] == direct.base_risk
-    assert via_mcp["new_risk"] == pytest.approx(direct.new_risk)
+    assert via_mcp["base_risk"] == pytest.approx(direct["base_risk"])
+    assert via_mcp["new_risk"] == pytest.approx(direct["new_risk"])
     assert via_mcp["risk_delta_pct_points"] == pytest.approx(
-        direct.risk_delta_pct_points
+        direct["risk_delta_pct_points"]
     )
 
 
 @pytest.mark.anyio
-async def test_what_if_categorical_feature_is_not_parsed_as_a_number():
-    cases, model_card = load_data()
-    direct = what_if(cases, model_card, "case_001", "smoker", "current")
+async def test_what_if_categorical_feature_is_not_parsed_as_a_number(live_api_server):
+    direct = httpx.post(
+        f"{live_api_server}/what-if",
+        json={"case_id": "case_001", "feature": "smoker", "new_value": "current"},
+    ).json()
 
     async with create_connected_server_and_client_session(mcp._mcp_server) as client:
         result = await client.call_tool(
@@ -99,7 +141,7 @@ async def test_what_if_categorical_feature_is_not_parsed_as_a_number():
         )
     via_mcp = _tool_json(result)
 
-    assert via_mcp["new_risk"] == pytest.approx(direct.new_risk)
+    assert via_mcp["new_risk"] == pytest.approx(direct["new_risk"])
 
 
 @pytest.fixture
