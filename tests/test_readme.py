@@ -29,6 +29,7 @@ def readme() -> str:
     "## What it does", "## Architecture", "## Quickstart", "## Data",
     "## Cohort", "## Methodology", "## Results", "## Retrieval",
     "## Agentic tool-use mode", "## FastAPI service, PostgreSQL and Kubernetes",
+    "## Voice interface",
     "## Versioned rules and audit trail",
     "## Engineering notes", "## Limitations", "## Licence",
 ])
@@ -51,6 +52,17 @@ def test_readme_documents_the_mcp_server(readme):
     assert "mcpServers" in section
     assert "additive" in section
     assert "mcp-demo" in section
+
+
+def test_readme_documents_the_voice_interface(readme):
+    section = readme.split("## Voice interface", 1)[1].split(
+        "## Versioned rules and audit trail", 1
+    )[0]
+    assert "whisper" in section.lower()
+    assert "pyttsx3" in section.lower()
+    assert "setup-voice" in section
+    assert "voice-demo" in section
+    assert "no live microphone" in section.lower()
 
 
 def test_disclaimer_appears_before_anything_else(readme):

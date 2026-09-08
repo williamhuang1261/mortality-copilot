@@ -639,6 +639,70 @@ stated gap, not silently patched over); no authentication exists between
 the two services, matching the API service's own stated no-auth gap
 above.
 
+## Voice interface
+
+`pipeline/agent.py`'s dispatcher, `pipeline/mcp_server.py` and
+`pipeline/api.py` all reach the same three tools in `pipeline/tools.py`
+through a different transport. `pipeline/voice.py` adds a fourth,
+speech-based one: audio in, the same `run_turn()` the text CLI and MCP path
+already call, audio out. No agent logic lives here — this module is only a
+transcribe/synthesize wrapper.
+
+Both directions are fully local and open source, no cloud speech API and no
+account to configure:
+
+- **Speech-to-text:** OpenAI's [Whisper](https://github.com/openai/whisper)
+  (`tiny.en`, CPU), loaded once per process.
+- **Text-to-speech:** [`pyttsx3`](https://github.com/nateshmbhat/pyttsx3),
+  which drives the host OS's own TTS engine (NSSpeechSynthesizer on macOS,
+  SAPI5 on Windows, espeak on Linux) — no model download, no network call.
+
+Install the extra stack (pulls in torch via Whisper, same reason
+`requirements-rag.txt` is a separate target) and make sure `ffmpeg` is on
+`PATH` — Whisper shells out to it to decode audio:
+
+```
+brew install ffmpeg   # or your OS's package manager
+make setup-voice
+```
+
+Run one voice turn from the command line:
+
+```
+$ make voice-demo
+$ python -m pipeline.voice artifacts/voice_samples/sample_case1.aiff artifacts/voice_samples/reply_case1.aiff
+Transcript: case 1.
+Reply: [deterministic dispatcher] case_001: predicted 36-month risk 4.63%, decile 9/10. Top drivers: Age = 67, Diabetes = yes, Sex = male.
+Reply audio written to: artifacts/voice_samples/reply_case1.aiff
+```
+
+`artifacts/voice_samples/sample_case1.aiff` and `sample_whatif_case1.aiff`
+are committed sample questions, generated once via `pipeline.voice.synthesize()`
+itself (documented here plainly — they are synthesized speech, not a
+recording of a real caller). `tests/test_voice.py` runs both through the
+full transcribe -> agent -> synthesize loop and checks the result against a
+direct `dispatch()` call on the same transcribed text, so the voice path
+cannot silently diverge from the text path it wraps.
+
+**Engineering note: reuse over reimplementation.** `voice_turn()` calls
+`pipeline/agent.py`'s existing `run_turn()` rather than re-parsing the
+transcribed utterance itself — the same "one source of truth for intent
+parsing" pattern `pipeline/mcp_server.py` and `pipeline/api.py` already
+follow by reaching `pipeline/tools.py` instead of reimplementing it. A bug
+fixed in the parser is fixed for every interface at once.
+
+**Limitations, stated plainly:** the CLI starts a fresh `Session` per
+invocation, so a context-dependent question ("what if age were 80" with no
+explicit case number) needs that context established first — a single
+voice call cannot yet carry state across turns the way the text REPL does
+within one process; `tests/test_voice.py` demonstrates the multi-turn case
+using the Python API directly. `tiny.en` is Whisper's smallest, English-only
+model, a deliberate CPU/latency trade-off for a local demo, not a
+production accuracy choice. `pyttsx3`'s voice and audio quality depend on
+whichever TTS engine the host OS ships. There is no live microphone or
+telephony integration — the interface is file-in, file-out — and latency
+has not been benchmarked for real-time use.
+
 ## Versioned rules and audit trail
 
 The tool-calling agent answers ad hoc questions about a case. `pipeline/rules.py`
@@ -902,11 +966,13 @@ pipeline/    DuckDB loading, indexing, the CLI  — plumbing and retrieval (eq_*
                                                    (rules.py, audit.py, rules_demo.py — versioned rules engine)
                                                    (mcp_server.py, mcp_demo.py — MCP server interface)
                                                    (api.py, db.py — FastAPI service + PostgreSQL persistence)
+                                                   (voice.py — speech-to-text/text-to-speech voice interface)
 prompts/     the case-note prompt template      — versioned, not inlined
 rules/       eligibility_rules.yaml             — versioned rule definitions, plain data, no code
 artifacts/   model_card.json, cases.json        — committed, readable without running anything
                                                    (equipment_model_card.json, equipment_cases.json — equipment domain)
                                                    (audit_log.jsonl — append-only rule-evaluation trail)
+                                                   (voice_samples/ — committed sample question/reply audio)
 docs/        eda.md, retrieval_eval.md, figs/   — committed results (equipment.md — equipment domain)
 tests/       no network, no LLM, no R           — what CI runs
 k8s/         deployment.yaml, service.yaml, configmap.yaml — the FastAPI service's manifest
