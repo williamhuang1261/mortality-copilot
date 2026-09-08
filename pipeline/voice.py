@@ -38,6 +38,7 @@ import typer
 import whisper
 
 from pipeline.agent import Session, available_ollama_model, load_data, run_turn
+from pipeline.tools import ToolError
 
 WHISPER_MODEL_NAME = "tiny.en"
 
@@ -88,12 +89,23 @@ def main(
     llm: bool = typer.Option(False, "--llm",
                               help="Opt into Ollama tool calling."),
 ) -> None:
-    """Run one voice turn from the command line."""
+    """Run one voice turn from the command line.
+
+    Each invocation starts a fresh Session, so a question that depends on
+    context from an earlier turn (e.g. "what if age were 80" without an
+    explicit case number) needs that context established first -- see
+    `voice_turn()`'s docstring and `tests/test_voice.py` for a multi-turn
+    example using the Python API directly.
+    """
     cases, model_card = load_data()
     session = Session(cases=cases, model_card=model_card)
     model = available_ollama_model() if llm else None
 
-    result = voice_turn(session, audio_in, audio_out, llm, model)
+    try:
+        result = voice_turn(session, audio_in, audio_out, llm, model)
+    except ToolError as exc:
+        typer.echo(f"Error: {exc}", err=True)
+        raise typer.Exit(1)
     typer.echo(f"Transcript: {result['transcript']}")
     typer.echo(f"Reply: {result['reply']}")
     typer.echo(f"Reply audio written to: {audio_out}")
