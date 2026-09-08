@@ -1,0 +1,8 @@
+# Voice interface only (pipeline/voice.py). Pulls in torch via
+# openai-whisper, same reason requirements-rag.txt is a separate target:
+# `make setup-voice`. Also requires the `ffmpeg` binary on PATH (Whisper
+# shells out to it to decode audio) -- install via your OS package manager,
+# e.g. `brew install ffmpeg` on macOS.
+openai-whisper==20250625
+pyttsx3==2.99
+certifi==2026.7.22

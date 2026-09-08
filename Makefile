@@ -7,13 +7,14 @@ PY      := $(VENV)/bin/python
 PIP     := $(VENV)/bin/pip
 RSCRIPT := Rscript
 
-.PHONY: help setup setup-rag data features eda models sklearn-baseline index demo finetune agent-demo agent-eval rules-demo mcp-demo mcp-serve api-serve api-demo equipment-data equipment-features equipment-models test all clean
+.PHONY: help setup setup-rag setup-voice data features eda models sklearn-baseline index demo finetune agent-demo agent-eval rules-demo mcp-demo mcp-serve api-serve api-demo voice-demo equipment-data equipment-features equipment-models test all clean
 
 help:
 	@echo "mortality-copilot"
 	@echo ""
 	@echo "  make setup      install core Python deps (venv) and R deps"
 	@echo "  make setup-rag  additionally install the retrieval stack (torch, faiss)"
+	@echo "  make setup-voice  additionally install the voice stack (whisper, pyttsx3; needs ffmpeg on PATH)"
 	@echo "  make data       download NHANES + NCHS mortality into DuckDB"
 	@echo "  make features   build the analytic cohort in SQL"
 	@echo "  make eda        exploratory analysis, hypothesis tests, figures"
@@ -29,6 +30,7 @@ help:
 	@echo "  make mcp-serve  run the MCP server as a network service (streamable-http, port 8001)"
 	@echo "  make api-serve  run the FastAPI service locally (uvicorn, port 8000)"
 	@echo "  make api-demo   curl the running FastAPI service's endpoints"
+	@echo "  make voice-demo run one voice turn against a committed sample question"
 	@echo "  make equipment-data      download NASA C-MAPSS FD001 into DuckDB (second domain)"
 	@echo "  make equipment-features  build the equipment health-score analytic tables"
 	@echo "  make equipment-models   fit/validate equipment models, score the external holdout"
@@ -52,6 +54,9 @@ r-deps:
 
 setup-rag: $(VENV)/.installed
 	$(PIP) install -r requirements-rag.txt
+
+setup-voice: $(VENV)/.installed
+	$(PIP) install -r requirements-voice.txt
 
 # ---------------------------------------------------------------- pipeline
 # Implemented in later steps; each prints a clear message until then.
@@ -105,6 +110,9 @@ api-demo:
 	curl -s http://localhost:8000/cases/case_001 && echo
 	curl -s -X POST http://localhost:8000/what-if -H "Content-Type: application/json" \
 	    -d '{"case_id":"case_001","feature":"age","new_value":"80"}' && echo
+
+voice-demo:
+	$(PY) -m pipeline.voice artifacts/voice_samples/sample_case1.aiff artifacts/voice_samples/reply_case1.aiff
 
 equipment-data:
 	$(RSCRIPT) R/eq01_ingest.R
