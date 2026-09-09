@@ -7,7 +7,7 @@ PY      := $(VENV)/bin/python
 PIP     := $(VENV)/bin/pip
 RSCRIPT := Rscript
 
-.PHONY: help setup setup-rag setup-voice data features eda models sklearn-baseline index demo finetune agent-demo agent-eval rules-demo mcp-demo mcp-serve api-serve api-demo voice-demo equipment-data equipment-features equipment-models test all clean
+.PHONY: help setup setup-rag setup-voice data features eda models sklearn-baseline index demo finetune agent-demo agent-eval rules-demo mcp-demo mcp-serve api-serve api-demo voice-demo equipment-data equipment-features equipment-models airflow-up airflow-test airflow-down test all clean
 
 help:
 	@echo "mortality-copilot"
@@ -34,6 +34,9 @@ help:
 	@echo "  make equipment-data      download NASA C-MAPSS FD001 into DuckDB (second domain)"
 	@echo "  make equipment-features  build the equipment health-score analytic tables"
 	@echo "  make equipment-models   fit/validate equipment models, score the external holdout"
+	@echo "  make airflow-up    bring up the Airflow stack (Docker Compose)"
+	@echo "  make airflow-test  run the mortality_pipeline DAG end to end inside it"
+	@echo "  make airflow-down  tear the Airflow stack down"
 	@echo "  make test       run the test suite"
 	@echo "  make all        data -> features -> eda -> models"
 	@echo "  make clean      remove generated data, index and artifacts"
@@ -124,6 +127,16 @@ equipment-features:
 equipment-models:
 	$(RSCRIPT) R/eq03_models.R
 	$(RSCRIPT) R/eq04_export.R
+
+airflow-up:
+	docker compose -f docker-compose.airflow.yml up -d --build
+
+airflow-test:
+	docker compose -f docker-compose.airflow.yml exec airflow \
+	    airflow dags test mortality_pipeline 2026-01-01
+
+airflow-down:
+	docker compose -f docker-compose.airflow.yml down -v
 
 all: data features eda models
 

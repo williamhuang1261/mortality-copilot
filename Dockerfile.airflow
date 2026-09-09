@@ -1,0 +1,47 @@
+# Airflow, plus this project's own R and core-Python dependencies, so the
+# existing `make data`/`features`/`eda`/`models` targets run unmodified
+# inside the same container that runs the DAG. No pipeline script is
+# rewritten for Airflow; the DAG just shells out to `make`.
+FROM apache/airflow:2.10.4-python3.11
+
+USER root
+
+# R, for R/01_ingest.R, R/03_eda.R, R/04_models.R and R/05_export.R.
+# build-essential + liblapack/libblas/gfortran: ranger/Rcpp/RcppEigen compile
+# from source on Debian's CRAN binary mirror gap for this arch, so a bare
+# compiler and its linear-algebra libraries are required.
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        r-base make build-essential liblapack-dev libblas-dev gfortran \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /opt/airflow/project
+
+# R packages (ranger, pROC, jsonlite -- the rest ship with R). Installed as
+# root at build time, before the switch to the airflow user: the airflow
+# image's default library path isn't writable by that user, and installing
+# here means a container start never waits on a CRAN compile either way.
+COPY R/install_deps.R ./R/install_deps.R
+RUN Rscript R/install_deps.R
+
+# Debian's apt-packaged survival (3.5.3, bundled with r-base-core here) gives
+# a differently-shaped summary.coxph() object than the CRAN survival this
+# project was developed against (3.8.6): R/05_export.R's
+# `summary(cox_full)$coefficients` comes back as an atomic vector instead of
+# a matrix, and `rownames()` on it throws. Installing survival from CRAN
+# into the site library (which R searches before the base library) is the
+# fix -- same "verify what a real run produced" discipline as this project's
+# other environment-driven findings, not silently pinned around.
+RUN Rscript -e 'install.packages("survival", repos = "https://cloud.r-project.org")'
+
+USER airflow
+
+# Only duckdb -- the four DAG stages (ingest/features are Python, EDA/models
+# are R) import nothing else from requirements.txt. Installing the full file
+# (fastapi, mcp, sqlalchemy==2.0.52, pandas 3.x...) breaks Airflow's own
+# import at startup: apache-airflow 2.10.4 pins sqlalchemy<2.0, and pip's
+# resolver installs 2.0.52 anyway because nothing here constrains it,
+# which crashes airflow.models.taskinstance at boot. Same reasoning as the
+# project's requirements-rag.txt/requirements-voice.txt split -- install
+# only what a given entry point actually imports.
+RUN pip install --no-cache-dir duckdb==1.1.3

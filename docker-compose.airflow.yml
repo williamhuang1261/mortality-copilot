@@ -1,0 +1,49 @@
+# A single-node Airflow stack (LocalExecutor, Postgres metadata DB) that
+# orchestrates the existing ingest/feature/EDA/model pipeline as a DAG.
+# Port 55434 is deliberate: 55432 is already docker-compose.test.yml's
+# throwaway Postgres for tests/test_db.py, and this metadata DB must never
+# collide with it. The project repo is bind-mounted read-write so a task's
+# `make <target>` shares the host's cached data/ and artifacts/, and a run
+# triggered from inside the container is inspectable from outside it too.
+#
+#   docker compose -f docker-compose.airflow.yml up -d --build
+#   docker compose -f docker-compose.airflow.yml exec airflow \
+#       airflow dags test mortality_pipeline 2026-01-01
+#   docker compose -f docker-compose.airflow.yml down -v
+services:
+  airflow-postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    ports:
+      - "55434:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U airflow"]
+      interval: 1s
+      timeout: 3s
+      retries: 30
+
+  airflow:
+    build:
+      context: .
+      dockerfile: Dockerfile.airflow
+    depends_on:
+      airflow-postgres:
+        condition: service_healthy
+    environment:
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@airflow-postgres/airflow
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__CORE__DAGS_FOLDER: /opt/airflow/project/dags
+    volumes:
+      - ./:/opt/airflow/project
+    ports:
+      - "8081:8080"
+    command: >
+      bash -c "airflow db migrate &&
+               airflow users create --username admin --password admin
+                 --firstname admin --lastname admin --role Admin
+                 --email admin@example.com || true &&
+               airflow scheduler & airflow webserver"
