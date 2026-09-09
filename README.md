@@ -785,6 +785,86 @@ one resolves to v2 (fires) because that date falls inside v2's own effective
 window — the rule set is allowed to change what *future* evaluations do, it
 is only *past* evaluations that stay pinned.
 
+## Airflow orchestration
+
+`make all` already runs the pipeline's four stages in order:
+`data -> features -> eda -> models`. `dags/mortality_pipeline_dag.py`
+orchestrates the same four stages as an [Apache Airflow](https://airflow.apache.org/)
+DAG — one `BashOperator` task per stage, each calling the identical `make`
+command a human already runs locally. No pipeline script is rewritten for
+Airflow; the DAG only sequences commands that already exist and already work.
+
+```mermaid
+flowchart LR
+    A[ingest_data<br/>make data] --> B[build_features<br/>make features]
+    B --> C[run_eda<br/>make eda]
+    C --> D[fit_models<br/>make models]
+```
+
+The stack is a Docker Compose setup with two services: a Postgres metadata
+database (port `55434`, deliberately not `55432` — that's already
+`docker-compose.test.yml`'s throwaway Postgres for `tests/test_db.py`) and a
+single Airflow container (LocalExecutor, webserver + scheduler) built from
+`Dockerfile.airflow`, which layers R and this project's `duckdb` dependency
+on top of the official `apache/airflow` image. The project directory is
+bind-mounted into the container, so a DAG run reads and writes the same
+`data/` and `artifacts/` a local `make all` would.
+
+```
+make airflow-up      # build and start the stack
+make airflow-test    # run the DAG end to end inside it
+make airflow-down    # tear it down
+```
+
+A real captured run:
+
+```
+$ make airflow-test
+[2026-09-09T19:31:06] {taskinstance.py:352} INFO - Marking task as SUCCESS. ... task_id=ingest_data
+[2026-09-09T19:31:06] {taskinstance.py:352} INFO - Marking task as SUCCESS. ... task_id=build_features
+[2026-09-09T19:31:06] {taskinstance.py:352} INFO - Marking task as SUCCESS. ... task_id=run_eda
+[2026-09-09T19:31:09] {taskinstance.py:352} INFO - Marking task as SUCCESS. ... task_id=fit_models
+DagRun Finished: dag_id=mortality_pipeline, ..., state=success
+```
+
+**Engineering note: a custom image over the official quickstart's Celery
+stack.** Airflow's own quickstart docker-compose ships Redis, a Celery
+worker and a triggerer for horizontal scaling — more than a single-DAG,
+four-task demo needs. `Dockerfile.airflow` installs R directly into the
+Airflow image itself (rather than shelling out to a separate worker
+container) and uses LocalExecutor with a Postgres backend, the smallest
+setup that is still closer to a production deployment than SQLite. The
+trade-off: this does not scale past one machine, which a real Celery/K8s
+executor would.
+
+**Engineering note: minimal, not the monolithic `requirements.txt`.**
+`Dockerfile.airflow` installs only `duckdb==1.1.3` — the one import the two
+Python pipeline stages (`pipeline/01_load_duckdb.py`,
+`pipeline/02_features.py`) actually use — rather than the project's full
+`requirements.txt`. Installing the full file breaks Airflow's own import at
+boot: `apache-airflow` 2.10.4 pins `sqlalchemy<2.0`, and `requirements.txt`
+pins `sqlalchemy==2.0.52` for `pipeline/db.py`, which the DAG's four stages
+never touch. Same reasoning as the project's `requirements-rag.txt`/
+`requirements-voice.txt` split — install only what a given entry point
+imports.
+
+**Limitations, stated plainly:** no retries, alerting or SLA configuration
+is set on any task — the demo shows correct sequencing and dependency
+handling, not production-grade failure recovery. The Postgres metadata
+database is not persisted beyond the compose lifecycle (`make airflow-down`
+runs `docker compose down -v`) — restarting the stack starts a fresh
+scheduler history, not a resumed one. This DAG duplicates `make all`'s
+ordering rather than replacing it as the primary way to run the pipeline
+locally. A DAG run regenerates `artifacts/model_card.json`,
+`artifacts/cases.json` and the two Kaplan-Meier figures in the same
+bind-mounted working tree `make all` would — the Cox and logistic models
+are closed-form and reproduce exactly, but the random forest's bootstrap
+resampling is not bit-identical across R versions even with the same
+`set.seed()` (the container pins R 4.2.2 for Debian package availability),
+so a container run's random forest AUC can differ from the committed
+0.841 by roughly 0.003. Committed artifacts in this repository are always
+from a host run, never a container run.
+
 ## Second domain: equipment health scoring (predictive maintenance)
 
 The same survival-analysis pipeline, applied to a second dataset in a different
@@ -977,6 +1057,8 @@ docs/        eda.md, retrieval_eval.md, figs/   — committed results (equipment
 tests/       no network, no LLM, no R           — what CI runs
 k8s/         deployment.yaml, service.yaml, configmap.yaml — the FastAPI service's manifest
 Dockerfile   builds the FastAPI service only    — no R, no RAG stack
+dags/        mortality_pipeline_dag.py          — the Airflow DAG orchestrating data/features/eda/models
+Dockerfile.airflow, docker-compose.airflow.yml   — the Airflow stack (LocalExecutor, Postgres metadata DB)
 ```
 
 ## Licence

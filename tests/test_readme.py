@@ -30,6 +30,7 @@ def readme() -> str:
     "## Cohort", "## Methodology", "## Results", "## Retrieval",
     "## Agentic tool-use mode", "## FastAPI service, PostgreSQL and Kubernetes",
     "## Voice interface",
+    "## Airflow orchestration",
     "## Versioned rules and audit trail",
     "## Engineering notes", "## Limitations", "## Licence",
 ])
@@ -63,6 +64,17 @@ def test_readme_documents_the_voice_interface(readme):
     assert "setup-voice" in section
     assert "voice-demo" in section
     assert "no live microphone" in section.lower()
+
+
+def test_readme_documents_the_airflow_orchestration(readme):
+    section = readme.split("## Airflow orchestration", 1)[1].split(
+        "## Second domain", 1
+    )[0]
+    assert "airflow-up" in section
+    assert "airflow-test" in section
+    assert "airflow-down" in section
+    assert "55434" in section
+    assert "localexecutor" in section.lower()
 
 
 def test_disclaimer_appears_before_anything_else(readme):
